@@ -6,14 +6,27 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
-import com.opensymphony.xwork2.ActionSupport;
+import com.cims.base.frame.BaseAction;
+import com.cims.register.model.User;
 
 @Namespace("/")
 @Results({ @Result(name = "error", location = "/error/error.jsp") })
-public class RegisterAction extends ActionSupport {
+public class RegisterAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
-	@Action(value = "register", results = { @Result(name = "success", location = "/index.html") })
+
+	private User user;
+
+	@Action(value = "register", results = { @Result(name = "success", location = "/WEB-INF/content/register/register.jsp") })
 	public String execute(){
+		
 		return SUCCESS;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

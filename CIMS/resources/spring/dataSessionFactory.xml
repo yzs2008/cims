@@ -49,9 +49,9 @@
 		</tx:attributes>
 	</tx:advice>
 	
-	<aop:config>
-		<aop:pointcut expression="(execution(* com.*.process.core.*.*(..))) or (execution(* com.*.process.dao.*.*(..)))" id="transactionProcess"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionProcess"/>
-	</aop:config>
+<!-- 	<aop:config> -->
+<!-- 		<aop:pointcut expression="(execution(* com.*.process.core.*.*(..))) or (execution(* com.*.process.dao.*.*(..)))" id="transactionProcess"/> -->
+<!-- 		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionProcess"/> -->
+<!-- 	</aop:config> -->
 	
 </beans>
