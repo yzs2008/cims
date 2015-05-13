@@ -8,4 +8,7 @@ import com.cims.register.model.User;
 @Repository("UserDao")
 public class UserDao extends BaseDao<User>{
 
+	public UserDao(){
+		this.clazz=User.class;
+	}
 }
