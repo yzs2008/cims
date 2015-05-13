@@ -5,7 +5,7 @@
 <struts>
 	<package name="default" namespace="/" extends="struts-default">
 		<global-results>			
-		      <result name="error">/error.html</result>
+		      <result name="error">/errorPage/error.jsp</result>
 			  <result name="sessionout">/sessionout.html</result>
 			  <result name="nopermi">/nopermi.html</result>
 		</global-results>

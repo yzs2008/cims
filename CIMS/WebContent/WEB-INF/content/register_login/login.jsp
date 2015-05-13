@@ -18,54 +18,35 @@
     </head>
     <body>
         <div class="container">
-            <!-- Codrops top bar -->
-            <div class="codrops-top">
-                <a href="">
-                    <strong>&laquo; Previous Demo: </strong>Responsive Content Navigator
-                </a>
-                <span class="right">
-                    <a href=" http://tympanus.net/codrops/2012/03/27/login-and-registration-form-with-html5-and-css3/">
-                        <strong>Back to the Codrops Article</strong>
-                    </a>
-                </span>
-                <div class="clr"></div>
-            </div><!--/ Codrops top bar -->
             <header>
-                <h1>Login and Registration Form <span>with HTML5 and CSS3</span></h1>
-				<nav class="codrops-demos">
-					<span>Click <strong>"Join us"</strong> to see the form switch</span>
-					<a href="index.html">Demo 1</a>
-					<a href="index2.html" class="current-demo">Demo 2</a>
-					<a href="index3.html">Demo 3</a>
-				</nav>
+                <h1>欢迎来到CIMS <span>（Contest Intelligent Management System）</span></h1>
             </header>
             <section>				
                 <div id="container_demo" >
-                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
                     <a class="hiddenanchor" id="toregister"></a>
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
-                                <h1>Log in</h1> 
+                            <form  action="${pageContext.request.contextPath}/login" autocomplete="on" method="post"> 
+                                <h1>登录</h1> 
                                 <p> 
-                                    <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" value="yzs"/>
+                                    <label for="username" class="uname" data-icon="u" > 用户名 或邮箱</label>
+                                    <input id="username" name="userName" required="required" type="text" placeholder="用户名 或邮箱" value="yzs"/>
                                 </p>
                                 <p> 
-                                    <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                                    <label for="password" class="youpasswd" data-icon="p"> 密码 </label>
+                                    <input id="password" name="password" required="required" type="password" placeholder="密码" /> 
                                 </p>
                                 <p class="keeplogin"> 
 									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
-									<label for="loginkeeping">Keep me logged in</label>
+									<label for="loginkeeping">自动登录</label>
 								</p>
                                 <p class="login button"> 
-                                    <input type="submit" value="Login" /> 
+                                    <input type="submit" value="登录" /> 
 								</p>
                                 <p class="change_link">
-									Not a member yet ?
-									<a href="#toregister" class="to_register">Join us</a>
+									还没有帐号？
+									<a href="#toregister" class="to_register">秒注一个</a>
 								</p>
                             </form>
                         </div>
