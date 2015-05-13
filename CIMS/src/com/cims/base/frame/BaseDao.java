@@ -6,11 +6,15 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseDao<T> {
-	//@Autowired
+	@Autowired
 	protected SessionFactory sessionFactory;
+	
+	static{
+		System.out.println("baseDao");
+	}
 
 	public Session getSession() throws Exception {
 		return this.sessionFactory.getCurrentSession();

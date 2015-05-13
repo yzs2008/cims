@@ -50,7 +50,7 @@
                                 <h1>Log in</h1> 
                                 <p> 
                                     <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" value="yzs"/>
                                 </p>
                                 <p> 
                                     <label for="password" class="youpasswd" data-icon="p"> Your password </label>
@@ -71,30 +71,30 @@
                         </div>
 
                         <div id="register" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
-                                <h1> <s:text name="sign_up"></s:text> </h1> 
+                            <form  action="register" method="post" autocomplete="on"> 
+                                <h1> 注 册 </h1> 
                                 <p> 
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                                    <label for="usernamesignup" class="uname" data-icon="u">用户名</label>
+                                    <input id="usernamesignup" name="user.userName" required="required" type="text" placeholder="用户名" value="yzs" />
                                 </p>
                                 <p> 
-                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                    <label for="emailsignup" class="youmail" data-icon="e" >邮箱</label>
+                                    <input id="emailsignup" name="user.email" required="required" type="email" placeholder="email@mail.com" value="yzs2008@yeah.net"/> 
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <label for="passwordsignup" class="youpasswd" data-icon="p">密码</label>
+                                    <input id="passwordsignup" name="user.password" required="required" type="password" placeholder="eg. X8df!90EO" value="1"/>
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">确认密码</label>
+                                    <input id="passwordsignup_confirm"  required="required" type="password" placeholder="" value="1"/>
                                 </p>
                                 <p class="signin button"> 
-									<input type="submit" value="Sign up"/> 
+									<input type="submit" value="注册"/> 
 								</p>
                                 <p class="change_link">  
-									Already a member ?
-									<a href="#tologin" class="to_register"> Go and log in </a>
+									已有账户？
+									<a href="#tologin" class="to_register"> 跳转登录 </a>
 								</p>
                             </form>
                         </div>

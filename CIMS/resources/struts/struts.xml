@@ -3,11 +3,29 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<!-- 相当于普通xml配置中的extends，指定默认的继承包 -->
-	<constant name="struts.convention.default.parent.package" value="struts-default" />
+	<package name="default" namespace="/" extends="struts-default">
+		<global-results>			
+		      <result name="error">/error.html</result>
+			  <result name="sessionout">/sessionout.html</result>
+			  <result name="nopermi">/nopermi.html</result>
+		</global-results>
+		
+	</package>
 
 	<constant name="struts.custom.i18n.resources" value="i18n/cims" />
+	<!-- 指定Web应用的默认编码集 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 是否每次HTTP请求到达时，系统都重新加载资源文件  生产环境false -->
+	<constant name="struts.i18n.reload" value="true"/>
+	<!-- 设置浏览器是否缓存静态内容  生产环境true-->
+	<constant name="struts.serve.static.browserCache " value="false" /> 
 	<constant name="struts.devMode" value="true" />
+	<!-- struts 2的配置文件修改后，系统是否自动重新加载该文件  生产环境false-->
 	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 浏览器是否缓存静态内容 生产环境 true -->
+	<constant name="struts.serve.static.browserCache" value="false"/>
+	
 	<constant name="struts.multipart.maxSize" value="4000194304" />
+	<constant name="struts.convention.default.parent.package"	value="default" />
+	<constant name="struts.convention.result.path" value="/WEB-INF/WebContent/" />
 </struts>
