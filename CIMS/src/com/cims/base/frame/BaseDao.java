@@ -1,95 +1,100 @@
 package com.cims.base.frame;
-
+/**
+ * @author kaidi
+ * @date 2015年5月13日
+ */
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.cims.register.dao.UserDao;
+
+@SuppressWarnings("unchecked")
 public class BaseDao<T> {
-	//@Autowired
+
+	protected final transient Logger log=Logger.getLogger(UserDao.class);
+
+	@Autowired
 	protected SessionFactory sessionFactory;
+	
+	protected Class<T> clazz;
 
 	public Session getSession() throws Exception {
 		return this.sessionFactory.getCurrentSession();
 	}
 
-	public <T>  T queryById(Class<T> entityClass, Serializable id) throws Exception {
-		return (T)getSession().get(entityClass, id);
-	}
-
-	public <T> void save(T t) throws Exception {
+	/*************CRUD***************************/
+	public void create(T t) throws Exception {
 		getSession().save(t);
 	}
 
-	public <T> void saveOrUpdate(T t) throws Exception {
-		getSession().saveOrUpdate(t);
+	public T retrieveById(Serializable id) throws Exception {
+		return (T)getSession().get(clazz, id);
 	}
 
-	public <T> void update(T t) throws Exception {
+	public void update(T t) throws Exception {
 		getSession().update(t);
-
 	}
 
-	public <T> void delete(T t) throws Exception {
+	public void delete(T t) throws Exception {
 		getSession().delete(t);
 	}
 
-	public <T> void delete(Class<T> entityClass, Serializable id) throws Exception {
-		getSession().delete(queryById(entityClass, id));
+	public void delete(Serializable id) throws Exception {
+		getSession().delete(retrieveById(id));
 	}
 
 	public Integer records(String hql) throws Exception {
 		return (Integer) getSession().createQuery(hql).uniqueResult().hashCode();
 	}
 
-	public <T> List<T> queryForList(String hql) throws Exception {
-		return queryForList(hql, new Object[] {});
-	}
-	
-	public <T> List<T> queryForListAll(Class<T> entityClass) throws Exception {
-		String hql="from "+entityClass.getName();
-		return queryForList(hql, new Object[] {});
+	public List<T> retrieveList(String hql) throws Exception {
+		return retrieveList(hql, new Object[] {});
 	}
 
-	public <T> List<T> queryForList(String hql, Object param) throws Exception {
-		return queryForList(hql, new Object[] { param });
-
+	public List<T> retrieveList(String hql, Object param) throws Exception {
+		return retrieveList(hql, new Object[] { param });
 	}
 
-	public <T> List<T> queryForList(String hql, Object[] params) throws Exception {
+	public List<T> retrieveList(String hql, Object[] params) throws Exception {
 		Query query = getSession().createQuery(hql);
 		setQueryParams(query, params);
 		return (List<T>) query.list();
-
 	}
 
-	public T queryForObject(String hql, Object[] params) throws Exception {
+	public T retrieveObject(String hql) throws Exception{
+		return retrieveObject(hql, new Object[]{});
+	}
+	
+	public T retrieveObject(String hql, Object param) throws Exception{
+		return retrieveObject(hql, new Object[]{param});
+	}
+	
+	public T retrieveObject(String hql, Object[] params) throws Exception {
 		Query query = getSession().createQuery(hql);
 		setQueryParams(query, params);
 		return (T) query.uniqueResult();
-
 	}
 
-	public <T> List<T> findByPage(String hql, int firstResult, int maxResult) throws Exception {
-		return findByPage(hql, new Object[] {}, firstResult, maxResult);
-
+	public List<T> retrieveByPage(String hql, int offset, int length) throws Exception {
+		return retrieveByPage(hql, new Object[] {}, offset, length);
 	}
 
-	public <T> List<T> findByPage(String hql, Object param, int firstResult, int maxResult) throws Exception {
-		return findByPage(hql, new Object[] { param }, firstResult, maxResult);
-
+	public List<T> retrieveByPage(String hql, Object param, int offset, int length) throws Exception {
+		return retrieveByPage(hql, new Object[] { param }, offset, length);
 	}
 
-	public <T> List<T> findByPage(String hql, Object[] params, int firstResult, int maxResult) throws Exception {
+	public List<T> retrieveByPage(String hql, Object[] params, int offset, int length) throws Exception {
 		Query query = getSession().createQuery(hql);
 		setQueryParams(query, params);
-		query.setFirstResult(firstResult);
-		query.setMaxResults(maxResult);
+		query.setFirstResult(offset);
+		query.setMaxResults(length);
 		return (List<T>) query.list();
-
 	}
 
 	private void setQueryParams(Query query, Object[] params) throws Exception {
@@ -100,26 +105,4 @@ public class BaseDao<T> {
 			query.setParameter(i, params[i]);
 		}
 	}
-
-	public <T> Long create(T t) throws Exception {
-		return (Long) getSession().save(t);
-	}
-
-	public Integer recordsForSQL(String sql) throws Exception {
-		return (Integer) getSession().createSQLQuery(sql).uniqueResult().hashCode();
-	}
-
-	public Object uniqueResultForSQL(String sql) throws Exception {
-		return getSession().createSQLQuery(sql).uniqueResult();
-	}
-
-	public <T> List<T> findListByPageForSQL(String sql, int start, int rowCount) throws Exception {
-		Query query = getSession().createSQLQuery(sql);
-		if ((start != -1) && (rowCount != -1)) {
-			query.setFirstResult(start);
-			query.setMaxResults(rowCount);
-		}
-		return (List<T>) query.list();
-	}
-
 }
