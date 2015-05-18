@@ -5,11 +5,9 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 
 import com.cims.base.frame.BaseAction;
 import com.cims.base.type.ActionContant;
-import com.cims.base.type.ActionEnum;
 import com.cims.register.model.User;
 import com.cims.register.process.UserProcess;
 
