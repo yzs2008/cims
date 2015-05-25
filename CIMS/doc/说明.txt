@@ -1,1 +1,1 @@
-入口地址：http:localhost:8080/cims/
+入口地址：http:localhost:8080/CIMS/

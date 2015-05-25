@@ -1,6 +1,5 @@
 package com.cims.register.dao;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.cims.base.frame.BaseDao;

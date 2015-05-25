@@ -1,0 +1,292 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2015/5/18 21:13:39                           */
+/*==============================================================*/
+
+
+drop table if exists cims_adjustScore;
+
+drop table if exists cims_admin;
+
+drop table if exists cims_award;
+
+drop table if exists cims_draw;
+
+drop table if exists cims_finalScore;
+
+drop table if exists cims_judge;
+
+drop table if exists cims_promotion;
+
+drop table if exists cims_race;
+
+drop table if exists cims_raceJudge;
+
+drop table if exists cims_register;
+
+drop table if exists cims_round;
+
+drop table if exists cims_score;
+
+drop table if exists cims_scoreDetail;
+
+drop table if exists cims_signUp;
+
+drop table if exists cims_siteScore;
+
+drop table if exists cims_standard;
+
+drop table if exists cims_vote;
+
+drop table if exists cims_voteDetail;
+
+/*==============================================================*/
+/* Table: cims_adjustScore                                      */
+/*==============================================================*/
+create table cims_adjustScore
+(
+   adjustScoreId        int not null,
+   raceId               int,
+   playerId             int,
+   adjustment           double,
+   primary key (adjustScoreId)
+);
+
+/*==============================================================*/
+/* Table: cims_admin                                            */
+/*==============================================================*/
+create table cims_admin
+(
+   adminId              int not null,
+   name                 varchar(64),
+   password             varchar(64),
+   role                 varchar(64),
+   primary key (adminId)
+);
+
+/*==============================================================*/
+/* Table: cims_award                                            */
+/*==============================================================*/
+create table cims_award
+(
+   awardId              int not null,
+   raceId               int,
+   awardName            varchar(255),
+   count                int,
+   start                int,
+   primary key (awardId)
+);
+
+/*==============================================================*/
+/* Table: cims_draw                                             */
+/*==============================================================*/
+create table cims_draw
+(
+   drawId               int not null,
+   playerId             int,
+   raceId               int,
+   drawGroupId          int,
+   orderSerial          int,
+   primary key (drawId)
+);
+
+/*==============================================================*/
+/* Table: cims_finalScore                                       */
+/*==============================================================*/
+create table cims_finalScore
+(
+   finalScoreId         int not null,
+   raceId               int,
+   playerId             int,
+   finalScore           double,
+   primary key (finalScoreId)
+);
+
+/*==============================================================*/
+/* Table: cims_judge                                            */
+/*==============================================================*/
+create table cims_judge
+(
+   judgeId              int not null,
+   judgeName            varchar(255),
+   useName              varchar(255),
+   password             varchar(32),
+   gender               varchar(8),
+   phone                varchar(32),
+   registerDate         date,
+   email                varchar(32),
+   avatar               varchar(255),
+   state                varchar(32),
+   introduction         text,
+   primary key (judgeId)
+);
+
+/*==============================================================*/
+/* Table: cims_promotion                                        */
+/*==============================================================*/
+create table cims_promotion
+(
+   promotionId          int not null,
+   raceId               int,
+   nextId               int,
+   start                int,
+   end                  int,
+   primary key (promotionId)
+);
+
+/*==============================================================*/
+/* Table: cims_race                                             */
+/*==============================================================*/
+create table cims_race
+(
+   raceId               int not null,
+   raceName             varchar(255),
+   roundId              int,
+   host                 varchar(255),
+   startTime            dateTime,
+   place                varchar(128),
+   qualification        varchar(16),
+   state                varchar(16),
+   description          text,
+   judgePattern         varchar(16),
+   judgeRule            varchar(255),
+   voteTime             int,
+   drawPattern          varchar(16),
+   eraseGroup           varchar(16),
+   primary key (raceId)
+);
+
+/*==============================================================*/
+/* Table: cims_raceJudge                                        */
+/*==============================================================*/
+create table cims_raceJudge
+(
+   raceJudgeId          int not null,
+   raceId               int,
+   judgeId              int,
+   status               int,
+   weight               int,
+   primary key (raceJudgeId)
+);
+
+/*==============================================================*/
+/* Table: cims_register                                         */
+/*==============================================================*/
+create table cims_register
+(
+   registerId           int not null,
+   userName             national varchar(255),
+   password             varchar(127),
+   registerTime         date,
+   gender               int,
+   realName             national varchar(255),
+   phone                varchar(16),
+   email                varchar(64),
+   avatar               varchar(255),
+   targetMatch          int,
+   description          text,
+   primary key (registerId)
+);
+
+/*==============================================================*/
+/* Table: cims_round                                            */
+/*==============================================================*/
+create table cims_round
+(
+   roundId              int,
+   roundName            varchar(255),
+   parent               int,
+   hasNode              varchar(8),
+   state                varchar(32)
+);
+
+/*==============================================================*/
+/* Table: cims_score                                            */
+/*==============================================================*/
+create table cims_score
+(
+   scoreId              int not null,
+   raceId               int,
+   playerId             int,
+   judgeId              int,
+   score                double,
+   primary key (scoreId)
+);
+
+/*==============================================================*/
+/* Table: cims_scoreDetail                                      */
+/*==============================================================*/
+create table cims_scoreDetail
+(
+   scoreDetailId        int not null,
+   scoreId              int,
+   standardId           int,
+   score                double,
+   primary key (scoreDetailId)
+);
+
+/*==============================================================*/
+/* Table: cims_signUp                                           */
+/*==============================================================*/
+create table cims_signUp
+(
+   signId               int not null,
+   registerId           int,
+   productName          varchar(255),
+   raceId               int,
+   productDescription   text,
+   groupNumber          int,
+   primary key (signId)
+);
+
+/*==============================================================*/
+/* Table: cims_siteScore                                        */
+/*==============================================================*/
+create table cims_siteScore
+(
+   siteScoreId          int not null,
+   raceId               int,
+   playerId             int,
+   siteScore            double,
+   primary key (siteScoreId)
+);
+
+/*==============================================================*/
+/* Table: cims_standard                                         */
+/*==============================================================*/
+create table cims_standard
+(
+   standardId           int not null,
+   standardName         varchar(255),
+   parent               int,
+   hasNode              varchar(8),
+   max                  int,
+   min                  int,
+   serial               int,
+   primary key (standardId)
+);
+
+/*==============================================================*/
+/* Table: cims_vote                                             */
+/*==============================================================*/
+create table cims_vote
+(
+   voteId               int not null,
+   raceId               int,
+   playerId             int,
+   count                int,
+   primary key (voteId)
+);
+
+/*==============================================================*/
+/* Table: cims_voteDetail                                       */
+/*==============================================================*/
+create table cims_voteDetail
+(
+   voteDetailId         int not null,
+   voteId               int,
+   IP                   varchar(32),
+   time                 date,
+   primary key (voteDetailId)
+);
+
