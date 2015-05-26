@@ -28,7 +28,7 @@
 			</props>
 		</property>	
 		<property name="packagesToScan">
-			<value>com.cims.*.model</value>
+			<value>com.cims.model.*</value>
 		</property>
 	</bean>
 

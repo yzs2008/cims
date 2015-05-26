@@ -15,7 +15,6 @@ public class Judge {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer judgeId;
 	private String judgeName;
-	private String useName;
 	private String password;
 	private String gender;
 	private String phone;
@@ -36,12 +35,6 @@ public class Judge {
 	}
 	public void setJudgeName(String judgeName) {
 		this.judgeName = judgeName;
-	}
-	public String getUseName() {
-		return useName;
-	}
-	public void setUseName(String useName) {
-		this.useName = useName;
 	}
 	public String getPassword() {
 		return password;

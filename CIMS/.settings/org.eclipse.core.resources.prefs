@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/common/adminFoot.jsp=UTF-8
+encoding//WebContent/WEB-INF/common/adminHeader.jsp=UTF-8
+encoding//WebContent/WEB-INF/common/adminMenu.jsp=UTF-8
 encoding/<project>=UTF-8
