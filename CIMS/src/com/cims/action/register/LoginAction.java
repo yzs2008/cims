@@ -1,4 +1,4 @@
-package com.cims.register.action;
+package com.cims.action.register;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cims.base.frame.BaseAction;
 import com.cims.base.type.ActionContant;
-import com.cims.register.model.User;
-import com.cims.register.process.UserProcess;
+import com.cims.model.User;
+import com.cims.process.UserProcess;
 
 
 @Namespace("/")

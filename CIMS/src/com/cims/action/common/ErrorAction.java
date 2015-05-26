@@ -1,4 +1,4 @@
-package com.cims.common.action;
+package com.cims.action.common;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;

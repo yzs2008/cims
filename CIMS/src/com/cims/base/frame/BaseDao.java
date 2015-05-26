@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cims.register.dao.UserDao;
+import com.cims.dao.UserDao;
 
 @SuppressWarnings("unchecked")
 public class BaseDao<T> {

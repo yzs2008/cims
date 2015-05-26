@@ -1,4 +1,4 @@
-package com.cims.register.process;
+package com.cims.process;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cims.register.dao.UserDao;
-import com.cims.register.model.User;
+import com.cims.dao.UserDao;
+import com.cims.model.User;
 
 @Service("UserProcess")
 public class UserProcess {
