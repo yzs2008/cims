@@ -1,1 +1,7 @@
 入口地址：http:localhost:8080/CIMS/
+创建数据库：
+create user 'kaidi'@'localhost' identified by 'kaidi141';
+grant all on *.* to 'kaidi'@'localhost';
+
+程序中出现的错误，一律返回ERROR
+用户中交互异常，返回ajaxError

@@ -22,7 +22,7 @@ public class Judge {
 	private String email;
 	private String avatar;
 	private String state;
-	private String intorduction;
+	private String introduction;
 
 	public Integer getJudgeId() {
 		return judgeId;
@@ -78,11 +78,11 @@ public class Judge {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getIntorduction() {
-		return intorduction;
+	public String getIntroduction() {
+		return introduction;
 	}
-	public void setIntorduction(String intorduction) {
-		this.intorduction = intorduction;
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 	
 }

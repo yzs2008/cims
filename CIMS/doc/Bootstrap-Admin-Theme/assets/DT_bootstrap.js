@@ -3,7 +3,7 @@ $.extend( true, $.fn.dataTable.defaults, {
 	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
 	"sPaginationType": "bootstrap",
 	"oLanguage": {
-		"sLengthMenu": "每页显示 _MENU_ 记录",
+		"sLengthMenu": "_MENU_ records per page"
 	}
 } );
 
@@ -149,19 +149,20 @@ if ( $.fn.DataTable.TableTools ) {
 
 /* Table initialisation */
 $(document).ready(function() {
-	$('#tableInfo').dataTable( {
+	$('#example').dataTable( {
 		"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
 		"sPaginationType": "bootstrap",
-		"bSort": false ,
-		"bSearching": false,
-		"bFilter":false,
 		"oLanguage": {
-			"sLengthMenu": "每页显示 _MENU_ 记录",
-			"sInfo":"第  _START_ 至 _END_ 条  共有 _TOTAL_ 条",
-			"oPaginate":{
-				"sPrevious":"上一页",
-				"sNext":"下一页"
-			},
+			"sLengthMenu": "_MENU_ records per page"
 		}
 	} );
+
+	$('#example2').dataTable( {
+		"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ records per page"
+		}
+	} );
+
 } );

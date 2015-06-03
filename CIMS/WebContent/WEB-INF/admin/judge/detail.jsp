@@ -6,7 +6,7 @@
 <html>
     
     <head>
-        <title>添加评委</title>
+        <title>更新评委信息</title>
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath}/admin/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -31,58 +31,46 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">添加评委</div>
+                                <div class="muted pull-left">更新评委信息</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                    <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/admin/judge/add" enctype="multipart/form-data">
+                                    <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/admin/judge/update" enctype="multipart/form-data">
                                       <fieldset>
                                         <legend>评委信息</legend>
                                         <div class="control-group">
                                           <label class="control-label" for="name">评委姓名 </label>
                                           <div class="controls">
-                                            <input type="text" name="judge.judgeName" class="default" id="name" >
+                                          	<span style="line-height:30px;">${judge.judgeName }</span>
+                                          	<input type="hidden" name="judge4update.judgeName"  value="${judge.judgeName }">
+                                          	<input type="hidden" name="judge4update.judgeId" value="${judge.judgeId }"> 
                                           </div>
                                         </div>
                                         <div class="control-group">
                                           <label class="control-label" for="password">密码</label>
                                           <div class="controls">
-                                            <input type="text" name="judge.password" class="default" id="password" >
-                                          </div>
-                                        </div>
-                                        <div class="control-group">
-                                          <label class="control-label" for="password_confirm">确认密码</label>
-                                          <div class="controls">
-                                            <input type="text" class="default" id="password_confirm">
-                                          </div>
-                                        </div>
-                                        <div class="control-group">
-                                          <label class="control-label" for="optionsCheckbox">性别</label>
-                                          <div class="controls">
-                                          	<input id="gender_male" type="radio" value="male" name="judge.gender" checked> 
-                                          	<label for="gender_male" style="display: inline-block;margin-left: 10px;">男</label>
-                                          	<input id="gender_female" type="radio" value="female" name="judge.gender" style="margin-left: 50px;"> 
-                                          	<label for="gender_female" style="display: inline-block;margin-left: 10px;">女</label>
+                                            <input type="text" name="judge4update.password" class="default" value="${judge.password }" >
                                           </div>
                                         </div>
                                         <div class="control-group">
                                           <label class="control-label" for="email">电子邮箱</label>
                                           <div class="controls">
-                                            <input type="text" name="judge.email" class="default" id="email">
+                                            <input type="text" name="judge4update.email" class="default" value="${judge.email }">
                                           </div>
                                         </div>
                                         <div class="control-group">
                                           <label class="control-label" for="phone">手机号</label>
                                           <div class="controls">
-                                            <input type="text" name="judge.phone" class="default" id="phone">
+                                            <input type="text" name="judge4update.phone" class="default" id="phone" value="${judge.phone }">
                                           </div>
                                         </div>
                                         <div class="control-group">
                                           <label class="control-label" for="fileInput">评委照片</label>
                                           <div class="controls">
-                                          	<input type="hidden" id="useDefaultAvatar" name="useDefaultAvatar" value="1">
 											  <!--                                           上传图片 -->
 											  <label style="margin-top:6px;font-size:12px;color:#22bbcc;">提示：按住Ctrl+Shift，可以实现滚轮缩放</label>
+											  <input type="hidden" name="judge4update.avatar" value="${judge.avatar }">
+											  <input type="hidden" name="changeAvatarFlag" id="changeAvatarFlag" value="1">
 	                                          <div class="fileupload-container">
 												  <div class="imageBox">
 												    <div class="thumbBox"></div>
@@ -110,12 +98,12 @@
                                         <div class="control-group">
                                           <label class="control-label" for="textarea2">评委简介</label>
                                           <div class="controls">
-                                            <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..." style="width: 98%; height: 200px"></textarea>
+                                            <textarea class="input-xlarge textarea" name="judge4update.introduction" style="width: 98%; height: 200px">${judge.introduction }</textarea>
                                           </div>
                                         </div>
                                         <div class="form-actions" >
                                           <button type="submit" class="btn btn-primary">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
-                                          <a href="${pageContext.request.contextPath }/admin/judge/list"><button type="button" class="btn" style="margin-left: 50px;">放弃添加</button></a>
+                                          <a href="${pageContext.request.contextPath }/admin/judge/list"><button type="button" class="btn" style="margin-left: 50px;">放弃更新</button></a>
                                         </div>
                                       </fieldset>
                                     </form>
@@ -134,8 +122,8 @@
 			{
 				thumbBox: '.thumbBox',
 				spinner: '.spinner',
-				imgSrc: '${pageContext.request.contextPath}/images/sys/default_avatar.png'
-			};
+				imgSrc: '${pageContext.request.contextPath }${judge.avatar}'
+			}
 			var cropper = $('.imageBox').cropbox(options);
 			$('#upload-file').on('change', function(){
 				var reader = new FileReader();
@@ -145,9 +133,9 @@
 				}
 				reader.readAsDataURL(this.files[0]);
 				this.files = [];
-
 				setTimeout(triggerCrop, 300);
-			});
+				$("#changeAvatarFlag").val(2);	
+			})
 			$('#btnCrop').on('click', function(){
 				var img = cropper.getDataURL();
 				$('.cropped').html('');
@@ -155,17 +143,19 @@
 				$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
 				$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
 				
-			});
+				$("#changeAvatarFlag").val(2);	
+			})
 			$('#btnZoomIn').on('click', function(){
 				cropper.zoomIn();
-			});
+			})
 			$('#btnZoomOut').on('click', function(){
 				cropper.zoomOut();
-			});
+			})
 			setTimeout(triggerCrop, 300);
 		});	
 		function triggerCrop(){
 			$('#btnCrop').trigger('click');
+			$("#changeAvatarFlag").val(1);	
 		}
 	</script>
 </html>

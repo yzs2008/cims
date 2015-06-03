@@ -28,7 +28,7 @@
 			</props>
 		</property>	
 		<property name="packagesToScan">
-			<value>com.cims.model.*</value>
+			<value>com.cims.model</value>
 		</property>
 	</bean>
 
@@ -50,7 +50,7 @@
 	</tx:advice>
 	
 	<aop:config>
-		<aop:pointcut expression="(execution(* com.*.process.core.*.*(..))) or (execution(* com.*.process.dao.*.*(..)))" id="transactionProcess"/>
+		<aop:pointcut expression="(execution(* com.cims.process.*.*(..))) or (execution(* com.cims.dao.*.*(..)))" id="transactionProcess"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionProcess"/>
 	</aop:config>
 	

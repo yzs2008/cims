@@ -80,7 +80,6 @@
                                         <div class="control-group">
                                           <label class="control-label" for="fileInput">评委照片</label>
                                           <div class="controls">
-                                          	<input type="hidden" id="useDefaultAvatar" name="useDefaultAvatar" value="1">
 											  <!--                                           上传图片 -->
 											  <label style="margin-top:6px;font-size:12px;color:#22bbcc;">提示：按住Ctrl+Shift，可以实现滚轮缩放</label>
 	                                          <div class="fileupload-container">
@@ -134,8 +133,8 @@
 			{
 				thumbBox: '.thumbBox',
 				spinner: '.spinner',
-				imgSrc: '${pageContext.request.contextPath}/images/sys/default_avatar.png'
-			};
+				imgSrc: '${pageContext.request.contextPath}/images/sys/avatar.png'
+			}
 			var cropper = $('.imageBox').cropbox(options);
 			$('#upload-file').on('change', function(){
 				var reader = new FileReader();
@@ -145,9 +144,7 @@
 				}
 				reader.readAsDataURL(this.files[0]);
 				this.files = [];
-
-				setTimeout(triggerCrop, 300);
-			});
+			})
 			$('#btnCrop').on('click', function(){
 				var img = cropper.getDataURL();
 				$('.cropped').html('');
@@ -155,17 +152,13 @@
 				$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
 				$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
 				
-			});
+			})
 			$('#btnZoomIn').on('click', function(){
 				cropper.zoomIn();
-			});
+			})
 			$('#btnZoomOut').on('click', function(){
 				cropper.zoomOut();
-			});
-			setTimeout(triggerCrop, 300);
+			})
 		});	
-		function triggerCrop(){
-			$('#btnCrop').trigger('click');
-		}
 	</script>
 </html>

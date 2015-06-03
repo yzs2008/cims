@@ -1,11 +1,12 @@
 package com.cims.base.type;
 
-public enum ActionEnum {
-	demo("demo");
+public enum StateEnum {
+	enable("启用"),
+	disable("禁用");
 	
 	private final String name;
 
-	private ActionEnum(String name){
+	private StateEnum(String name){
 		this.name=name;
 	}
 

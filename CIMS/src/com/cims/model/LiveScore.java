@@ -1,11 +1,16 @@
 package com.cims.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cims_liveScore")
 public class LiveScore {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer liveScoreId;
 	private Integer raceId;
 	private Integer playerId;
