@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="cims_race")
@@ -18,6 +20,7 @@ public class Race {
 	private Integer roundId;
 	private String host;
 	private String place;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
 	private String qualification;
 	private String state;
@@ -27,6 +30,8 @@ public class Race {
 	private Integer voteTime;
 	private String drawPattern;
 	private String eraseGroup;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createTime;
 	public Integer getRaceId() {
 		return raceId;
 	}
@@ -110,6 +115,12 @@ public class Race {
 	}
 	public void setEraseGroup(String eraseGroup) {
 		this.eraseGroup = eraseGroup;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	
 }

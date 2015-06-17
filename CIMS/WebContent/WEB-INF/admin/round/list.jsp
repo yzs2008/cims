@@ -6,7 +6,7 @@
 <html>
     
     <head>
-        <title>添加评委</title>
+        <title>轮次管理</title>
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/css/admin/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath}/css/admin/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -24,19 +24,19 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">评委信息</div>
+                                <div class="muted pull-left">轮次信息</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
                                    <div class="table-toolbar">
                                       <div class="btn-group">
-                                         <a href="${pageContext.request.contextPath }/admin/judge/add"><button class="btn btn-success">新增评委<i class="icon-plus icon-white"></i></button></a>
+                                         <a href="${pageContext.request.contextPath }/admin/race/add"><button class="btn btn-success">新增赛事<i class="icon-plus icon-white"></i></button></a>
                                       </div>
                                       <div class="btn-group pull-right">
                                          <button data-toggle="dropdown" class="btn dropdown-toggle">扩展功能 <span class="caret"></span></button>
                                          <ul class="dropdown-menu">
                                             <li><a href="#">打印</a></li>
-                                            <li><a href="#">导入评委信息</a></li>
+                                            <li><a href="#">导入赛事信息</a></li>
                                             <li><a href="#">导出Excel</a></li>
                                          </ul>
                                       </div>
@@ -45,28 +45,30 @@
                                     <table  class="table table-striped table-bordered" style="vertical-align: middle;" id="tableInfo">
                                         <thead>
                                             <tr>
-                                                <th>姓名</th>
-                                                <th>性别</th>
-                                                <th>邮箱</th>
-                                                <th>电话</th>
-                                                <th>注册时间</th>
+                                                <th>主办</th>
+                                                <th>名称</th>
+                                                <th>轮次</th>
+                                                <th>投票时长</th>
+                                                <th>抽签模式</th>
+                                                <th>评分模式</th>
                                                 <th>状态</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach var="item" items="${ judgeList }" >
+                                        <c:forEach var="item" items="${ raceList }" >
                                             <tr class="gradeX">
-                                                <td>${item.judgeName }</td>
-                                                <td>${item.gender }</td>
-                                                <td>${item.email }</td>
-                                                <td>${item.phone }</td>
-                                                <td>${item.registerDate }</td>
-                                                <td>${item.state }</td>
+                                                <td>${item.host }</td>
+                                                <td>${item.raceName }</td>
+                                                <td>${item.roundId }</td>
+                                                <td>${item.voteTime }</td>
+                                                <td>${item.drawPattern }</td>
+                                                <td>${item.judgePattern }</td>
+                                                <td>${item.state}</td>
                                                 <td style="min-width:95px;width:95px;">
-													<a href="javascript:void(0);" data-id="${item.judgeId }" onclick="detail(this)">查看</a>
-													<a href="javascript:void(0);" data-id="${item.judgeId }" onclick="edit(this)">编辑</a>
-													<a href="javascript:void(0);" data-id="${item.judgeId }" onclick="deleted(this)">删除</a>
+													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="detail(this)">查看</a>
+													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="edit(this)">编辑</a>
+													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="deleted(this)">删除</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>

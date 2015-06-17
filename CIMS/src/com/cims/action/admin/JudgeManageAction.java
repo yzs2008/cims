@@ -98,7 +98,7 @@ public class JudgeManageAction extends BaseAction {
 		return INPUT;
 	}
 
-	@Action(value = "detail", results = { @Result(name = "success", location = "/WEB-INF/admin/judge/detail.jsp") })
+	@Action(value = "edit", results = { @Result(name = "success", location = "/WEB-INF/admin/judge/edit.jsp") })
 	public String showDetail() {
 		if (StringUtils.isNotBlank(id)) {
 			judge = judgeProcess.retrieve(Integer.valueOf(id));
@@ -107,7 +107,7 @@ public class JudgeManageAction extends BaseAction {
 		return ERROR;
 	}
 
-	@Action(value = "judgeDetail", results = { @Result(name = "success", location = "/WEB-INF/admin/judge/detail.jsp") })
+	@Action(value = "detail", results = { @Result(name = "success", location = "/WEB-INF/admin/judge/detail.jsp") })
 	public String judgeDetail() {
 		if (StringUtils.isNotBlank(id)) {
 			judge = judgeProcess.retrieve(Integer.valueOf(id));
@@ -117,7 +117,7 @@ public class JudgeManageAction extends BaseAction {
 	}
 
 	@Action(value = "update", results = {
-			@Result(name = "input", location = "/WEB-INF/admin/judge/update.jsp"),
+			@Result(name = "input", location = "/WEB-INF/admin/judge/edit.jsp"),
 			@Result(name = "success", type = "redirect", location = "list") })
 	public String update() {
 		if (accept(judge4update)) {

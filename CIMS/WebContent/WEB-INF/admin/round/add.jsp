@@ -6,14 +6,11 @@
 <html>
     
     <head>
-        <title>添加评委</title>
+        <title>添加赛事</title>
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/css/admin/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath}/css/admin/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath}/css/admin/styles.css" rel="stylesheet" media="screen">
-        <link href="${pageContext.request.contextPath}/css/fileupload/style.css" rel="stylesheet" media="screen">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/cropbox.js"></script>
     </head>
     
     <body>
@@ -26,91 +23,83 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">添加评委</div>
+                                <div class="muted pull-left">添加赛事</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                    <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/admin/judge/add" enctype="multipart/form-data">
+                                    <form class="form-horizontal" method="post" action="${pageContext.request.contextPath }/admin/race/add" >
                                       <fieldset>
-                                        <legend>评委信息</legend>
+                                        <legend>赛事信息</legend>
                                         <div class="control-group">
-                                          <label class="control-label" for="name">评委姓名 </label>
+                                          <label class="control-label" for="name">赛事名称 </label>
                                           <div class="controls">
-                                            <input type="text" name="judge.judgeName" class="default" required="required" id="name" >
+                                            <input type="text" name="race.raceName" class="default" required="required" id="name" >
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="password">密码</label>
+                                          <label class="control-label" for="round">赛事轮次</label>
                                           <div class="controls">
-                                            <input type="text" name="judge.password" class="default" required="required" id="password" >
+                                            <input type="text" name="race.roundId" class="default" required="required" id="round" >
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="password_confirm">确认密码</label>
+                                          <label class="control-label" for="host">主办方</label>
                                           <div class="controls">
-                                            <input type="text" class="default" id="password_confirm" required="required">
+                                            <input type="text" class="default" name="race.host" id="host" required="required">
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="optionsCheckbox">性别</label>
+                                          <label class="control-label" for="startTime">开始时间</label>
                                           <div class="controls">
-                                          	<input id="gender_male" type="radio" value="male" name="judge.gender" checked> 
-                                          	<label for="gender_male" style="display: inline-block;margin-left: 10px;">男</label>
-                                          	<input id="gender_female" type="radio" value="female" name="judge.gender" style="margin-left: 50px;"> 
-                                          	<label for="gender_female" style="display: inline-block;margin-left: 10px;">女</label>
+                                            <input type="text" class="default" name="race.startTime" id="startTime" required="required">
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="email">电子邮箱</label>
+                                          <label class="control-label" for="qualification">参赛资格</label>
                                           <div class="controls">
-                                            <input type="text" name="judge.email" class="default" id="email">
+                                            <input type="text" class="default" name="race.qualification" id="qualification" required="required">
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="phone">手机号</label>
+                                          <label class="control-label" for="place">举办地点</label>
                                           <div class="controls">
-                                            <input type="text" name="judge.phone" class="default" id="phone">
+                                            <input type="text" name="race.place" class="default" id="place">
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="fileInput">评委照片</label>
+                                          <label class="control-label" for="judgePattern">评分模式</label>
                                           <div class="controls">
-                                          	<input type="hidden" id="useDefaultAvatar" name="useDefaultAvatar" value="1">
-											  <!--                                           上传图片 -->
-											  <label style="margin-top:6px;font-size:12px;color:#22bbcc;">提示：按住Ctrl+Shift，可以实现滚轮缩放</label>
-	                                          <div class="fileupload-container">
-												  <div class="imageBox">
-												    <div class="thumbBox"></div>
-												    <div class="spinner" style="display: none">Loading...</div>
-												  </div>
-												  <div class="action"> 
-												    <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
-												      <label for="upload-file" style="  line-height: 50px; font-size: 17px;">选择照片</label>
-												      </a>
-												      <input type="file"  name="avatar" id="upload-file" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp"/>
-												      <input type="hidden" name="imageClipStartX"/>
-												      <input type="hidden" name="imageClipStartY"/>
-												      <input type="hidden" name="imageClipWidth"/>
-												      <input type="hidden" name="imageClipHeight"/>
-												    </div>
-												    <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
-												    <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
-												    <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
-												  </div>
-												  <div class="cropped"></div>
-												</div>
-												<!--                                           上传图片 -->
+                                            <input type="text" name="race.judgePattern" class="default" id="judgePattern">
                                           </div>
                                         </div>
                                         <div class="control-group">
-                                          <label class="control-label" for="textarea2">评委简介</label>
+                                          <label class="control-label" for="voteTime">投票时长</label>
                                           <div class="controls">
-                                            <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..." style="width: 98%; height: 200px"></textarea>
+                                            <input type="text" name="race.voteTime" class="default" id="voteTime">
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="drawPattern">抽签模式</label>
+                                          <div class="controls">
+                                            <input type="text" name="race.drawPattern" class="default" id="drawPattern">
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="eraseGroup">是否抹去分组标志</label>
+                                          <div class="controls">
+                                            <input type="text" name="race.eraseGroup" class="default" id="eraseGroup">
+                                          </div>
+                                        </div>
+                                       
+                                        <div class="control-group">
+                                          <label class="control-label" for="textarea2">赛事简介</label>
+                                          <div class="controls">
+                                            <textarea class="input-xlarge textarea" name="race.description" placeholder="Enter text ..." style="width: 98%; height: 200px"></textarea>
                                           </div>
                                         </div>
                                         <div class="form-actions" >
                                           <button type="submit" class="btn btn-primary" onclick="validate()">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
-                                          <a href="${pageContext.request.contextPath }/admin/judge/list"><button type="button" class="btn" style="margin-left: 50px;">放弃添加</button></a>
+                                          <a href="${pageContext.request.contextPath }/admin/race/list"><button type="button" class="btn" style="margin-left: 50px;">放弃添加</button></a>
                                         </div>
                                       </fieldset>
                                     </form>

@@ -19,7 +19,7 @@ public class JudgeDao extends BaseDao<Judge> {
 	}
 	
 	public List<Judge> retrieveList(Judge judge)throws Exception{
-		StringBuilder sbHql=new StringBuilder("select o from Judge o where 1=1");
+		StringBuilder sbHql=new StringBuilder("select o from Judge o where 1=1 order by o.registerDate desc");
 		
 		String hql=sbHql.toString();
 		return retrieveList(hql);

@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="cims_judge")
@@ -18,6 +20,7 @@ public class Judge {
 	private String password;
 	private String gender;
 	private String phone;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date registerDate;
 	private String email;
 	private String avatar;
