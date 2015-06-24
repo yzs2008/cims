@@ -5,3 +5,6 @@ grant all on *.* to 'kaidi'@'localhost';
 
 程序中出现的错误，一律返回ERROR
 用户中交互异常，返回ajaxError
+
+
+初始化系统要有默认轮次，创建时间为当前时间加上100年

@@ -1,0 +1,96 @@
+.icon-blank{
+	background:url('../../images/round/blank.gif') no-repeat center center;
+}
+.icon-add{
+	background:url('../../images/round/edit_add.png') no-repeat center center;
+}
+.icon-edit{
+	background:url('../../images/round/pencil.png') no-repeat center center;
+}
+.icon-clear{
+	background:url('../../images/round/clear.png') no-repeat center center;
+}
+.icon-remove{
+	background:url('../../images/round/edit_remove.png') no-repeat center center;
+}
+.icon-save{
+	background:url('../../images/round/filesave.png') no-repeat center center;
+}
+.icon-cut{
+	background:url('../../images/round/cut.png') no-repeat center center;
+}
+.icon-ok{
+	background:url('../../images/round/ok.png') no-repeat center center;
+}
+.icon-no{
+	background:url('../../images/round/no.png') no-repeat center center;
+}
+.icon-cancel{
+	background:url('../../images/round/cancel.png') no-repeat center center;
+}
+.icon-reload{
+	background:url('../../images/round/reload.png') no-repeat center center;
+}
+.icon-search{
+	background:url('../../images/round/search.png') no-repeat center center;
+}
+.icon-print{
+	background:url('../../images/round/print.png') no-repeat center center;
+}
+.icon-help{
+	background:url('../../images/round/help.png') no-repeat center center;
+}
+.icon-undo{
+	background:url('../../images/round/undo.png') no-repeat center center;
+}
+.icon-redo{
+	background:url('../../images/round/redo.png') no-repeat center center;
+}
+.icon-back{
+	background:url('../../images/round/back.png') no-repeat center center;
+}
+.icon-sum{
+	background:url('../../images/round/sum.png') no-repeat center center;
+}
+.icon-tip{
+	background:url('../../images/round/tip.png') no-repeat center center;
+}
+.icon-filter{
+	background:url('../../images/round/filter.png') no-repeat center center;
+}
+.icon-man{
+	background:url('../../images/round/man.png') no-repeat center center;
+}
+.icon-lock{
+	background:url('../../images/round/lock.png') no-repeat center center;
+}
+.icon-more{
+	background:url('../../images/round/more.png') no-repeat center center;
+}
+
+
+.icon-mini-add{
+	background:url('../../images/round/mini_add.png') no-repeat center center;
+}
+.icon-mini-edit{
+	background:url('../../images/round/mini_edit.png') no-repeat center center;
+}
+.icon-mini-refresh{
+	background:url('../../images/round/mini_refresh.png') no-repeat center center;
+}
+
+.icon-large-picture{
+	background:url('../../images/round/large_picture.png') no-repeat center center;
+}
+.icon-large-clipart{
+	background:url('../../images/round/large_clipart.png') no-repeat center center;
+}
+.icon-large-shapes{
+	background:url('../../images/round/large_shapes.png') no-repeat center center;
+}
+.icon-large-smartart{
+	background:url('../../images/round/large_smartart.png') no-repeat center center;
+}
+.icon-large-chart{
+	background:url('../../images/round/large_chart.png') no-repeat center center;
+}

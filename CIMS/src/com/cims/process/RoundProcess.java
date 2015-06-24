@@ -50,7 +50,22 @@ public class RoundProcess {
 		}
 		return null;
 	}
-
+	public boolean retrieve(String  roundName){
+		boolean accept=false;
+		try{
+			Round filter=new Round();
+			filter.setRoundName(roundName);
+			if( roundDao.retrieve(filter)!=null){
+				accept=false;
+			}else{
+				accept=true;
+			}	
+		}catch(Exception e){
+			log.error(e.getMessage());
+			accept=false;
+		}
+		return accept;
+	}
 	//改
 	public boolean update(Round round){
 		boolean done=false;
