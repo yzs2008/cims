@@ -71,12 +71,12 @@ select, textarea, input[type="text"] {
 												<label class="control-label title-bold" for="round-parent">上级轮次:</label> <span id="round-parent" class="content-underline">上级轮次名称</span>
 											</div>
 											<div class="control-group">
-												<label class="control-label title-bold" for="round-hasnode">是否包含子轮次:</label> <span id="round-hasnode" class="content-underline">是</span> 
+												<label class="control-label title-bold" for="round-hasnode">是否可包含子轮次:</label> <span id="round-hasnode" class="content-underline">是</span> 
 											</div>
 											<div class="control-group">
 												<label class="control-label title-bold" for="round-description">轮次简介:</label>
 												<div class="controls">
-													<p id="round-description" class="content-underline">轮轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍轮次的简单介绍</p>
+													<p id="round-description" class="content-underline">轮次简介</p>
 												</div>
 											</div>
 											<div class="form-actions">
@@ -98,20 +98,44 @@ select, textarea, input[type="text"] {
 	<%@ include file="../../common/adminFoot.jsp"%>
 	<script type="text/javascript">
 		$(function() {
+			$.ajax({
+				   type: "GET",
+				   url: '${ pageContext.request.contextPath }/admin/round/roundListJson',
+				   success: function(data){
+					   bindRoundTree(data.resultData);
+				   }
+				});
+		});
+		
+		function bindRoundTree(jsonData){
+			var treeDataArray={"treeData":[]};
+			treeDataArray.treeData[0]=traverse(jsonData);
+			
 			$("#roundTree")
 					.tree(
 							{
-								url : '${ pageContext.request.contextPath }/testData/tree_data2.json',
-								animate : true,
-								lines : true,
+								"data":treeDataArray.treeData,
+								"animate" : true,
+								"lines" : true,
 								onClick:function(node){
 									getData(node.id);
 								}
 							});
-		});
-
+		}
+		function traverse(node){
+			var output={
+				"id":node.round.roundId,
+				"text":node.round.roundName,
+				"iconCls":"icon-add",
+				"state":"open",
+				"children":[]
+			};	
+			for(var i=0;i<node.children.length;i++){
+				output.children[i]=traverse(node.children[i]);	
+			}
+			return output;
+		}
 		function getData(id){
-			id=1;
 			var param="id="+id;
 			$.ajax({
 				   type: "POST",
@@ -141,7 +165,7 @@ select, textarea, input[type="text"] {
 		}	
 		function edit(evt) {
 			var id = $(evt).data("id");
-			window.location.href = "edit?id=" + id;
+			window.location.href = "${ pageContext.request.contextPath }/edit?id=" + id;
 		}
 		function _delete(evt) {
 			var id = $(evt).data("id");

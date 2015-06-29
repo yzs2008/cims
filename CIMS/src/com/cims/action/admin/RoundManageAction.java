@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
 import com.cims.base.type.StateEnum;
+import com.cims.data.model.RoundList;
 import com.cims.model.Round;
 import com.cims.process.RoundProcess;
 
@@ -28,7 +29,7 @@ public class RoundManageAction extends BaseAction {
 	private Round round;
 	private Integer id;
 	private Round round4update;
-	
+
 	private String roundName;
 
 	private List<Round> roundList;
@@ -51,9 +52,9 @@ public class RoundManageAction extends BaseAction {
 
 	@Action(value = "add", results = { @Result(name = "input", location = "/WEB-INF/admin/round/add.jsp"), @Result(name = "success", type = "redirect", location = "list") })
 	public String add() {
-		Round filter=new Round();
+		Round filter = new Round();
 		filter.setHasNode(true);
-		roundList=roundProcess.retrieveList(filter);
+		roundList = roundProcess.retrieveList(filter);
 		if (accept()) {
 			round.setState(StateEnum.enable.toString());
 			round.setCreateTime(new Date());
@@ -75,7 +76,7 @@ public class RoundManageAction extends BaseAction {
 		}
 		return true;
 	}
-	
+
 	@Action(value = "update", results = { @Result(name = "input", location = "/WEB-INF/admin/round/edit.jsp"), @Result(name = "success", type = "redirect", location = "list") })
 	public String update() {
 		return INPUT;
@@ -83,7 +84,19 @@ public class RoundManageAction extends BaseAction {
 
 	@Action(value = "edit", results = { @Result(name = "input", location = "/WEB-INF/admin/round/edit.jsp"), @Result(name = "success", type = "redirect", location = "list") })
 	public String edit() {
-		return INPUT;
+		if (id != null) {
+			try {
+				Round filter = new Round();
+				filter.setRoundId(id);
+				filter.setHasNode(true);
+				roundList = roundProcess.retrieveParentList(filter);
+				round4update = roundProcess.retrieve(id);
+				return INPUT;
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		}
+		return ERROR;
 	}
 
 	@Action("roundInfo")
@@ -100,23 +113,65 @@ public class RoundManageAction extends BaseAction {
 			log.error(e.getMessage());
 		}
 	}
+
 	@Action("roundNameCheck")
-	public void roundNameCheck(){
-		try{
-			if(StringUtils.isNotBlank(roundName)){
-				JSONObject resultData=new JSONObject();
-				if(roundProcess.retrieve(roundName)){
+	public void roundNameCheck() {
+		try {
+			if (StringUtils.isNotBlank(roundName)) {
+				JSONObject resultData = new JSONObject();
+				if (roundProcess.retrieve(roundName)) {
 					resultData.put("resultData", true);
-				}else{
+				} else {
 					resultData.put("resultData", false);
-				} 
+				}
 				String jsonResult = resultData.toJSONString();
 				HttpUtils.responseJson(jsonResult, response);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 	}
+
+	@Action("roundNameCheck4update")
+	public void roundNameCheck4update() {
+		try {
+			if (StringUtils.isNotBlank(roundName)) {
+				JSONObject resultData = new JSONObject();
+				if (roundProcess.retrieveExclude(roundName, id)) {
+					boolean hasNode = Boolean.valueOf(request.getParameter("hasNode"));
+					if (!hasNode) {
+						if (roundProcess.acceptChangeHasNode(id)) {
+							resultData.put("resultData", true);
+						} else {
+							resultData.put("resultData", false);
+							resultData.put("message", "该轮次下面包含子轮次，无法成为叶子轮次");
+						}
+					}
+				} else {
+					resultData.put("resultData", false);
+					resultData.put("message", "轮次名称不能重复");
+				}
+				String jsonResult = resultData.toJSONString();
+				HttpUtils.responseJson(jsonResult, response);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+
+	@Action("roundListJson")
+	public void roundListJson() {
+		try {
+			RoundList root = roundProcess.retrieveRoundList();
+			JSONObject resultData = new JSONObject();
+			resultData.put("resultData", root);
+			String jsonResult = resultData.toJSONString();
+			HttpUtils.responseJson(jsonResult, response);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+
 	public Round getRound() {
 		return round;
 	}
