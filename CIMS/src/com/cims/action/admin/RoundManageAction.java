@@ -38,7 +38,6 @@ public class RoundManageAction extends BaseAction {
 
 	@Action(value = "list", results = { @Result(name = "input", location = "/WEB-INF/admin/round/list.jsp") })
 	public String list() {
-		roundList = roundProcess.retrieveList(new Round());
 		return INPUT;
 	}
 
@@ -77,9 +76,24 @@ public class RoundManageAction extends BaseAction {
 		return true;
 	}
 
-	@Action(value = "update", results = { @Result(name = "input", location = "/WEB-INF/admin/round/edit.jsp"), @Result(name = "success", type = "redirect", location = "list") })
+	@Action(value = "update", results = {@Result(name = "success", type = "redirect", location = "list") })
 	public String update() {
-		return INPUT;
+		if(round4update==null){
+			return ERROR;
+		}
+		try{
+			round=roundProcess.retrieve(round4update.getRoundId());
+			round.setDescription(round4update.getDescription());
+			round.setHasNode(round4update.isHasNode());
+			round.setParent(round4update.getParent());
+			round.setParentName(round4update.getParentName());
+			round.setRoundName(round4update.getRoundName());
+			roundProcess.update(round);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error(e.getMessage());
+			return ERROR;
+		}
 	}
 
 	@Action(value = "edit", results = { @Result(name = "input", location = "/WEB-INF/admin/round/edit.jsp"), @Result(name = "success", type = "redirect", location = "list") })
@@ -137,8 +151,10 @@ public class RoundManageAction extends BaseAction {
 		try {
 			if (StringUtils.isNotBlank(roundName)) {
 				JSONObject resultData = new JSONObject();
+				//判断是否具有同名轮次
 				if (roundProcess.retrieveExclude(roundName, id)) {
 					boolean hasNode = Boolean.valueOf(request.getParameter("hasNode"));
+					//判断是否包含叶子节点
 					if (!hasNode) {
 						if (roundProcess.acceptChangeHasNode(id)) {
 							resultData.put("resultData", true);
@@ -146,6 +162,8 @@ public class RoundManageAction extends BaseAction {
 							resultData.put("resultData", false);
 							resultData.put("message", "该轮次下面包含子轮次，无法成为叶子轮次");
 						}
+					}else{
+						resultData.put("resultData", true);
 					}
 				} else {
 					resultData.put("resultData", false);

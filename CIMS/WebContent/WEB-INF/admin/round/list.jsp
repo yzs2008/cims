@@ -22,13 +22,20 @@ label {
 	margin-right: 10px;
 }
 
+.form-patch{
+	text-align: center;
+	padding-right: 0px;
+}
+
 select, textarea, input[type="text"] {
 	margin-bottom: 0px;
 }
-.title-bold{
+
+.title-bold {
 	font-weight: bold;
 }
-.content-underline{
+
+.content-underline {
 	text-decoration: underline;
 }
 </style>
@@ -63,28 +70,26 @@ select, textarea, input[type="text"] {
 										</div>
 									</td>
 									<td>
-										<form method="post" action="${pageContext.request.contextPath }/admin/round/update">
-											<div class="control-group">
-												<label class="control-label title-bold" for="round-name">轮次名称:</label> <span id="round-name" class="content-underline">轮次名称我是第一轮</span> 
+										<div class="control-group">
+											<label class="control-label title-bold" for="round-name">轮次名称:</label> <span id="round-name" class="content-underline"></span>
+										</div>
+										<div class="control-group">
+											<label class="control-label title-bold" for="round-parent">上级轮次:</label> <span id="round-parent" class="content-underline"></span>
+										</div>
+										<div class="control-group">
+											<label class="control-label title-bold" for="round-hasnode">是否可包含子轮次:</label> <span id="round-hasnode" class="content-underline"></span>
+										</div>
+										<div class="control-group">
+											<label class="control-label title-bold" for="round-description">轮次简介:</label>
+											<div class="controls">
+												<p id="round-description" class="content-underline"></p>
 											</div>
-											<div class="control-group">
-												<label class="control-label title-bold" for="round-parent">上级轮次:</label> <span id="round-parent" class="content-underline">上级轮次名称</span>
-											</div>
-											<div class="control-group">
-												<label class="control-label title-bold" for="round-hasnode">是否可包含子轮次:</label> <span id="round-hasnode" class="content-underline">是</span> 
-											</div>
-											<div class="control-group">
-												<label class="control-label title-bold" for="round-description">轮次简介:</label>
-												<div class="controls">
-													<p id="round-description" class="content-underline">轮次简介</p>
-												</div>
-											</div>
-											<div class="form-actions">
-												<button type="submit" id="btn-edit" data-id="" class="btn btn-primary" onclick="edit(this)">编辑</button>
-												<button type="submit" id="btn-delete" data-id="" class="btn btn-primary" onclick="_delete(this)">删除</button>
-												<button type="submit" id="btn-add" data-id="" class="btn btn-primary" onclick="add(this)">添加子轮次</button>
-											</div>
-										</form>
+										</div>
+										<div class="form-actions form-patch">
+											<button type="button" id="btn-edit" data-id="" class="btn btn-primary" onclick="edit(this)">编辑</button>
+											<button type="button" id="btn-delete" data-id="" class="btn btn-primary" onclick="_delete(this)">删除</button>
+											<button type="button" id="btn-add" data-id="" class="btn btn-primary" onclick="add(this)">添加子轮次</button>
+										</div>
 									</td>
 								</tr>
 							</tbody>
@@ -98,82 +103,94 @@ select, textarea, input[type="text"] {
 	<%@ include file="../../common/adminFoot.jsp"%>
 	<script type="text/javascript">
 		$(function() {
+			//初始化轮次结构
 			$.ajax({
-				   type: "GET",
-				   url: '${ pageContext.request.contextPath }/admin/round/roundListJson',
-				   success: function(data){
-					   bindRoundTree(data.resultData);
-				   }
-				});
+						type : "GET",
+						url : '${ pageContext.request.contextPath }/admin/round/roundListJson',
+						success : function(data) {
+							bindRoundTree(data.resultData);
+						}
+					});
 		});
-		
-		function bindRoundTree(jsonData){
-			var treeDataArray={"treeData":[]};
-			treeDataArray.treeData[0]=traverse(jsonData);
+
+		function bindRoundTree(jsonData) {
+			var treeDataArray = {
+				"treeData" : []
+			};
+			treeDataArray.treeData[0] = traverse(jsonData);
+
+			$("#roundTree").tree({
+				"data" : treeDataArray.treeData,
+				"animate" : true,
+				"lines" : true,
+				onClick : function(node) {
+					getData(node.id);
+				}
+			});
 			
-			$("#roundTree")
-					.tree(
-							{
-								"data":treeDataArray.treeData,
-								"animate" : true,
-								"lines" : true,
-								onClick:function(node){
-									getData(node.id);
-								}
-							});
+			//初始化轮次信息
+			bindData(jsonData.round);
 		}
-		function traverse(node){
-			var output={
-				"id":node.round.roundId,
-				"text":node.round.roundName,
-				"iconCls":"icon-add",
-				"state":"open",
-				"children":[]
-			};	
-			for(var i=0;i<node.children.length;i++){
-				output.children[i]=traverse(node.children[i]);	
+		function traverse(node) {
+			var output = {
+				"id" : node.round.roundId,
+				"text" : node.round.roundName,
+				"iconCls" : "icon-add",
+				"state" : "open",
+				"children" : []
+			};
+			for (var i = 0; i < node.children.length; i++) {
+				output.children[i] = traverse(node.children[i]);
 			}
 			return output;
 		}
-		function getData(id){
-			var param="id="+id;
+		function getData(id) {
+			var param = "id=" + id;
 			$.ajax({
-				   type: "POST",
-				   url: '${ pageContext.request.contextPath }/admin/round/roundInfo',
-				   data: param,
-				   success: function(data){
-					   bindData(data.resultData);
-				   }
-				});
+						type : "POST",
+						url : '${ pageContext.request.contextPath }/admin/round/roundInfo',
+						data : param,
+						success : function(data) {
+							bindData(data.resultData);
+						}
+					});
 		}
-		function bindData(data){
+		function bindData(data) {
 			$("#round-name").text(data.roundName);
 			$("#round-description").text(data.description);
 			$("#round-parent").text(data.parentName);
 
-			$("#btn-add").data(data.id);
-			$("#btn-edit").data(data.id);
-			$("#btn-delete").data(data.id);
-			
-			var hasNode="是";
-			if(!data.hasNode){
-				hasNode="不是";	
-				$("#btn-add").css();
+			$("#btn-add").data("id",data.roundId);
+			$("#btn-edit").data("id",data.roundId);
+			$("#btn-delete").data("id",data.roundId);
+
+			var hasNode = "是";
+			if (!data.hasNode) {
+				hasNode = "否";
+				$("#btn-add").css("display","none");
+			}else{
+				$("#btn-add").css("display","inline");
+			}
+			if(data.parent==-1){
+				$("#btn-edit").css("display","none");
+				$("#btn-delete").css("display","none");
+			}else{
+				$("#btn-edit").css("display","inline");
+				$("#btn-delete").css("display","inline");
 			}
 			$("#round-hasnode").text(hasNode);
-			
-		}	
+		}
 		function edit(evt) {
 			var id = $(evt).data("id");
-			window.location.href = "${ pageContext.request.contextPath }/edit?id=" + id;
+			window.location.href = "${ pageContext.request.contextPath }/admin/round/edit?id=" + id;
 		}
 		function _delete(evt) {
 			var id = $(evt).data("id");
-			window.location.href = "deleted?id=" + id;
+			window.location.href = "${ pageContext.request.contextPath }/admin/round/delete?id=" + id;
 		}
 		function add(evt) {
 			var id = $(evt).data("id");
-			window.location.href = "add?id=" + id;
+			window.location.href = "${ pageContext.request.contextPath }/admin/round/add?id=" + id;
 		}
 	</script>
 </body>
