@@ -2,7 +2,6 @@ package com.cims.action.admin;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
@@ -33,8 +32,6 @@ public class RoundManageAction extends BaseAction {
 	private String roundName;
 
 	private List<Round> roundList;
-	private Map<String, String> judgePatternMap;
-	private Map<String, String> drawPatternMap;
 
 	@Action(value = "list", results = { @Result(name = "input", location = "/WEB-INF/admin/round/list.jsp") })
 	public String list() {
@@ -76,13 +73,43 @@ public class RoundManageAction extends BaseAction {
 		return true;
 	}
 
-	@Action(value = "update", results = {@Result(name = "success", type = "redirect", location = "list") })
+	@Action("delete")
+	public void delete() {
+		try {
+			JSONObject resultData = new JSONObject();
+			if (id != null) {
+				// 查看是否可以删除
+				if (roundProcess.prepareDelete(id)) {
+					if (roundProcess.detete(String.valueOf(id))) {
+						resultData.put("resultData", true);
+						resultData.put("message", "删除成功");
+					} else {
+						resultData.put("resultData", false);
+						resultData.put("message", "程序内部错误！请联系系统提供商！");
+
+					}
+				} else {
+					resultData.put("resultData", false);
+					resultData.put("message", "该轮次下面包含子轮次或赛事，无法删除该轮次！");
+				}
+			} else {
+				resultData.put("resultData", false);
+				resultData.put("message", "参数错误");
+			}
+			String jsonResult = resultData.toJSONString();
+			HttpUtils.responseJson(jsonResult, response);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+
+	@Action(value = "update", results = { @Result(name = "success", type = "redirect", location = "list") })
 	public String update() {
-		if(round4update==null){
+		if (round4update == null) {
 			return ERROR;
 		}
-		try{
-			round=roundProcess.retrieve(round4update.getRoundId());
+		try {
+			round = roundProcess.retrieve(round4update.getRoundId());
 			round.setDescription(round4update.getDescription());
 			round.setHasNode(round4update.isHasNode());
 			round.setParent(round4update.getParent());
@@ -90,7 +117,7 @@ public class RoundManageAction extends BaseAction {
 			round.setRoundName(round4update.getRoundName());
 			roundProcess.update(round);
 			return SUCCESS;
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return ERROR;
 		}
@@ -151,10 +178,10 @@ public class RoundManageAction extends BaseAction {
 		try {
 			if (StringUtils.isNotBlank(roundName)) {
 				JSONObject resultData = new JSONObject();
-				//判断是否具有同名轮次
+				// 判断是否具有同名轮次
 				if (roundProcess.retrieveExclude(roundName, id)) {
 					boolean hasNode = Boolean.valueOf(request.getParameter("hasNode"));
-					//判断是否包含叶子节点
+					// 判断是否包含叶子节点
 					if (!hasNode) {
 						if (roundProcess.acceptChangeHasNode(id)) {
 							resultData.put("resultData", true);
@@ -162,7 +189,7 @@ public class RoundManageAction extends BaseAction {
 							resultData.put("resultData", false);
 							resultData.put("message", "该轮次下面包含子轮次，无法成为叶子轮次");
 						}
-					}else{
+					} else {
 						resultData.put("resultData", true);
 					}
 				} else {
@@ -206,14 +233,6 @@ public class RoundManageAction extends BaseAction {
 		return roundList;
 	}
 
-	public Map<String, String> getJudgePatternMap() {
-		return judgePatternMap;
-	}
-
-	public Map<String, String> getDrawPatternMap() {
-		return drawPatternMap;
-	}
-
 	public void setRound(Round round) {
 		this.round = round;
 	}
@@ -228,14 +247,6 @@ public class RoundManageAction extends BaseAction {
 
 	public void setRoundList(List<Round> roundList) {
 		this.roundList = roundList;
-	}
-
-	public void setJudgePatternMap(Map<String, String> judgePatternMap) {
-		this.judgePatternMap = judgePatternMap;
-	}
-
-	public void setDrawPatternMap(Map<String, String> drawPatternMap) {
-		this.drawPatternMap = drawPatternMap;
 	}
 
 	public String getRoundName() {

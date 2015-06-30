@@ -186,7 +186,16 @@ select, textarea, input[type="text"] {
 		}
 		function _delete(evt) {
 			var id = $(evt).data("id");
-			window.location.href = "${ pageContext.request.contextPath }/admin/round/delete?id=" + id;
+			$.ajax({
+				type : "GET",
+				url : '${ pageContext.request.contextPath }/admin/round/delete?id=' + id,
+				success : function(data) {
+					alert(data.message);	
+					if(data.resultData){
+						location.reload();
+					}
+				}
+			});
 		}
 		function add(evt) {
 			var id = $(evt).data("id");

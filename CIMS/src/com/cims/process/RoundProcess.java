@@ -163,4 +163,19 @@ public class RoundProcess {
 		}
 		return root;
 	}
+	public boolean prepareDelete(Integer id) {
+		boolean accept=false;
+		try{
+			Integer records=roundDao.childrenRecords(id);
+			if(records>0){
+				accept=false;
+			}else{
+				accept=true;
+			}
+		}catch(Exception e){
+			log.error(e.getMessage());
+			accept=false;
+		}
+		return accept;
+	}
 }
