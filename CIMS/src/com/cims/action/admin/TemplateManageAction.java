@@ -8,7 +8,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cims.base.frame.BaseAction;
-import com.cims.model.Race;
+import com.cims.model.persist.Race;
 import com.cims.process.RaceProcess;
 
 @Namespace("/admin/race")

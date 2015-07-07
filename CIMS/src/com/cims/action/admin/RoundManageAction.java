@@ -13,8 +13,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
 import com.cims.base.type.StateEnum;
-import com.cims.data.model.RoundList;
-import com.cims.model.Round;
+import com.cims.model.datastruct.RoundList;
+import com.cims.model.persist.Round;
 import com.cims.process.RoundProcess;
 
 @Namespace("/admin/round")
@@ -38,26 +38,25 @@ public class RoundManageAction extends BaseAction {
 		return INPUT;
 	}
 
-	@Action(value = "detail", results = { @Result(name = "input", location = "/WEB-INF/admin/round/detail.jsp") })
-	public String detail() {
-		if (id == null) {
-
-		}
-		return INPUT;
-	}
 
 	@Action(value = "add", results = { @Result(name = "input", location = "/WEB-INF/admin/round/add.jsp"), @Result(name = "success", type = "redirect", location = "list") })
 	public String add() {
-		Round filter = new Round();
-		filter.setHasNode(true);
-		roundList = roundProcess.retrieveList(filter);
-		if (accept()) {
-			round.setState(StateEnum.enable.toString());
-			round.setCreateTime(new Date());
-			roundProcess.saveRound(round);
-			return SUCCESS;
+		try {
+			
+			if (accept()) {
+				round.setState(StateEnum.enable.toString());
+				round.setCreateTime(new Date());
+				roundProcess.saveRound(round);
+				return SUCCESS;
+			}
+				Round filter = new Round();
+				filter.setHasNode(true);
+				roundList = roundProcess.retrieveList(filter);
+			return INPUT;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return ERROR;
 		}
-		return INPUT;
 	}
 
 	private boolean accept() {

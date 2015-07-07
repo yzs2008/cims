@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.cims.base.frame.BaseDao;
-import com.cims.model.Judge;
+import com.cims.model.persist.Judge;
 
 @Repository("JudgeDao")
 public class JudgeDao extends BaseDao<Judge> {

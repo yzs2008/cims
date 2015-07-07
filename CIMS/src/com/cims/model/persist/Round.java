@@ -1,4 +1,4 @@
-package com.cims.model;
+package com.cims.model.persist;
 
 import java.util.Date;
 

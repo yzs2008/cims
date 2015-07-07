@@ -1,9 +1,9 @@
-package com.cims.data.model;
+package com.cims.model.datastruct;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cims.model.Round;
+import com.cims.model.persist.Round;
 
 public class RoundList {
 	private List<RoundList> children =new ArrayList<RoundList>();

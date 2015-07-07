@@ -1,4 +1,4 @@
-package com.cims.model;
+package com.cims.model.persist;
 
 import java.util.Date;
 
@@ -18,6 +18,7 @@ public class Race {
 	private Integer raceId;
 	private String raceName;
 	private Integer roundId;
+	private String roundName;
 	private String host;
 	private String place;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -121,6 +122,12 @@ public class Race {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public String getRoundName() {
+		return roundName;
+	}
+	public void setRoundName(String roundName) {
+		this.roundName = roundName;
 	}
 	
 }

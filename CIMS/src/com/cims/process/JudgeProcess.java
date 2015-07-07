@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cims.dao.JudgeDao;
-import com.cims.model.Judge;
+import com.cims.model.persist.Judge;
 
 @Service("JudgeProcess")
 public class JudgeProcess {

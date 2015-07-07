@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cims.base.frame.BaseAction;
 import com.cims.base.type.ActionContant;
-import com.cims.model.User;
+import com.cims.model.persist.User;
 import com.cims.process.UserProcess;
 
 

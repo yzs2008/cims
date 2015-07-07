@@ -1,4 +1,4 @@
-package com.cims.model;
+package com.cims.model.persist;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,44 +7,44 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cims_promotion")
-public class Promotion {
+@Table(name="cims_award")
+public class Award {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer promotionId;
+	private Integer awardId;
 	private Integer raceId;
-	private Integer nextId;
+	private String awardName;
+	private Integer count;
 	private Integer start;
-	private Integer end;
-	public Integer getPromotionId() {
-		return promotionId;
+	public Integer getAwardId() {
+		return awardId;
 	}
 	public Integer getRaceId() {
 		return raceId;
 	}
-	public Integer getNextId() {
-		return nextId;
+	public String getAwardName() {
+		return awardName;
+	}
+	public Integer getCount() {
+		return count;
 	}
 	public Integer getStart() {
 		return start;
 	}
-	public Integer getEnd() {
-		return end;
-	}
-	public void setPromotionId(Integer promotionId) {
-		this.promotionId = promotionId;
+	public void setAwardId(Integer awardId) {
+		this.awardId = awardId;
 	}
 	public void setRaceId(Integer raceId) {
 		this.raceId = raceId;
 	}
-	public void setNextId(Integer nextId) {
-		this.nextId = nextId;
+	public void setAwardName(String awardName) {
+		this.awardName = awardName;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 	public void setStart(Integer start) {
 		this.start = start;
-	}
-	public void setEnd(Integer end) {
-		this.end = end;
 	}
 	
 }

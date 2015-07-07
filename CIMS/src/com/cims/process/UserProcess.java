@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cims.dao.UserDao;
-import com.cims.model.User;
+import com.cims.model.persist.User;
 
 @Service("UserProcess")
 public class UserProcess {

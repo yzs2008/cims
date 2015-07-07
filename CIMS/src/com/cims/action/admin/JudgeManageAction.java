@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cims.base.frame.BaseAction;
 import com.cims.base.type.StateEnum;
-import com.cims.model.Judge;
+import com.cims.model.persist.Judge;
 import com.cims.process.JudgeProcess;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;

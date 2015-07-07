@@ -1,16 +1,21 @@
 package com.cims.action.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
-import com.cims.model.Race;
-import com.cims.model.Round;
+import com.cims.base.frame.HttpUtils;
+import com.cims.model.persist.Race;
+import com.cims.model.persist.Round;
 import com.cims.process.RaceProcess;
 
 @Namespace("/admin/race")
@@ -25,6 +30,7 @@ public class RaceManageAction extends BaseAction {
 	private List<Race> raceList;
 	private Integer id;
 	private Race race4update;
+	private String startTime;
 	
 	private List<Round> roundList;
 	private Map<String,String> judgePatternMap;
@@ -46,7 +52,47 @@ public class RaceManageAction extends BaseAction {
 			@Result(name = "input", location = "/WEB-INF/admin/race/add.jsp"),
 			@Result(name = "success", type = "redirect", location = "list") })
 	public String add() {
-		return INPUT;
+		try{
+			if(accept()){
+				raceProcess.saveRace(race);
+				return SUCCESS;
+			}else{
+				roundList = raceProcess.retrieveRoundList();
+				return INPUT;
+			}
+		}catch(Exception e){
+			log.error(e.getMessage());
+			return ERROR;
+		}
+	}
+	private boolean accept(){
+		boolean accept=true;
+		if(race==null){
+			accept=false;
+			return accept;
+		}
+		if(StringUtils.isBlank(race.getRaceName())){
+			accept=false;
+		}
+		if(StringUtils.isBlank(race.getHost())){
+			accept=false;
+		}
+		if(StringUtils.isBlank(race.getRoundName())){
+			accept=false;
+		}
+		if(race.getRoundId()==null){
+			accept=false;
+		}
+		try{
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			race.setStartTime(sdf.parse(startTime));
+		}catch(Exception e){
+			accept=false;
+		}
+		if(race.getStartTime()==null){
+			accept=false;
+		}
+		return accept;
 	}
 
 	@Action(value = "update", results = {
@@ -62,7 +108,24 @@ public class RaceManageAction extends BaseAction {
 	public String edit() {
 		return INPUT;
 	}
-	
+
+	@Action("raceNameCheck")
+	public void raceNameCheck() {
+		try {
+			if (StringUtils.isNotBlank(race.getRaceName())) {
+				JSONObject resultData = new JSONObject();
+				if (raceProcess.raceNameCheck(race.getRaceName())) {
+					resultData.put("resultData", true);
+				} else {
+					resultData.put("resultData", false);
+				}
+				String jsonResult = resultData.toJSONString();
+				HttpUtils.responseJson(jsonResult, response);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
 	
 	public Race getRace() {
 		return race;
@@ -118,6 +181,14 @@ public class RaceManageAction extends BaseAction {
 
 	public void setDrawPatternMap(Map<String, String> drawPatternMap) {
 		this.drawPatternMap = drawPatternMap;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 	
 }

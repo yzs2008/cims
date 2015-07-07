@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cims.dao.RoundDao;
-import com.cims.data.model.RoundList;
-import com.cims.model.Round;
+import com.cims.model.datastruct.RoundList;
+import com.cims.model.persist.Round;
 
 
 @Service("RoundProcess")

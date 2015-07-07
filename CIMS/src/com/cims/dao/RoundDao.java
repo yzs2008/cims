@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.cims.base.frame.BaseDao;
-import com.cims.model.Round;
+import com.cims.model.persist.Round;
 
 @Repository("RoundDao")
 public class RoundDao extends BaseDao<Round> {
@@ -26,6 +26,8 @@ public class RoundDao extends BaseDao<Round> {
 		}
 		if(round.isHasNode()){
 			sbHql.append(" and o.hasNode=true");
+		}else{
+			sbHql.append(" and o.hasNode=false");
 		}
 		sbHql.append(" order by o.createTime desc");
 		String hql=sbHql.toString();
