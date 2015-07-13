@@ -94,7 +94,7 @@
 									<div class="left-right">
 										<label class="control-label" for="judgePattern">评分模式</label>
 										<div class="controls">
-											<input type="text" name="race.judgePattern" class="default" id="judgePattern">
+											<s:select name="race.judgePattern" listKey="key" listValue="value" list="judgePatternMap" />
 										</div>
 									</div>
 									<div class="left-right">

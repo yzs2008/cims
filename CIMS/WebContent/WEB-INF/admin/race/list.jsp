@@ -13,6 +13,7 @@
         <link href="${pageContext.request.contextPath}/css/admin/styles.css" rel="stylesheet" media="screen">
         <link href="${pageContext.request.contextPath}/css/admin/DT_bootstrap.css" rel="stylesheet" media="screen">
         <script src="${pageContext.request.contextPath}/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     </head>
     
     <body>
@@ -24,7 +25,7 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left">赛事信息</div>
+                                <div class="muted pull-left">赛事基本信息</div>
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
@@ -63,7 +64,7 @@
                                                 <td>${item.roundId }</td>
                                                 <td>${item.voteTime }</td>
                                                 <td>${item.drawPattern }</td>
-                                                <td>${item.judgePattern }</td>
+                                                <td>${item.judgePattern.toString() }</td>
                                                 <td>${item.state}</td>
                                                 <td style="min-width:95px;width:95px;">
 													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="detail(this)">查看</a>

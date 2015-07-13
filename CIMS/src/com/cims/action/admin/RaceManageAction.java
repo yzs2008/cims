@@ -1,7 +1,7 @@
 package com.cims.action.admin;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
+import com.cims.model.datastruct.JudgePattern;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.Round;
 import com.cims.process.RaceProcess;
@@ -36,7 +37,14 @@ public class RaceManageAction extends BaseAction {
 	private Map<String,String> judgePatternMap;
 	private Map<String,String> drawPatternMap; 
 	
-
+	public RaceManageAction() {
+		judgePatternMap=new LinkedHashMap<String,String>();
+		for(JudgePattern p: JudgePattern.values()){
+			judgePatternMap.put(p.name(), p.toString());
+		}
+		drawPatternMap =new LinkedHashMap<String,String>(); 
+	}
+	
 	@Action(value = "list", results = { @Result(name = "input", location = "/WEB-INF/admin/race/list.jsp") })
 	public String list() {
 		raceList=raceProcess.retrieveList(new Race());

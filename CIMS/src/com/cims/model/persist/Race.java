@@ -3,12 +3,16 @@ package com.cims.model.persist;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.cims.model.datastruct.JudgePattern;
 
 @Entity
 @Table(name="cims_race")
@@ -26,7 +30,8 @@ public class Race {
 	private String qualification;
 	private String state;
 	private String description;
-	private String judgePattern;
+	@Enumerated(EnumType.STRING)
+	private JudgePattern judgePattern;
 	private String judgeRuler;
 	private Integer voteTime;
 	private String drawPattern;
@@ -60,7 +65,7 @@ public class Race {
 	public String getDescription() {
 		return description;
 	}
-	public String getJudgePattern() {
+	public JudgePattern getJudgePattern() {
 		return judgePattern;
 	}
 	public String getJudgeRuler() {
@@ -102,7 +107,7 @@ public class Race {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public void setJudgePattern(String judgePattern) {
+	public void setJudgePattern(JudgePattern judgePattern) {
 		this.judgePattern = judgePattern;
 	}
 	public void setJudgeRuler(String judgeRuler) {
