@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Type;
+
 import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgePattern;
 
@@ -37,7 +39,7 @@ public class Race {
 	private Integer voteTime;
 	@Enumerated(EnumType.STRING)
 	private DrawPattern drawPattern;
-	@Enumerated(EnumType.STRING)
+	@Type(type="true_false")
 	private Boolean eraseGroup;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;
