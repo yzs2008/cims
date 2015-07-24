@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
+import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgePattern;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.Round;
@@ -23,7 +24,7 @@ import com.cims.process.RaceProcess;
 public class RaceManageAction extends BaseAction {
 
 	private static final long serialVersionUID = 3742461286899118994L;
-	
+
 	@Autowired
 	private RaceProcess raceProcess;
 
@@ -32,22 +33,25 @@ public class RaceManageAction extends BaseAction {
 	private Integer id;
 	private Race race4update;
 	private String startTime;
-	
+
 	private List<Round> roundList;
-	private Map<String,String> judgePatternMap;
-	private Map<String,String> drawPatternMap; 
-	
+	private Map<String, String> judgePatternMap;
+	private Map<String, String> drawPatternMap;
+
 	public RaceManageAction() {
-		judgePatternMap=new LinkedHashMap<String,String>();
-		for(JudgePattern p: JudgePattern.values()){
+		judgePatternMap = new LinkedHashMap<String, String>();
+		for (JudgePattern p : JudgePattern.values()) {
 			judgePatternMap.put(p.name(), p.toString());
 		}
-		drawPatternMap =new LinkedHashMap<String,String>(); 
+		drawPatternMap = new LinkedHashMap<String, String>();
+		for(DrawPattern d:DrawPattern.values()){
+			drawPatternMap.put(d.name(), d.toString());
+		}
 	}
-	
+
 	@Action(value = "list", results = { @Result(name = "input", location = "/WEB-INF/admin/race/list.jsp") })
 	public String list() {
-		raceList=raceProcess.retrieveList(new Race());
+		raceList = raceProcess.retrieveList(new Race());
 		return INPUT;
 	}
 
@@ -56,65 +60,69 @@ public class RaceManageAction extends BaseAction {
 		return INPUT;
 	}
 
-	@Action(value = "add", results = {
-			@Result(name = "input", location = "/WEB-INF/admin/race/add.jsp"),
-			@Result(name = "success", type = "redirect", location = "list") })
+	@Action(value = "add", results = { @Result(name = "input", location = "/WEB-INF/admin/race/add.jsp"), @Result(name = "success", type = "redirect", location = "list") })
 	public String add() {
-		try{
-			if(accept()){
+		try {
+			if (accept()) {
 				raceProcess.saveRace(race);
 				return SUCCESS;
-			}else{
+			} else {
 				roundList = raceProcess.retrieveRoundList();
 				return INPUT;
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return ERROR;
 		}
 	}
-	private boolean accept(){
-		boolean accept=true;
-		if(race==null){
-			accept=false;
+
+	private boolean accept() {
+		boolean accept = true;
+		if (race == null) {
+			accept = false;
 			return accept;
 		}
-		if(StringUtils.isBlank(race.getRaceName())){
-			accept=false;
+		if (StringUtils.isBlank(race.getRaceName())) {
+			accept = false;
 		}
-		if(StringUtils.isBlank(race.getHost())){
-			accept=false;
+		if (StringUtils.isBlank(race.getHost())) {
+			accept = false;
 		}
-		if(StringUtils.isBlank(race.getRoundName())){
-			accept=false;
+		if (StringUtils.isBlank(race.getRoundName())) {
+			accept = false;
 		}
-		if(race.getRoundId()==null){
-			accept=false;
+		if (race.getRoundId() == null) {
+			accept = false;
 		}
-		try{
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 			race.setStartTime(sdf.parse(startTime));
-		}catch(Exception e){
-			accept=false;
+		} catch (Exception e) {
+			accept = false;
 		}
-		if(race.getStartTime()==null){
-			accept=false;
+		if (race.getStartTime() == null) {
+			accept = false;
 		}
 		return accept;
 	}
 
-	@Action(value = "update", results = {
-			@Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp"),
-			@Result(name = "success", type = "redirect", location = "list") })
+	@Action(value = "update", results = { @Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp"), @Result(name = "success", type = "redirect", location = "list") })
 	public String update() {
 		return INPUT;
 	}
 
-	@Action(value = "edit", results = {
-			@Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp"),
-			@Result(name = "success", type = "redirect", location = "list") })
+	@Action(value = "edit", results = { @Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp") })
 	public String edit() {
-		return INPUT;
+		if (id == null) {
+			return ERROR;
+		}
+		try {
+			race = raceProcess.retrieve(id);
+			return INPUT;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return ERROR;
+		}
 	}
 
 	@Action("raceNameCheck")
@@ -134,7 +142,7 @@ public class RaceManageAction extends BaseAction {
 			log.error(e.getMessage());
 		}
 	}
-	
+
 	public Race getRace() {
 		return race;
 	}
@@ -198,5 +206,5 @@ public class RaceManageAction extends BaseAction {
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	
+
 }

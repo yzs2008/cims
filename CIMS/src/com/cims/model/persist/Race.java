@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgePattern;
 
 @Entity
@@ -34,8 +35,10 @@ public class Race {
 	private JudgePattern judgePattern;
 	private String judgeRuler;
 	private Integer voteTime;
-	private String drawPattern;
-	private String eraseGroup;
+	@Enumerated(EnumType.STRING)
+	private DrawPattern drawPattern;
+	@Enumerated(EnumType.STRING)
+	private Boolean eraseGroup;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;
 	public Integer getRaceId() {
@@ -74,12 +77,6 @@ public class Race {
 	public Integer getVoteTime() {
 		return voteTime;
 	}
-	public String getDrawPattern() {
-		return drawPattern;
-	}
-	public String getEraseGroup() {
-		return eraseGroup;
-	}
 	public void setRaceId(Integer raceId) {
 		this.raceId = raceId;
 	}
@@ -116,10 +113,11 @@ public class Race {
 	public void setVoteTime(Integer voteTime) {
 		this.voteTime = voteTime;
 	}
-	public void setDrawPattern(String drawPattern) {
-		this.drawPattern = drawPattern;
+	
+	public Boolean getEraseGroup() {
+		return eraseGroup;
 	}
-	public void setEraseGroup(String eraseGroup) {
+	public void setEraseGroup(Boolean eraseGroup) {
 		this.eraseGroup = eraseGroup;
 	}
 	public Date getCreateTime() {
@@ -133,6 +131,12 @@ public class Race {
 	}
 	public void setRoundName(String roundName) {
 		this.roundName = roundName;
+	}
+	public DrawPattern getDrawPattern() {
+		return drawPattern;
+	}
+	public void setDrawPattern(DrawPattern drawPattern) {
+		this.drawPattern = drawPattern;
 	}
 	
 }

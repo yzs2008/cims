@@ -98,7 +98,7 @@
 										</div>
 									</div>
 									<div class="left-right">
-										<label class="control-label" for="voteTime">投票时长</label>
+										<label class="control-label" for="voteTime">现场投票时长</label>
 										<div class="controls">
 											<input type="text" name="race.voteTime" class="default" id="voteTime">
 										</div>
@@ -106,9 +106,9 @@
 								</div>
 								<div class="control-group padding-top20">
 									<div class="left-right">
-										<label class="control-label" for="drawPattern">抽签模式</label>
+										<label class="control-label" for="drawPattern">排序模式</label>
 										<div class="controls">
-											<input type="text" name="race.drawPattern" class="default" id="drawPattern">
+											<s:select name="race.drawPattern" listKey="key" listValue="value" list="drawPatternMap" />
 										</div>
 									</div>
 									<div class="left-right">
