@@ -34,14 +34,26 @@ span.my-span {
 	width: auto !important;
 }
 
-ul.info {
+ul.info, ul.judge-info {
 	margin-top: 20px;
 }
 
 ul.info li {
 	display: inline-block;
 	margin-right: 20px;
-	  min-width: 400px;
+	min-width: 400px;
+}
+
+.width-50 {
+	width: 50px;
+}
+
+ul.judge-info li {
+	display: inline-block;
+	margin-right: 20px;
+	min-width: 150px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 </style>
 </head>
@@ -81,17 +93,17 @@ ul.info li {
 							<fieldset>
 								<legend>评委信息</legend>
 								<div class="control-group">
-									<ul class="info">
-										<li>赛事名称 <span class="my-span">赛事名称是这个</span></li>
-										<li>开赛时间<span class="my-span">赛事名称是这个</span></li>
-										<li>主&nbsp;办&nbsp;方<span class="my-span">赛事名称是这个</span></li>
-										<li>比赛地点<span class="my-span">赛事名称是这个</span></li>
-										<li>所属轮次<span class="my-span">赛事名称是这个</span></li>
-										<li>抽签模式<span class="my-span">赛事名称是这个</span></li>
-										<li>评分模式<span class="my-span">赛事名称是这个</span></li>
-										<li>现场投票时长<span class="my-span">赛事名称是这个</span></li>
-										<li>排名模式<span class="my-span">抹去分组排名</span></li>
-										<li>当前状态<span class="my-span">抹去分组排名</span></li>
+									<ul class="judge-info">
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
+										<li><img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>评委名</span></li>
 									</ul>
 								</div>
 							</fieldset>
