@@ -68,7 +68,7 @@
                                                 <td>${item.state}</td>
                                                 <td style="min-width:95px;width:95px;">
 													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="detail(this)">查看</a>
-													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="edit(this)">编辑</a>
+													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="config(this)">配置</a>
 													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="deleted(this)">删除</a>
                                                 </td>
                                             </tr>
@@ -96,9 +96,9 @@
        			var id=$(evt).data("id");
        			window.location.href="deleted?id="+id;
        		}
-       		function edit(evt){
+       		function config(evt){
        			var id=$(evt).data("id");
-       			window.location.href="edit?id="+id;
+       			window.location.href="config?id="+id;
        		}
         </script>
     </body>

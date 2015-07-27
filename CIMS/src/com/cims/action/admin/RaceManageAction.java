@@ -75,6 +75,10 @@ public class RaceManageAction extends BaseAction {
 			return ERROR;
 		}
 	}
+	@Action(value="config",results={@Result(name="input",location="/WEB-INF/admin/race/config.jsp")})
+	public String config(){
+		return INPUT;
+	}
 
 	private boolean accept() {
 		boolean accept = true;
