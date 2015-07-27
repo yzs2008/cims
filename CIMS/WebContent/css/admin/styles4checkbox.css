@@ -1,5 +1,4 @@
 body {
-	padding: 0;
 	margin: 0;
 	font-size: 62.5%;
 	font-family: Arial, sans-serif;
@@ -34,12 +33,12 @@ input[type="checkbox"] {
 	text-align: center;
 }*/
 
-p {
-	font-size: 2em;
-	font-family: 'adelle-sans', sans-serif;
-	text-align: center;
-	color: #bbb;
-}
+/* p { */
+/* 	font-size: 2em; */
+/* 	font-family: 'adelle-sans', sans-serif; */
+/* 	text-align: center; */
+/* 	color: #bbb; */
+/* } */
 
 /* ==================================================================== */
 /* CHECKBOX TYPE 1 ---------------------------------------------------- */

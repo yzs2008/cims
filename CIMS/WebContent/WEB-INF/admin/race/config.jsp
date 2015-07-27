@@ -22,6 +22,10 @@
 	width: 50px;
 	vertical-align: bottom;
 }
+.width-20 {
+	width: 20px;
+	vertical-align: bottom;
+}
 
 ul.judge-info li {
 	display: inline-block;
@@ -29,6 +33,12 @@ ul.judge-info li {
 	min-width: 150px;
 	text-align: center;
 	margin-bottom: 20px;
+}
+label.control-label{
+	float:none !important;
+}
+.text-align{
+	text-align: center;
 }
 </style>
 </head>
@@ -476,23 +486,47 @@ ul.judge-info li {
 								<div class="tab-pane" id="tab2">
 									<form class="form-horizontal">
 										<fieldset>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">Address</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-												</div>
+											<div class="control-group text-align">
+												<label class="control-label" for="focusedInput">第</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">至</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">晋级到</label>
+												<select>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+												</select>
 											</div>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">City</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-												</div>
+											<div class="control-group text-align">
+												<label class="control-label" for="focusedInput">第</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">至</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">晋级到</label>
+												<select>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+												</select>
 											</div>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">State</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-												</div>
+											<div class="control-group text-align">
+												<label class="control-label" for="focusedInput">第</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">至</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">晋级到</label>
+												<select>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+													<option>总决赛</option>
+												</select>
 											</div>
 										</fieldset>
 									</form>
