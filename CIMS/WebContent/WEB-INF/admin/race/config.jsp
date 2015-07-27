@@ -22,6 +22,7 @@
 	width: 50px;
 	vertical-align: bottom;
 }
+
 .width-20 {
 	width: 20px;
 	vertical-align: bottom;
@@ -34,10 +35,12 @@ ul.judge-info li {
 	text-align: center;
 	margin-bottom: 20px;
 }
-label.control-label{
-	float:none !important;
+
+label.control-label {
+	float: none !important;
 }
-.text-align{
+
+.text-align {
 	text-align: center;
 }
 </style>
@@ -60,10 +63,18 @@ label.control-label{
 								<div class="navbar-inner">
 									<div class="container">
 										<ul class="nav nav-pills">
-											<li class=""><a href="#tab1" data-toggle="tab">配置评委</a></li>
-											<li class=""><a href="#tab2" data-toggle="tab">配置晋级</a></li>
-											<li class="active"><a href="#tab3" data-toggle="tab">配置奖项</a></li>
-											<li class=""><a href="#tab4" data-toggle="tab">配置</a></li>
+											<li class="">
+												<a href="#tab1" data-toggle="tab">配置评委</a>
+											</li>
+											<li class="">
+												<a href="#tab2" data-toggle="tab">配置晋级</a>
+											</li>
+											<li class="active">
+												<a href="#tab3" data-toggle="tab">配置奖项</a>
+											</li>
+											<li class="">
+												<a href="#tab4" data-toggle="tab">配置评分标准</a>
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -77,10 +88,10 @@ label.control-label{
 										<fieldset>
 											<ul class="judge-info">
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -90,10 +101,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -103,10 +114,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -116,10 +127,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -129,10 +140,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -142,10 +153,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -155,10 +166,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -168,10 +179,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -181,10 +192,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -194,10 +205,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -207,10 +218,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -220,10 +231,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -233,10 +244,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -246,10 +257,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -259,10 +270,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -272,10 +283,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -285,10 +296,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -298,10 +309,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -311,10 +322,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -324,10 +335,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -337,10 +348,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -350,10 +361,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -363,10 +374,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -376,10 +387,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -389,10 +400,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -402,10 +413,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -415,10 +426,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -428,10 +439,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -441,10 +452,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -454,10 +465,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -467,10 +478,10 @@ label.control-label{
 													</select>
 												</li>
 												<li>
-													<input type="checkbox" id="checkbox-6-1" /><label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-													<span>评委名</span> 
-													<span>权重</span>
+													<input type="checkbox" id="checkbox-6-1" />
+													<label for="checkbox-6-1"></label>
+													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
+													<br> <span>评委名</span> <span>权重</span>
 													<select class="width-50">
 														<option>1</option>
 														<option>2</option>
@@ -534,23 +545,29 @@ label.control-label{
 								<div class="tab-pane" id="tab3">
 									<form class="form-horizontal">
 										<fieldset>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">Company Name</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-												</div>
+											<div class="control-group text-align">
+												<label class="control-label" for="focusedInput">第</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">起，共</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">人,称为</label>
+												<input class="input-xlarge focused" id="focusedInput" type="text" value="">
 											</div>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">Contact Name</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-												</div>
+											<div class="control-group text-align">
+												<label class="control-label" for="focusedInput">第</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">起，共</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">人,称为</label>
+												<input class="input-xlarge focused" id="focusedInput" type="text" value="">
 											</div>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">Contact Phone</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-												</div>
+											<div class="control-group text-align">
+												<label class="control-label" for="focusedInput">第</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">起，共</label>
+												<input class="width-20 focused" id="focusedInput" type="text" value="">
+												<label class="control-label" for="focusedInput">人,称为</label>
+												<input class="input-xlarge focused" id="focusedInput" type="text" value="">
 											</div>
 										</fieldset>
 									</form>
@@ -580,9 +597,15 @@ label.control-label{
 									</form>
 								</div>
 								<ul class="pager wizard">
-									<li class="previous"><a href="javascript:void(0);">上一步</a></li>
-									<li class="next disabled" style="display: none;"><a href="javascript:void(0);">下一步</a></li>
-									<li class="next finish" style="display: inline;"><a href="javascript:;">完成</a></li>
+									<li class="previous">
+										<a href="javascript:void(0);">上一步</a>
+									</li>
+									<li class="next disabled" style="display: none;">
+										<a href="javascript:void(0);">下一步</a>
+									</li>
+									<li class="next finish" style="display: inline;">
+										<a href="javascript:;">完成</a>
+									</li>
 								</ul>
 							</div>
 						</div>
