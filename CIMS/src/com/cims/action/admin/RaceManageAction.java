@@ -1,5 +1,6 @@
 package com.cims.action.admin;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +18,23 @@ import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
 import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgePattern;
+import com.cims.model.persist.Judge;
 import com.cims.model.persist.Race;
+import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
+import com.cims.process.JudgeProcess;
 import com.cims.process.RaceProcess;
 
 @Namespace("/admin/race")
+@InterceptorRef(value="json")
 public class RaceManageAction extends BaseAction {
 
 	private static final long serialVersionUID = 3742461286899118994L;
 
 	@Autowired
 	private RaceProcess raceProcess;
+	@Autowired
+	private JudgeProcess judgeProcess;
 
 	private Race race;
 	private List<Race> raceList;
@@ -37,6 +45,9 @@ public class RaceManageAction extends BaseAction {
 	private List<Round> roundList;
 	private Map<String, String> judgePatternMap;
 	private Map<String, String> drawPatternMap;
+	
+	
+	
 
 	public RaceManageAction() {
 		judgePatternMap = new LinkedHashMap<String, String>();
@@ -75,10 +86,36 @@ public class RaceManageAction extends BaseAction {
 			return ERROR;
 		}
 	}
+	
+	private List<Judge> judgeList;
+	private List<RaceJudge> raceJudgeList;
+	
 	@Action(value="config",results={@Result(name="input",location="/WEB-INF/admin/race/config.jsp")})
 	public String config(){
+		try{
+			judgeList=judgeProcess.retrieveList(new Judge());
+		}catch(Exception e){
+			log.error(e.getMessage());
+			return ERROR;
+		}
 		return INPUT;
 	}
+	@Action(value="configJudge")
+	public void configJudge() throws IOException{
+		JSONObject resultData=new  JSONObject();
+		try{
+			for(RaceJudge rj:raceJudgeList){
+				rj.setDisplayName("评委");
+			}
+			resultData.put("resultData", "done");
+		}catch(Exception e){
+			log.error(e.getMessage());
+			resultData.put("resultData", "error");
+		}
+		String resultJson=resultData.toJSONString();
+		HttpUtils.responseJson(resultJson, response);
+	}
+
 
 	private boolean accept() {
 		boolean accept = true;
@@ -209,6 +246,22 @@ public class RaceManageAction extends BaseAction {
 
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
+	}
+
+	public List<Judge> getJudgeList() {
+		return judgeList;
+	}
+
+	public void setJudgeList(List<Judge> judgeList) {
+		this.judgeList = judgeList;
+	}
+
+	public List<RaceJudge> getRaceJudgeList() {
+		return raceJudgeList;
+	}
+
+	public void setRaceJudgeList(List<RaceJudge> raceJudgeList) {
+		this.raceJudgeList = raceJudgeList;
 	}
 
 }

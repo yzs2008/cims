@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cims.dao.RaceDao;
 import com.cims.dao.RoundDao;
 import com.cims.model.persist.Race;
+import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
 
 
@@ -102,5 +103,21 @@ public class RaceProcess {
 			accept=false;
 		}
 		return accept;
+	}
+	
+	public boolean configJudge(List<RaceJudge> raceJudgeList){
+		boolean done=true;
+		try{
+			//先删除比赛评委信息
+			String deleteFist="delete from RaceJudge as o where o.raceId=?";
+			Integer raceId=1;
+			
+
+			//重新写入评委信息
+		}catch(Exception e){
+			log.error(e.getMessage());
+			done=false;
+		}
+		return done;
 	}
 }

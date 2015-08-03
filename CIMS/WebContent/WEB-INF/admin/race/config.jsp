@@ -87,409 +87,20 @@ label.control-label {
 									<form class="form-horizontal">
 										<fieldset>
 											<ul class="judge-info">
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
-												<li>
-													<input type="checkbox" id="checkbox-6-1" />
-													<label for="checkbox-6-1"></label>
-													<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg">
-													<br> <span>评委名</span> <span>权重</span>
-													<select class="width-50">
-														<option>1</option>
-														<option>2</option>
-														<option>3</option>
-														<option>4</option>
-														<option>5</option>
-													</select>
-												</li>
+												<s:iterator value="judgeList" var="item">
+													<li>
+														<input type="checkbox" id="checkbox-6-<s:property value='#item.judgeId'/>"  data-judgeid="<s:property value='#item.judgeId'/>"/>
+														<label for="checkbox-6-<s:property value='#item.judgeId'/>"></label> <img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
+														<span><s:property value='#item.judgeName' /> </span>&#183; <span>权重</span>
+														<select class="width-50" id="select-<s:property value='#item.judgeId'/>">
+															<option selected>1</option>
+															<option>2</option>
+															<option>3</option>
+															<option>4</option>
+															<option>5</option>
+														</select>
+													</li>
+												</s:iterator>
 											</ul>
 										</fieldset>
 									</form>
@@ -601,7 +212,7 @@ label.control-label {
 										<a href="javascript:void(0);">上一步</a>
 									</li>
 									<li class="next disabled" style="display: none;">
-										<a href="javascript:void(0);">下一步</a>
+										<a href="javascript:void(0);" onclick="nextClick()">下一步</a>
 									</li>
 									<li class="next finish" style="display: inline;">
 										<a href="javascript:;">完成</a>
@@ -645,6 +256,60 @@ label.control-label {
 			});
 			$('#rootwizard').find("a[href*='tab1']").trigger('click');
 		});
+		function nextClick() {
+			var targetId = $('div.tab-content > div[class="tab-pane active"]').attr("id");
+			switch (targetId) {
+				case 'tab1':
+					saveJudgeInfo();
+					break;
+				case 'tab2':
+					savePromotionInfo();
+					break;
+				case 'tab3':
+					saveAwardInfo();
+					break;
+				case 'tab4':
+					saveStandardInfo();
+					break;
+			}
+		}
+
+		function saveJudgeInfo() {
+			var items=new Array();
+			var index=0;
+			var raceId=1;
+			$('ul.judge-info >li> input[type="checkbox"]').each(function(){
+				if($(this).is(":checked")){
+					var _judgeId=$(this).data("judgeid");
+					var weight=$('ul.judge-info >li> #select-'+_judgeId).val();
+					items[index++]={"raceId":raceId,"judgeId":_judgeId,"weight":weight};
+				}
+			});
+			var judgeList={"raceJudgeList":items};
+			var jsonData = JSON.stringify(judgeList);
+			
+			$.ajax({
+				url:'${ pageContext.request.contextPath }/admin/race/configJudge',
+				method:'POST',
+				data:jsonData,
+				dataType:'json',
+				contentType: 'application/json',
+				success:function(data){
+					if(data.resultData=="done"){
+						alert('评委配置成功！');	
+					}	
+				}
+			});
+		}
+		function savePromotionInfo() {
+
+		}
+		function saveAwardInfo(){
+			
+		}
+		function saveStandardInfo(){
+			
+		}
 	</script>
 </body>
 

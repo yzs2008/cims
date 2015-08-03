@@ -16,6 +16,12 @@ public class RaceJudge {
 	private Integer judgeId;
 	private Integer status;
 	private Integer weight;
+	private String displayName;
+	
+	public RaceJudge(){
+		
+	}
+	
 	public Integer getRaceJudgeId() {
 		return raceJudgeId;
 	}
@@ -45,6 +51,12 @@ public class RaceJudge {
 	}
 	public void setWeight(Integer weight) {
 		this.weight = weight;
+	}
+	public String getDisplayName() {
+		return displayName;
+	}
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 	
 }
