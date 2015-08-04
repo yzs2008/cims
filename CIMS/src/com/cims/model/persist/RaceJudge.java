@@ -1,10 +1,14 @@
 package com.cims.model.persist;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.cims.base.type.StateEnum;
 
 @Entity
 @Table(name="cims_raceJudge")
@@ -14,7 +18,8 @@ public class RaceJudge {
 	private Integer raceJudgeId;
 	private Integer raceId;
 	private Integer judgeId;
-	private Integer status;
+	@Enumerated(EnumType.STRING)
+	private StateEnum status;
 	private Integer weight;
 	private String displayName;
 	
@@ -31,9 +36,6 @@ public class RaceJudge {
 	public Integer getJudgeId() {
 		return judgeId;
 	}
-	public Integer getStatus() {
-		return status;
-	}
 	public Integer getWeight() {
 		return weight;
 	}
@@ -46,9 +48,6 @@ public class RaceJudge {
 	public void setJudgeId(Integer judgeId) {
 		this.judgeId = judgeId;
 	}
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
@@ -57,6 +56,14 @@ public class RaceJudge {
 	}
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+
+	public StateEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(StateEnum status) {
+		this.status = status;
 	}
 	
 }

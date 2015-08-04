@@ -96,7 +96,16 @@ public class BaseDao<T> {
 		query.setMaxResults(length);
 		return (List<T>) query.list();
 	}
-
+	
+	public void execute(String hql) throws Exception{
+		execute(hql, new Object[]{});
+	}
+	public void execute(String hql, Object[] params)throws Exception{
+		Query query =getSession().createQuery(hql);
+		setQueryParams(query, params);
+		query.executeUpdate();
+	}
+	
 	private void setQueryParams(Query query, Object[] params) throws Exception {
 		if (null == params) {
 			return;

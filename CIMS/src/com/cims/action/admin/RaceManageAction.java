@@ -2,6 +2,7 @@ package com.cims.action.admin;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import com.cims.process.JudgeProcess;
 import com.cims.process.RaceProcess;
 
 @Namespace("/admin/race")
-@InterceptorRef(value="json")
+@InterceptorRef(value = "json")
 public class RaceManageAction extends BaseAction {
 
 	private static final long serialVersionUID = 3742461286899118994L;
@@ -45,9 +46,6 @@ public class RaceManageAction extends BaseAction {
 	private List<Round> roundList;
 	private Map<String, String> judgePatternMap;
 	private Map<String, String> drawPatternMap;
-	
-	
-	
 
 	public RaceManageAction() {
 		judgePatternMap = new LinkedHashMap<String, String>();
@@ -55,7 +53,7 @@ public class RaceManageAction extends BaseAction {
 			judgePatternMap.put(p.name(), p.toString());
 		}
 		drawPatternMap = new LinkedHashMap<String, String>();
-		for(DrawPattern d:DrawPattern.values()){
+		for (DrawPattern d : DrawPattern.values()) {
 			drawPatternMap.put(d.name(), d.toString());
 		}
 	}
@@ -86,37 +84,52 @@ public class RaceManageAction extends BaseAction {
 			return ERROR;
 		}
 	}
-	
+
 	private List<Judge> judgeList;
 	private List<RaceJudge> raceJudgeList;
-	
-	@Action(value="config",results={@Result(name="input",location="/WEB-INF/admin/race/config.jsp")})
-	public String config(){
-		try{
-			judgeList=judgeProcess.retrieveList(new Judge());
-		}catch(Exception e){
+
+	@Action(value = "config", results = { @Result(name = "input", location = "/WEB-INF/admin/race/config.jsp") })
+	public String config() {
+		try {
+			judgeList = judgeProcess.retrieveList(new Judge());
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return ERROR;
 		}
 		return INPUT;
 	}
-	@Action(value="configJudge")
-	public void configJudge() throws IOException{
-		JSONObject resultData=new  JSONObject();
-		try{
-			for(RaceJudge rj:raceJudgeList){
-				rj.setDisplayName("评委");
+
+	@Action(value = "configJudge")
+	public void configJudge() throws IOException {
+		JSONObject resultData = new JSONObject();
+		try {
+			if (raceJudgeList != null && raceJudgeList.size() != 0) {
+				raceProcess.configJudge(raceJudgeList);
 			}
 			resultData.put("resultData", "done");
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			resultData.put("resultData", "error");
+		}
+		String resultJson = resultData.toJSONString();
+		HttpUtils.responseJson(resultJson, response);
+	}
+	@Action("raceJudgeInfo")
+	public void raceJudgeInfo() throws IOException{
+	JSONObject resultData=new JSONObject();
+		try{
+			List<RaceJudge> raceJudgeInfoList=new ArrayList<RaceJudge>();
+			if(id!=null){
+				raceJudgeInfoList= raceProcess.getJudgeInfo(id);
+			}		
+			resultData.put("resultData", raceJudgeInfoList);
+		}catch(Exception e){
+			log.error(e.getMessage());
+			resultData.put("resultData", new ArrayList<RaceJudge>());
 		}
 		String resultJson=resultData.toJSONString();
 		HttpUtils.responseJson(resultJson, response);
 	}
-
-
 	private boolean accept() {
 		boolean accept = true;
 		if (race == null) {

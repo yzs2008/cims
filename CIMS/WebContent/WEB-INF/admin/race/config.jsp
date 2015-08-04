@@ -91,7 +91,7 @@ label.control-label {
 													<li>
 														<input type="checkbox" id="checkbox-6-<s:property value='#item.judgeId'/>"  data-judgeid="<s:property value='#item.judgeId'/>"/>
 														<label for="checkbox-6-<s:property value='#item.judgeId'/>"></label> <img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-														<span><s:property value='#item.judgeName' /> </span>&#183; <span>权重</span>
+														<span id="span-<s:property value='#item.judgeId'/>"><s:property value='#item.judgeName' /> </span>&#183; <span>权重</span>
 														<select class="width-50" id="select-<s:property value='#item.judgeId'/>">
 															<option selected>1</option>
 															<option>2</option>
@@ -255,7 +255,38 @@ label.control-label {
 				$('#rootwizard').find("a[href*='tab1']").trigger('click');
 			});
 			$('#rootwizard').find("a[href*='tab1']").trigger('click');
+			
+			initJudgeInfo();
 		});
+		
+		function initJudgeInfo(){
+			var raceId=1;
+			var postData={"id":raceId};
+			var jsonData=JSON.stringify(postData);
+			$.ajax({
+				url:'${ pageContext.request.contextPath }/admin/race/raceJudgeInfo',
+				method:'POST',
+				data:jsonData,
+				dataType:'json',
+				contentType: 'application/json',
+				success:function(data){
+					if(data.resultData!=""){
+						bindJudgeInfo(data.resultData);	
+					}	
+				}
+			});
+		}
+		
+		function bindJudgeInfo(resultData){
+			for(var i=0;i<resultData.length;i++){
+				var item=resultData[i];
+				var judgeId=item.judgeId;
+				$('#checkbox-6-'+judgeId).prop('checked',true);
+				$('#span-'+judgeId).html(item.displayName);
+				$('#select-'+judgeId).val(item.weight);
+			}	
+		}
+		
 		function nextClick() {
 			var targetId = $('div.tab-content > div[class="tab-pane active"]').attr("id");
 			switch (targetId) {
@@ -282,7 +313,8 @@ label.control-label {
 				if($(this).is(":checked")){
 					var _judgeId=$(this).data("judgeid");
 					var weight=$('ul.judge-info >li> #select-'+_judgeId).val();
-					items[index++]={"raceId":raceId,"judgeId":_judgeId,"weight":weight};
+					var displayName=$('ul.judge-info >li> #span-'+_judgeId).html();
+					items[index++]={"raceId":raceId,"judgeId":_judgeId,"weight":weight,"displayName":displayName};
 				}
 			});
 			var judgeList={"raceJudgeList":items};
@@ -293,10 +325,11 @@ label.control-label {
 				method:'POST',
 				data:jsonData,
 				dataType:'json',
+				async:false,
 				contentType: 'application/json',
 				success:function(data){
-					if(data.resultData=="done"){
-						alert('评委配置成功！');	
+					if(!data.resultData=="done"){
+						alert('评委配置失败，请重试！');	
 					}	
 				}
 			});
