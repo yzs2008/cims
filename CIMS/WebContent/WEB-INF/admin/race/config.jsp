@@ -107,7 +107,7 @@ label.control-label {
 													<input class="width-20 focused end" type="text" value="">
 													<label class="control-label">晋级到</label>
 													<s:select list="raceList" listValue="raceName" listKey="raceId" value=""></s:select>
-													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>
+													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除该项</a>
 												</div>
 											</c:if>
 											<s:iterator var="promotionItem" value="racePromotionList">
@@ -118,7 +118,7 @@ label.control-label {
 													<input class="width-20 focused end" type="text" value="<s:property value='#promotionItem.end' />">
 													<label class="control-label">晋级到</label>
 													<s:select list="raceList" listValue="raceName" listKey="raceId" value="%{ #promotionItem.nextId}"></s:select>
-													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>
+													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除该项</a>
 												</div>
 											</s:iterator>
 											<a href="javascript:void(0);" onclick="addPromotionBtn(this)">新增晋级</a>
@@ -136,7 +136,7 @@ label.control-label {
 													<input class="width-20 focused count" type="text" value="">
 													<label class="control-label" for="focusedInput">人,称为</label>
 													<input class="input-xlarge focused awardName" type="text" value="">
-													<a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除奖项</a>
+													<a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除该项</a>
 												</div>
 											</c:if>
 											<s:iterator var="awardItem" value="raceAwardList">
@@ -147,7 +147,7 @@ label.control-label {
 													<input class="width-20 focused count" type="text" value="${awardItem.count }">
 													<label class="control-label" for="focusedInput">人,称为</label>
 													<input class="input-xlarge focused awardName" type="text" value="${awardItem.awardName }">
-													<a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除奖项</a>
+													<a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除该项</a>
 												</div>
 											</s:iterator>
 											<a href="javascript:void(0);" onclick="addAwardBtn(this)">添加奖项</a>
@@ -156,25 +156,30 @@ label.control-label {
 								</div>
 								<div class="tab-pane" id="tab4">
 									<form class="form-horizontal">
-										<fieldset>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">公司</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
+										<fieldset id="tab4-fieldset">
+											<c:if test="${raceStandardList==null || raceStandardList.size()==0 }">
+												<div class="control-group text-align standard">
+													<label class="control-label" for="focusedInput">评分项名称</label>
+													<input class="input-xlarge focused standardName" type="text" value="">
+													<label class="control-label" for="focusedInput">最小值</label>
+													<input class="width-20 focused min" type="text" value="">
+													<label class="control-label" for="focusedInput">最大值</label>
+													<input class="width-20 focused max" type="text" value="">
+													<a href="javascript:void(0);" onclick="deleteStandardBtn(this)">删除该项</a>
 												</div>
-											</div>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">Contact Name</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
+											</c:if>
+											<s:iterator var="standardItem" value="raceStandardList">
+												<div class="control-group text-align standard">
+													<label class="control-label" for="focusedInput">评分项名称</label>
+													<input class="input-xlarge focused standardName" type="text" value="${standardItem.standardName }">
+													<label class="control-label" for="focusedInput">最小值</label>
+													<input class="width-20 focused min" type="text" value="${standardItem.min }">
+													<label class="control-label" for="focusedInput">最大值</label>
+													<input class="width-20 focused max" type="text" value="${standardItem.max }">
+													<a href="javascript:void(0);" onclick="deleteStandardBtn(this)">删除该项</a>
 												</div>
-											</div>
-											<div class="control-group">
-												<label class="control-label" for="focusedInput">Contact Phone</label>
-												<div class="controls">
-													<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-												</div>
-											</div>
+											</s:iterator>
+											<a href="javascript:void(0);" onclick="addStandardBtn(this)">添加评分项</a>
 										</fieldset>
 									</form>
 								</div>
@@ -207,8 +212,7 @@ label.control-label {
 							if ($current >= $total) {
 								$('#rootwizard').find('.pager .next').hide();
 								$('#rootwizard').find('.pager .finish').show();
-								$('#rootwizard').find('.pager .finish')
-										.removeClass('disabled');
+								$('#rootwizard').find('.pager .finish').removeClass('disabled');
 							} else {
 								$('#rootwizard').find('.pager .next').show();
 								$('#rootwizard').find('.pager .finish').hide();
@@ -216,10 +220,11 @@ label.control-label {
 						}
 					});
 			$('#rootwizard .finish').click(function() {
-				alert('Finished!, Starting over!');
-				$('#rootwizard').find("a[href*='tab1']").trigger('click');
+				var raceId=1;//TODO
+				saveStandardInfo();
+				location.href="${pageContext.request.contextPath}/admin/race/detail?id="+raceId;
 			});
-			$('#rootwizard').find("a[href*='tab3']").trigger('click');
+			$('#rootwizard').find("a[href*='tab1']").trigger('click');
 
 			initJudgeInfo();
 		});
@@ -328,7 +333,7 @@ label.control-label {
 					+ '		<select>'
 					+ selectOptions
 					+ '</select>'
-					+ '		<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>'
+					+ '		<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除该项</a>'
 					+ '	</div>';
 
 			$('#tab2-fieldset').find('div').last().after(insertHtml);
@@ -450,7 +455,7 @@ label.control-label {
 					+ '        <input class="width-20 focused count" type="text" value="">'
 					+ '        <label class="control-label" for="focusedInput">人,称为</label>'
 					+ '        <input class="input-xlarge focused awardName" type="text" value="">'
-					+ '		  <a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除奖项</a>'
+					+ '		  <a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除该项</a>'
 					+ '</div>';
 
 			$('#tab3-fieldset').find('div').last().after(insertHtml);
@@ -462,7 +467,76 @@ label.control-label {
 			}
 		}
 		function saveStandardInfo() {
+			var raceId = 1;
+			var items = new Array();
+			var index = 0;
+			$('div.standard').each(function() {
+				var standardName = $(this).find('input.standardName').val();
+				var max = $(this).find('input.max').val();
+				var min = $(this).find('input.min').val();
+				//填入空值视为无效输入
+				if (max == null || max == "") {
+					return true;
+				}
+				if (min == null || min == "") {
+					return true;
+				}
+				if (standardName == null || standardName == "") {
+					return true;
+				}
+				var maxInt = parseInt(max);
+				var minInt = parseInt(min);
+				//最大值不能小于最小值,否则视为无效
+				if (maxInt <= minInt) {
+					return true;
+				}
+				items[index++] = {
+					"raceId" : raceId,
+					"max" : max,
+					"min" : min,
+					"standardName" : standardName
+				};
+			});
 
+			var standardList = {
+				"raceStandardList" : items
+			};
+			var jsonData = JSON.stringify(standardList);
+
+			$
+					.ajax({
+						url : '${ pageContext.request.contextPath }/admin/race/configStandard',
+						method : 'POST',
+						data : jsonData,
+						dataType : 'json',
+						async : false,
+						contentType : 'application/json',
+						success : function(data) {
+							if (!data.resultData == "done") {
+								alert('评分项配置失败，请重试！');
+							}
+						}
+					});
+		}
+
+		function addStandardBtn(evt) {
+			var insertHtml = '<div class="control-group text-align standard">'
+					+ '        <label class="control-label" for="focusedInput">评分项名称</label>'
+					+ '        <input class="input-xlarge focused standardName" type="text" value="">'
+					+ '        <label class="control-label" for="focusedInput">最小值</label>'
+					+ '        <input class="width-20 focused min" type="text" value="">'
+					+ '        <label class="control-label" for="focusedInput">最大值</label>'
+					+ '        <input class="width-20 focused max" type="text" value="">'
+					+ '		  <a href="javascript:void(0);" onclick="deleteStandardBtn(this)">删除该项</a>'
+					+ '</div>';
+
+			$('#tab4-fieldset').find('div').last().after(insertHtml);
+		}
+		function deleteStandardBtn(evt) {
+			//必须保留一个奖项
+			if ($('#tab4-fieldset').find('div').length > 1) {
+				$(evt).parent('div').remove();
+			}
 		}
 	</script>
 </body>

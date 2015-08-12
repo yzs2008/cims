@@ -13,11 +13,13 @@ import com.cims.dao.PromotionDao;
 import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.RoundDao;
+import com.cims.dao.StandardDao;
 import com.cims.model.persist.Award;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
+import com.cims.model.persist.Standard;
 
 @Service("RaceProcess")
 public class RaceProcess {
@@ -33,6 +35,8 @@ public class RaceProcess {
 	private PromotionDao promotionDao;
 	@Autowired
 	private AwardDao awardDao;
+	@Autowired
+	private StandardDao standardDao;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -214,5 +218,34 @@ public class RaceProcess {
 		}
 		return done;
 	}
-	
+
+	public List<Standard> retrieveStandard(Integer id) {
+		try{
+			List<Standard> standardList;
+			String query="select o from Standard as o where o.raceId=?";
+			standardList= standardDao.retrieveList(query, new Object[]{id});
+			return standardList;
+		}catch(Exception e){
+			log.error(e.getMessage());
+			return new ArrayList<Standard>();
+		}
+	}
+	public boolean configStandard(List<Standard> raceStandardList) {
+		boolean done = true;
+		try {
+			// 先删除比赛 评分项信息
+			String deleteFist = "delete from Standard as o where o.raceId=?";
+			Integer raceId = raceStandardList.get(0).getRaceId();
+			standardDao.execute(deleteFist, new Object[] { raceId });
+
+			// 重新写入评分项信息
+			for(Standard item:raceStandardList){
+				standardDao.create(item);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			done = false;
+		}
+		return done;
+	}
 }

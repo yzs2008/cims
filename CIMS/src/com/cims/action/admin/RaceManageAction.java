@@ -25,6 +25,7 @@ import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
+import com.cims.model.persist.Standard;
 import com.cims.process.JudgeProcess;
 import com.cims.process.RaceProcess;
 
@@ -52,6 +53,7 @@ public class RaceManageAction extends BaseAction {
 	private List<RaceJudge> raceJudgeList;
 	private List<Promotion> racePromotionList;
 	private List<Award> raceAwardList;
+	private List<Standard> raceStandardList;
 
 	public RaceManageAction() {
 		judgePatternMap = new LinkedHashMap<String, String>();
@@ -113,6 +115,7 @@ public class RaceManageAction extends BaseAction {
 			raceList=raceProcess.retrieveList(new Race());
 			racePromotionList=raceProcess.retrievePromotionList(id);
 			raceAwardList=raceProcess.retrieveAwardList(id);
+			raceStandardList=raceProcess.retrieveStandard(id);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return ERROR;
@@ -213,6 +216,27 @@ public class RaceManageAction extends BaseAction {
 		try{
 			if(raceAwardList!=null && raceAwardList.size()!=0){
 				raceProcess.configAward(raceAwardList);
+			}
+			resultData.put("resultData", "done");
+		}catch(Exception e){
+			log.error(e.getMessage());
+			resultData.put("resultData", "error");
+		}
+		String resultJson=resultData.toJSONString();
+		HttpUtils.responseJson(resultJson, response);
+	}
+	
+	
+	/**
+	 * 配置赛事评分项
+	 * @throws IOException 
+	 */
+	@Action(value="configStandard",interceptorRefs={@InterceptorRef(value="json")})
+	public void raceStandardConfig() throws IOException{
+		JSONObject resultData = new JSONObject();
+		try{
+			if(raceStandardList!=null && raceStandardList.size()!=0){
+				raceProcess.configStandard(raceStandardList);
 			}
 			resultData.put("resultData", "done");
 		}catch(Exception e){
@@ -340,6 +364,14 @@ public class RaceManageAction extends BaseAction {
 
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
+	}
+
+	public List<Standard> getRaceStandardList() {
+		return raceStandardList;
+	}
+
+	public void setRaceStandardList(List<Standard> raceStandardList) {
+		this.raceStandardList = raceStandardList;
 	}
 
 	public List<Judge> getJudgeList() {
