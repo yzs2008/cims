@@ -115,7 +115,7 @@ label.control-label {
 													<label class="control-label" >至</label>
 													<input class="width-20 focused end"  type="text" value="<s:property value='#promotionItem.end' />">
 													<label class="control-label" >晋级到</label>
-													<s:select list="raceList" listValue="raceName" listKey="raceId" value="<s:property value='#promotionItem.nextId' />"></s:select>
+													<s:select list="raceList" listValue="raceName" listKey="raceId" value="%{ #promotionItem.nextId}"></s:select>
 													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>
 												</div>
 											</s:iterator>
