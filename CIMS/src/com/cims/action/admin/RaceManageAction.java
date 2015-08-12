@@ -104,8 +104,12 @@ public class RaceManageAction extends BaseAction {
 	@Action(value = "config", results = { @Result(name = "input", location = "/WEB-INF/admin/race/config.jsp") })
 	public String config() {
 		try {
+			if(id==null){
+				return INPUT;
+			}
 			judgeList = judgeProcess.retrieveList(new Judge());
 			raceList=raceProcess.retrieveList(new Race());
+			racePromotionList=raceProcess.retrievePromotionList(id);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return ERROR;

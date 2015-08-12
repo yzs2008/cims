@@ -167,4 +167,16 @@ public class RaceProcess {
 		return done;
 		
 	}
+
+	public List<Promotion> retrievePromotionList(Integer id) {
+		try{
+			List<Promotion> promotionList;
+			String query="select o from Promotion as o where o.raceId=?";
+			promotionList= promotionDao.retrieveList(query, new Object[]{id});
+			return promotionList;
+		}catch(Exception e){
+			log.error(e.getMessage());
+			return new ArrayList<Promotion>();
+		}
+	}
 }

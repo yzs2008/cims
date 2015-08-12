@@ -107,23 +107,19 @@ label.control-label {
 								</div>
 								<div class="tab-pane" id="tab2">
 									<form class="form-horizontal">
-										<fieldset>
-											<div class="control-group text-align promotion">
-												<label class="control-label" >第</label>
-												<input class="width-20 focused start" type="text" value="">
-												<label class="control-label" >至</label>
-												<input class="width-20 focused end"  type="text" value="">
-												<label class="control-label" >晋级到</label>
-												<s:select list="raceList" listValue="raceName" listKey="raceId"></s:select>
-											</div>
-											<div class="control-group text-align promotion">
-												<label class="control-label" >第</label>
-												<input class="width-20 focused start" type="text" value="">
-												<label class="control-label" >至</label>
-												<input class="width-20 focused end"  type="text" value="">
-												<label class="control-label" >晋级到</label>
-												<s:select list="raceList" listValue="raceName" listKey="raceId"></s:select>
-											</div>
+										<fieldset id="tab2-fieldset">
+											<s:iterator var="promotionItem" value="racePromotionList">
+												<div class="control-group text-align promotion">
+													<label class="control-label" >第</label>
+													<input class="width-20 focused start" type="text" value="<s:property value='#promotionItem.start' />">
+													<label class="control-label" >至</label>
+													<input class="width-20 focused end"  type="text" value="<s:property value='#promotionItem.end' />">
+													<label class="control-label" >晋级到</label>
+													<s:select list="raceList" listValue="raceName" listKey="raceId" value="<s:property value='#promotionItem.nextId' />"></s:select>
+													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>
+												</div>
+											</s:iterator>
+											<a href="javascript:void(0);" onclick="addPromotionBtn(this)">新增晋级</a>
 										</fieldset>
 									</form>
 								</div>
@@ -227,7 +223,7 @@ label.control-label {
 				alert('Finished!, Starting over!');
 				$('#rootwizard').find("a[href*='tab1']").trigger('click');
 			});
-			$('#rootwizard').find("a[href*='tab1']").trigger('click');
+			$('#rootwizard').find("a[href*='tab2']").trigger('click');
 			
 			initJudgeInfo();
 		});
@@ -307,6 +303,27 @@ label.control-label {
 				}
 			});
 		}
+		function addPromotionBtn(evt){
+	        var selectOptions=$('#tab2-fieldset').find('div').last().find('select').html();
+			var insertHtml =	'   <div class="control-group text-align promotion"> '																			
+                               +'		<label class="control-label" >第</label>		 '
+                               +'		<input class="width-20 focused start" type="text" value="">'
+                               +'		<label class="control-label" >至</label>'
+                               +'		<input class="width-20 focused end"  type="text" value="">'
+                               +'		<label class="control-label" >晋级到</label>'
+                               +'		<select>'+selectOptions+'</select>'
+                               +'		<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>'		
+                               +'	</div>';
+
+
+	         $('#tab2-fieldset').find('div').last().after(insertHtml);
+		}
+		function deletePromotionBtn(evt){
+			//必须保留一个晋级项
+			if($('#tab2-fieldset').find('div').length>1){
+				$(evt).parent('div').remove();	
+			}
+		}
 		function savePromotionInfo() {
 			var raceId=1;
 			var items=new Array();
@@ -315,6 +332,19 @@ label.control-label {
 				var start=$(this).find('input.start').val();	
 				var end=$(this).find('input.end').val();
 				var target=$(this).find('select').val();
+				//填入空值视为无效输入
+				if(start==null || start==""){
+					return true;
+				}
+				if(end==null || end==""){
+					return true;	
+				}
+				var startInt=parseInt(start);
+				var endInt=parseInt(end);
+				//起始点不能大于终止点,否则视为无效
+				if(startInt>endInt){
+					return true;
+				}
 				items[index++]={"raceId":raceId,"nextId":target,"start":start,"end":end};
 				
 			});	
