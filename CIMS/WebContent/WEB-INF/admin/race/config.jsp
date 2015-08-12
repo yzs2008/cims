@@ -63,18 +63,10 @@ label.control-label {
 								<div class="navbar-inner">
 									<div class="container">
 										<ul class="nav nav-pills">
-											<li class="">
-												<a href="#tab1" data-toggle="tab">配置评委</a>
-											</li>
-											<li class="">
-												<a href="#tab2" data-toggle="tab">配置晋级</a>
-											</li>
-											<li class="active">
-												<a href="#tab3" data-toggle="tab">配置奖项</a>
-											</li>
-											<li class="">
-												<a href="#tab4" data-toggle="tab">配置评分标准</a>
-											</li>
+											<li class=""><a href="#tab1" data-toggle="tab">配置评委</a></li>
+											<li class=""><a href="#tab2" data-toggle="tab">配置晋级</a></li>
+											<li class="active"><a href="#tab3" data-toggle="tab">配置奖项</a></li>
+											<li class=""><a href="#tab4" data-toggle="tab">配置评分标准</a></li>
 										</ul>
 									</div>
 								</div>
@@ -88,18 +80,17 @@ label.control-label {
 										<fieldset>
 											<ul class="judge-info">
 												<s:iterator value="judgeList" var="item">
-													<li>
-														<input type="checkbox" id="checkbox-6-<s:property value='#item.judgeId'/>"  data-judgeid="<s:property value='#item.judgeId'/>"/>
-														<label for="checkbox-6-<s:property value='#item.judgeId'/>"></label> <img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br>
-														<span id="span-<s:property value='#item.judgeId'/>"><s:property value='#item.judgeName' /> </span>&#183; <span>权重</span>
-														<select class="width-50" id="select-<s:property value='#item.judgeId'/>">
+													<li><input type="checkbox" id="checkbox-6-<s:property value='#item.judgeId'/>" data-judgeid="<s:property value='#item.judgeId'/>" /> <label
+														for="checkbox-6-<s:property value='#item.judgeId'/>"
+													></label> <img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span id="span-<s:property value='#item.judgeId'/>"><s:property
+																value='#item.judgeName'
+															/> </span>&#183; <span>权重</span> <select class="width-50" id="select-<s:property value='#item.judgeId'/>">
 															<option selected>1</option>
 															<option>2</option>
 															<option>3</option>
 															<option>4</option>
 															<option>5</option>
-														</select>
-													</li>
+														</select></li>
 												</s:iterator>
 											</ul>
 										</fieldset>
@@ -108,13 +99,24 @@ label.control-label {
 								<div class="tab-pane" id="tab2">
 									<form class="form-horizontal">
 										<fieldset id="tab2-fieldset">
+											<c:if test="${ racePromotionList==null || racePromotionList.size()==0}">
+												<div class="control-group text-align promotion">
+													<label class="control-label">第</label>
+													<input class="width-20 focused start" type="text" value="">
+													<label class="control-label">至</label>
+													<input class="width-20 focused end" type="text" value="">
+													<label class="control-label">晋级到</label>
+													<s:select list="raceList" listValue="raceName" listKey="raceId" value=""></s:select>
+													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>
+												</div>
+											</c:if>
 											<s:iterator var="promotionItem" value="racePromotionList">
 												<div class="control-group text-align promotion">
-													<label class="control-label" >第</label>
+													<label class="control-label">第</label>
 													<input class="width-20 focused start" type="text" value="<s:property value='#promotionItem.start' />">
-													<label class="control-label" >至</label>
-													<input class="width-20 focused end"  type="text" value="<s:property value='#promotionItem.end' />">
-													<label class="control-label" >晋级到</label>
+													<label class="control-label">至</label>
+													<input class="width-20 focused end" type="text" value="<s:property value='#promotionItem.end' />">
+													<label class="control-label">晋级到</label>
 													<s:select list="raceList" listValue="raceName" listKey="raceId" value="%{ #promotionItem.nextId}"></s:select>
 													<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>
 												</div>
@@ -125,31 +127,30 @@ label.control-label {
 								</div>
 								<div class="tab-pane" id="tab3">
 									<form class="form-horizontal">
-										<fieldset>
-											<div class="control-group text-align">
-												<label class="control-label" for="focusedInput">第</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">起，共</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">人,称为</label>
-												<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-											</div>
-											<div class="control-group text-align">
-												<label class="control-label" for="focusedInput">第</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">起，共</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">人,称为</label>
-												<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-											</div>
-											<div class="control-group text-align">
-												<label class="control-label" for="focusedInput">第</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">起，共</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">人,称为</label>
-												<input class="input-xlarge focused" id="focusedInput" type="text" value="">
-											</div>
+										<fieldset id="tab3-fieldset">
+											<c:if test="${raceAwardList==null || raceAwardList.size()==0 }">
+												<div class="control-group text-align award">
+													<label class="control-label" for="focusedInput">第</label>
+													<input class="width-20 focused start" type="text" value="">
+													<label class="control-label" for="focusedInput">起，共</label>
+													<input class="width-20 focused count" type="text" value="">
+													<label class="control-label" for="focusedInput">人,称为</label>
+													<input class="input-xlarge focused awardName" type="text" value="">
+													<a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除奖项</a>
+												</div>
+											</c:if>
+											<s:iterator var="awardItem" value="raceAwardList">
+												<div class="control-group text-align award">
+													<label class="control-label" for="focusedInput">第</label>
+													<input class="width-20 focused start" type="text" value="${awardItem.start }">
+													<label class="control-label" for="focusedInput">起，共</label>
+													<input class="width-20 focused count" type="text" value="${awardItem.count }">
+													<label class="control-label" for="focusedInput">人,称为</label>
+													<input class="input-xlarge focused awardName" type="text" value="${awardItem.awardName }">
+													<a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除奖项</a>
+												</div>
+											</s:iterator>
+											<a href="javascript:void(0);" onclick="addAwardBtn(this)">添加奖项</a>
 										</fieldset>
 									</form>
 								</div>
@@ -178,15 +179,9 @@ label.control-label {
 									</form>
 								</div>
 								<ul class="pager wizard">
-									<li class="previous">
-										<a href="javascript:void(0);">上一步</a>
-									</li>
-									<li class="next disabled" style="display: none;">
-										<a href="javascript:void(0);" onclick="nextClick()">下一步</a>
-									</li>
-									<li class="next finish" style="display: inline;">
-										<a href="javascript:;">完成</a>
-									</li>
+									<li class="previous"><a href="javascript:void(0);">上一步</a></li>
+									<li class="next disabled" style="display: none;"><a href="javascript:void(0);" onclick="nextClick()">下一步</a></li>
+									<li class="next finish" style="display: inline;"><a href="javascript:;">完成</a></li>
 								</ul>
 							</div>
 						</div>
@@ -212,7 +207,8 @@ label.control-label {
 							if ($current >= $total) {
 								$('#rootwizard').find('.pager .next').hide();
 								$('#rootwizard').find('.pager .finish').show();
-								$('#rootwizard').find('.pager .finish').removeClass('disabled');
+								$('#rootwizard').find('.pager .finish')
+										.removeClass('disabled');
 							} else {
 								$('#rootwizard').find('.pager .next').show();
 								$('#rootwizard').find('.pager .finish').hide();
@@ -223,153 +219,250 @@ label.control-label {
 				alert('Finished!, Starting over!');
 				$('#rootwizard').find("a[href*='tab1']").trigger('click');
 			});
-			$('#rootwizard').find("a[href*='tab2']").trigger('click');
-			
+			$('#rootwizard').find("a[href*='tab3']").trigger('click');
+
 			initJudgeInfo();
 		});
-		
-		function initJudgeInfo(){
-			var raceId=1;//TODO
-			var postData={"id":raceId};
-			var jsonData=JSON.stringify(postData);
-			$.ajax({
-				url:'${ pageContext.request.contextPath }/admin/race/raceJudgeInfo',
-				type:'POST',
-				data:jsonData,
-				dataType:'json',
-				contentType: 'application/json',
-				success:function(data){
-					if(data.resultData!=""){
-						bindJudgeInfo(data.resultData);	
-					}	
-				}
-			});
+
+		function initJudgeInfo() {
+			var raceId = 1;//TODO
+			var postData = {
+				"id" : raceId
+			};
+			var jsonData = JSON.stringify(postData);
+			$
+					.ajax({
+						url : '${ pageContext.request.contextPath }/admin/race/raceJudgeInfo',
+						type : 'POST',
+						data : jsonData,
+						dataType : 'json',
+						contentType : 'application/json',
+						success : function(data) {
+							if (data.resultData != "") {
+								bindJudgeInfo(data.resultData);
+							}
+						}
+					});
 		}
-		
-		function bindJudgeInfo(resultData){
-			for(var i=0;i<resultData.length;i++){
-				var item=resultData[i];
-				var judgeId=item.judgeId;
-				$('#checkbox-6-'+judgeId).prop('checked',true);
-				$('#span-'+judgeId).html(item.displayName);
-				$('#select-'+judgeId).val(item.weight);
-			}	
+
+		function bindJudgeInfo(resultData) {
+			for (var i = 0; i < resultData.length; i++) {
+				var item = resultData[i];
+				var judgeId = item.judgeId;
+				$('#checkbox-6-' + judgeId).prop('checked', true);
+				$('#span-' + judgeId).html(item.displayName);
+				$('#select-' + judgeId).val(item.weight);
+			}
 		}
-		
+
 		function nextClick() {
-			var targetId = $('div.tab-content > div[class="tab-pane active"]').attr("id");
+			var targetId = $('div.tab-content > div[class="tab-pane active"]')
+					.attr("id");
 			switch (targetId) {
-				case 'tab1':
-					saveJudgeInfo();
-					break;
-				case 'tab2':
-					savePromotionInfo();
-					break;
-				case 'tab3':
-					saveAwardInfo();
-					break;
-				case 'tab4':
-					saveStandardInfo();
-					break;
+			case 'tab1':
+				saveJudgeInfo();
+				break;
+			case 'tab2':
+				savePromotionInfo();
+				break;
+			case 'tab3':
+				saveAwardInfo();
+				break;
+			case 'tab4':
+				saveStandardInfo();
+				break;
 			}
 		}
 
 		function saveJudgeInfo() {
-			var items=new Array();
-			var index=0;
-			var raceId=1;//TODO
-			$('ul.judge-info >li> input[type="checkbox"]').each(function(){
-				if($(this).is(":checked")){
-					var _judgeId=$(this).data("judgeid");
-					var weight=$('ul.judge-info >li> #select-'+_judgeId).val();
-					var displayName=$('ul.judge-info >li> #span-'+_judgeId).html();
-					items[index++]={"raceId":raceId,"judgeId":_judgeId,"weight":weight,"displayName":displayName};
-				}
-			});
-			var judgeList={"raceJudgeList":items};
+			var items = new Array();
+			var index = 0;
+			var raceId = 1;//TODO
+			$('ul.judge-info >li> input[type="checkbox"]').each(
+					function() {
+						if ($(this).is(":checked")) {
+							var _judgeId = $(this).data("judgeid");
+							var weight = $(
+									'ul.judge-info >li> #select-' + _judgeId)
+									.val();
+							var displayName = $(
+									'ul.judge-info >li> #span-' + _judgeId)
+									.html();
+							items[index++] = {
+								"raceId" : raceId,
+								"judgeId" : _judgeId,
+								"weight" : weight,
+								"displayName" : displayName
+							};
+						}
+					});
+			var judgeList = {
+				"raceJudgeList" : items
+			};
 			var jsonData = JSON.stringify(judgeList);
-			
-			$.ajax({
-				url:'${ pageContext.request.contextPath }/admin/race/configJudge',
-				method:'POST',
-				data:jsonData,
-				dataType:'json',
-				async:false,
-				contentType: 'application/json',
-				success:function(data){
-					if(!data.resultData=="done"){
-						alert('评委配置失败，请重试！');	
-					}	
-				}
-			});
-		}
-		function addPromotionBtn(evt){
-	        var selectOptions=$('#tab2-fieldset').find('div').last().find('select').html();
-			var insertHtml =	'   <div class="control-group text-align promotion"> '																			
-                               +'		<label class="control-label" >第</label>		 '
-                               +'		<input class="width-20 focused start" type="text" value="">'
-                               +'		<label class="control-label" >至</label>'
-                               +'		<input class="width-20 focused end"  type="text" value="">'
-                               +'		<label class="control-label" >晋级到</label>'
-                               +'		<select>'+selectOptions+'</select>'
-                               +'		<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>'		
-                               +'	</div>';
 
-
-	         $('#tab2-fieldset').find('div').last().after(insertHtml);
+			$
+					.ajax({
+						url : '${ pageContext.request.contextPath }/admin/race/configJudge',
+						method : 'POST',
+						data : jsonData,
+						dataType : 'json',
+						async : false,
+						contentType : 'application/json',
+						success : function(data) {
+							if (!data.resultData == "done") {
+								alert('评委配置失败，请重试！');
+							}
+						}
+					});
 		}
-		function deletePromotionBtn(evt){
+		function addPromotionBtn(evt) {
+			var selectOptions = $('#tab2-fieldset').find('div').last().find(
+					'select').html();
+			var insertHtml = '   <div class="control-group text-align promotion"> '
+					+ '		<label class="control-label" >第</label>		 '
+					+ '		<input class="width-20 focused start" type="text" value="">'
+					+ '		<label class="control-label" >至</label>'
+					+ '		<input class="width-20 focused end"  type="text" value="">'
+					+ '		<label class="control-label" >晋级到</label>'
+					+ '		<select>'
+					+ selectOptions
+					+ '</select>'
+					+ '		<a href="javascript:void(0);" onclick="deletePromotionBtn(this)">删除晋级</a>'
+					+ '	</div>';
+
+			$('#tab2-fieldset').find('div').last().after(insertHtml);
+		}
+		function deletePromotionBtn(evt) {
 			//必须保留一个晋级项
-			if($('#tab2-fieldset').find('div').length>1){
-				$(evt).parent('div').remove();	
+			if ($('#tab2-fieldset').find('div').length > 1) {
+				$(evt).parent('div').remove();
 			}
 		}
 		function savePromotionInfo() {
-			var raceId=1;
-			var items=new Array();
-			var index=0;
-			$('div.promotion').each(function(){
-				var start=$(this).find('input.start').val();	
-				var end=$(this).find('input.end').val();
-				var target=$(this).find('select').val();
+			var raceId = 1;
+			var items = new Array();
+			var index = 0;
+			$('div.promotion').each(function() {
+				var start = $(this).find('input.start').val();
+				var end = $(this).find('input.end').val();
+				var target = $(this).find('select').val();
 				//填入空值视为无效输入
-				if(start==null || start==""){
+				if (start == null || start == "") {
 					return true;
 				}
-				if(end==null || end==""){
-					return true;	
+				if (end == null || end == "") {
+					return true;
 				}
-				var startInt=parseInt(start);
-				var endInt=parseInt(end);
+				var startInt = parseInt(start);
+				var endInt = parseInt(end);
 				//起始点不能大于终止点,否则视为无效
-				if(startInt>endInt){
+				if (startInt > endInt) {
 					return true;
 				}
-				items[index++]={"raceId":raceId,"nextId":target,"start":start,"end":end};
-				
-			});	
-			var promotionList={"racePromotionList":items};
-			var jsonData = JSON.stringify(promotionList);
-			
-			$.ajax({
-				url:'${ pageContext.request.contextPath }/admin/race/configPromotion',
-				method:'POST',
-				data:jsonData,
-				dataType:'json',
-				async:false,
-				contentType: 'application/json',
-				success:function(data){
-					if(!data.resultData=="done"){
-						alert('晋级配置失败，请重试！');	
-					}	
-				}
+				items[index++] = {
+					"raceId" : raceId,
+					"nextId" : target,
+					"start" : start,
+					"end" : end
+				};
+
 			});
+			var promotionList = {
+				"racePromotionList" : items
+			};
+			var jsonData = JSON.stringify(promotionList);
+
+			$
+					.ajax({
+						url : '${ pageContext.request.contextPath }/admin/race/configPromotion',
+						method : 'POST',
+						data : jsonData,
+						dataType : 'json',
+						async : false,
+						contentType : 'application/json',
+						success : function(data) {
+							if (!data.resultData == "done") {
+								alert('晋级配置失败，请重试！');
+							}
+						}
+					});
 		}
-		function saveAwardInfo(){
-				
+
+		function saveAwardInfo() {
+			var raceId = 1;
+			var items = new Array();
+			var index = 0;
+			$('div.award').each(function() {
+				var start = $(this).find('input.start').val();
+				var count = $(this).find('input.count').val();
+				var awardName = $(this).find('input.awardName').val();
+				//填入空值视为无效输入
+				if (start == null || start == "") {
+					return true;
+				}
+				if (count == null || count == "") {
+					return true;
+				}
+				if (awardName == null || awardName == "") {
+					return true;
+				}
+				var startInt = parseInt(start);
+				var countInt = parseInt(count);
+				//起始值和人数不能小于0,否则视为无效
+				if (startInt <= 0 || countInt <= 0) {
+					return true;
+				}
+				items[index++] = {
+					"raceId" : raceId,
+					"count" : count,
+					"start" : start,
+					"awardName" : awardName
+				};
+			});
+
+			var awardList = {
+				"raceAwardList" : items
+			};
+			var jsonData = JSON.stringify(awardList);
+
+			$
+					.ajax({
+						url : '${ pageContext.request.contextPath }/admin/race/configAward',
+						method : 'POST',
+						data : jsonData,
+						dataType : 'json',
+						async : false,
+						contentType : 'application/json',
+						success : function(data) {
+							if (!data.resultData == "done") {
+								alert('奖项配置失败，请重试！');
+							}
+						}
+					});
 		}
-		function saveStandardInfo(){
-			
+
+		function addAwardBtn(evt) {
+			var insertHtml = '<div class="control-group text-align award">'
+					+ '        <label class="control-label" for="focusedInput">第</label>'
+					+ '        <input class="width-20 focused start" type="text" value="">'
+					+ '        <label class="control-label" for="focusedInput">起，共</label>'
+					+ '        <input class="width-20 focused count" type="text" value="">'
+					+ '        <label class="control-label" for="focusedInput">人,称为</label>'
+					+ '        <input class="input-xlarge focused awardName" type="text" value="">'
+					+ '		  <a href="javascript:void(0);" onclick="deleteAwardBtn(this)">删除奖项</a>'
+					+ '</div>';
+
+			$('#tab3-fieldset').find('div').last().after(insertHtml);
+		}
+		function deleteAwardBtn(evt) {
+			//必须保留一个奖项
+			if ($('#tab3-fieldset').find('div').length > 1) {
+				$(evt).parent('div').remove();
+			}
+		}
+		function saveStandardInfo() {
+
 		}
 	</script>
 </body>

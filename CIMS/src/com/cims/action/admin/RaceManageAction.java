@@ -19,6 +19,7 @@ import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
 import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgePattern;
+import com.cims.model.persist.Award;
 import com.cims.model.persist.Judge;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
@@ -50,6 +51,7 @@ public class RaceManageAction extends BaseAction {
 	private List<Judge> judgeList;
 	private List<RaceJudge> raceJudgeList;
 	private List<Promotion> racePromotionList;
+	private List<Award> raceAwardList;
 
 	public RaceManageAction() {
 		judgePatternMap = new LinkedHashMap<String, String>();
@@ -110,6 +112,7 @@ public class RaceManageAction extends BaseAction {
 			judgeList = judgeProcess.retrieveList(new Judge());
 			raceList=raceProcess.retrieveList(new Race());
 			racePromotionList=raceProcess.retrievePromotionList(id);
+			raceAwardList=raceProcess.retrieveAwardList(id);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return ERROR;
@@ -200,6 +203,26 @@ public class RaceManageAction extends BaseAction {
 		String resultJson=resultData.toJSONString();
 		HttpUtils.responseJson(resultJson, response);
 	}
+	/**
+	 * 配置赛事奖项
+	 * @throws IOException 
+	 */
+	@Action(value="configAward",interceptorRefs={@InterceptorRef(value="json")})
+	public void raceAwardConfig() throws IOException{
+		JSONObject resultData = new JSONObject();
+		try{
+			if(raceAwardList!=null && raceAwardList.size()!=0){
+				raceProcess.configAward(raceAwardList);
+			}
+			resultData.put("resultData", "done");
+		}catch(Exception e){
+			log.error(e.getMessage());
+			resultData.put("resultData", "error");
+		}
+		String resultJson=resultData.toJSONString();
+		HttpUtils.responseJson(resultJson, response);
+	}
+	
 	
 	/**
 	 * 检查赛事名称是否重复
@@ -321,6 +344,14 @@ public class RaceManageAction extends BaseAction {
 
 	public List<Judge> getJudgeList() {
 		return judgeList;
+	}
+
+	public List<Award> getRaceAwardList() {
+		return raceAwardList;
+	}
+
+	public void setRaceAwardList(List<Award> raceAwardList) {
+		this.raceAwardList = raceAwardList;
 	}
 
 	public void setJudgeList(List<Judge> judgeList) {

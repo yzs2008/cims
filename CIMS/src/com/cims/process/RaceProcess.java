@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cims.base.type.StateEnum;
+import com.cims.dao.AwardDao;
 import com.cims.dao.PromotionDao;
 import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.RoundDao;
+import com.cims.model.persist.Award;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
@@ -29,6 +31,8 @@ public class RaceProcess {
 	private RaceJudgeDao raceJudgeDao;
 	@Autowired
 	private PromotionDao promotionDao;
+	@Autowired
+	private AwardDao awardDao;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -154,7 +158,7 @@ public class RaceProcess {
 			// 先删除比赛 晋级信息
 			String deleteFist = "delete from Promotion as o where o.raceId=?";
 			Integer raceId = racePromotionList.get(0).getRaceId();
-			raceJudgeDao.execute(deleteFist, new Object[] { raceId });
+			promotionDao.execute(deleteFist, new Object[] { raceId });
 
 			// 重新写入晋级信息
 			for(Promotion item:racePromotionList){
@@ -179,4 +183,36 @@ public class RaceProcess {
 			return new ArrayList<Promotion>();
 		}
 	}
+	
+	public List<Award> retrieveAwardList(Integer id) {
+		try{
+			List<Award> awardList;
+			String query="select o from Award as o where o.raceId=?";
+			awardList= awardDao.retrieveList(query, new Object[]{id});
+			return awardList;
+		}catch(Exception e){
+			log.error(e.getMessage());
+			return new ArrayList<Award>();
+		}
+	}
+
+	public boolean configAward(List<Award> raceAwardList) {
+		boolean done = true;
+		try {
+			// 先删除比赛奖项信息
+			String deleteFist = "delete from Award as o where o.raceId=?";
+			Integer raceId = raceAwardList.get(0).getRaceId();
+			awardDao.execute(deleteFist, new Object[] { raceId });
+
+			// 重新写入奖项信息
+			for(Award item:raceAwardList){
+				awardDao.create(item);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			done = false;
+		}
+		return done;
+	}
+	
 }
