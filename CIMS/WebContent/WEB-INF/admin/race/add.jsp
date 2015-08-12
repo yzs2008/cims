@@ -161,11 +161,14 @@
 		if(name==null||name==""){
 			return accept;	
 		}else{
-			var postData="race.raceName="+name;
+			var postData={"race":{"raceName":name}};
+			var jsonData=JSON.stringify(postData);
 			$.ajax({
 				   type: "POST",
 				   url: '${ pageContext.request.contextPath }/admin/race/raceNameCheck',
-				   data: postData,
+				   data:jsonData,
+				   dataType:'json',
+				   contentType: 'application/json',
 				   async:false,
 				   success: function(data){
 					   if(data.resultData){

@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cims.base.type.StateEnum;
+import com.cims.dao.PromotionDao;
 import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.RoundDao;
-import com.cims.model.persist.Judge;
+import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
@@ -26,6 +27,8 @@ public class RaceProcess {
 	private RoundDao roundDao;
 	@Autowired
 	private RaceJudgeDao raceJudgeDao;
+	@Autowired
+	private PromotionDao promotionDao;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -143,5 +146,25 @@ public class RaceProcess {
 			judgeInfoList=new ArrayList<RaceJudge>();
 		}
 		return judgeInfoList;
+	}
+
+	public boolean configPromotion(List<Promotion> racePromotionList) {
+		boolean done = true;
+		try {
+			// 先删除比赛 晋级信息
+			String deleteFist = "delete from Promotion as o where o.raceId=?";
+			Integer raceId = racePromotionList.get(0).getRaceId();
+			raceJudgeDao.execute(deleteFist, new Object[] { raceId });
+
+			// 重新写入晋级信息
+			for(Promotion item:racePromotionList){
+				promotionDao.create(item);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			done = false;
+		}
+		return done;
+		
 	}
 }

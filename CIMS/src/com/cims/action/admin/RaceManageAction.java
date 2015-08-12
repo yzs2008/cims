@@ -20,6 +20,7 @@ import com.cims.base.frame.HttpUtils;
 import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgePattern;
 import com.cims.model.persist.Judge;
+import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
@@ -27,7 +28,6 @@ import com.cims.process.JudgeProcess;
 import com.cims.process.RaceProcess;
 
 @Namespace("/admin/race")
-@InterceptorRef(value = "json")
 public class RaceManageAction extends BaseAction {
 
 	private static final long serialVersionUID = 3742461286899118994L;
@@ -47,6 +47,10 @@ public class RaceManageAction extends BaseAction {
 	private Map<String, String> judgePatternMap;
 	private Map<String, String> drawPatternMap;
 
+	private List<Judge> judgeList;
+	private List<RaceJudge> raceJudgeList;
+	private List<Promotion> racePromotionList;
+
 	public RaceManageAction() {
 		judgePatternMap = new LinkedHashMap<String, String>();
 		for (JudgePattern p : JudgePattern.values()) {
@@ -58,6 +62,10 @@ public class RaceManageAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 赛事基本信息列表
+	 * @return
+	 */
 	@Action(value = "list", results = { @Result(name = "input", location = "/WEB-INF/admin/race/list.jsp") })
 	public String list() {
 		raceList = raceProcess.retrieveList(new Race());
@@ -69,6 +77,10 @@ public class RaceManageAction extends BaseAction {
 		return INPUT;
 	}
 
+	/**
+	 * 添加比赛，填写赛事基本信息
+	 * @return
+	 */
 	@Action(value = "add", results = { @Result(name = "input", location = "/WEB-INF/admin/race/add.jsp"), @Result(name = "success", type = "redirect", location = "list") })
 	public String add() {
 		try {
@@ -80,18 +92,20 @@ public class RaceManageAction extends BaseAction {
 				return INPUT;
 			}
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.getCause().getMessage());
 			return ERROR;
 		}
 	}
 
-	private List<Judge> judgeList;
-	private List<RaceJudge> raceJudgeList;
-
+	/**
+	 * 初始化赛事配置页面
+	 * @return
+	 */
 	@Action(value = "config", results = { @Result(name = "input", location = "/WEB-INF/admin/race/config.jsp") })
 	public String config() {
 		try {
 			judgeList = judgeProcess.retrieveList(new Judge());
+			raceList=raceProcess.retrieveList(new Race());
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			return ERROR;
@@ -99,7 +113,34 @@ public class RaceManageAction extends BaseAction {
 		return INPUT;
 	}
 
-	@Action(value = "configJudge")
+	@Action(value = "update", results = { @Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp"), @Result(name = "success", type = "redirect", location = "list") })
+	public String update() {
+		return INPUT;
+	}
+
+	/**
+	 * 赛事基本信息编辑
+	 * @return
+	 */
+	@Action(value = "edit", results = { @Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp") })
+	public String edit() {
+		if (id == null) {
+			return ERROR;
+		}
+		try {
+			race = raceProcess.retrieve(id);
+			return INPUT;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return ERROR;
+		}
+	}
+
+	/**
+	 * 配置评委
+	 * @throws IOException
+	 */
+	@Action(value = "configJudge",interceptorRefs={@InterceptorRef(value="json")})
 	public void configJudge() throws IOException {
 		JSONObject resultData = new JSONObject();
 		try {
@@ -114,9 +155,14 @@ public class RaceManageAction extends BaseAction {
 		String resultJson = resultData.toJSONString();
 		HttpUtils.responseJson(resultJson, response);
 	}
-	@Action("raceJudgeInfo")
+
+	/**
+	 * 获取赛事评委信息
+	 * @throws IOException
+	 */
+	@Action(value="raceJudgeInfo",interceptorRefs={@InterceptorRef(value="json")})
 	public void raceJudgeInfo() throws IOException{
-	JSONObject resultData=new JSONObject();
+		JSONObject resultData=new JSONObject();
 		try{
 			List<RaceJudge> raceJudgeInfoList=new ArrayList<RaceJudge>();
 			if(id!=null){
@@ -130,6 +176,52 @@ public class RaceManageAction extends BaseAction {
 		String resultJson=resultData.toJSONString();
 		HttpUtils.responseJson(resultJson, response);
 	}
+	
+	/**
+	 * 配置赛事晋级
+	 * @throws IOException 
+	 */
+	@Action(value="configPromotion",interceptorRefs={@InterceptorRef(value="json")})
+	public void racePromotionConfig() throws IOException{
+		JSONObject resultData = new JSONObject();
+		try{
+			if(racePromotionList!=null && racePromotionList.size()!=0){
+				raceProcess.configPromotion(racePromotionList);
+			}
+			resultData.put("resultData", "done");
+		}catch(Exception e){
+			log.error(e.getMessage());
+			resultData.put("resultData", "error");
+		}
+		String resultJson=resultData.toJSONString();
+		HttpUtils.responseJson(resultJson, response);
+	}
+	
+	/**
+	 * 检查赛事名称是否重复
+	 */
+	@Action(value="raceNameCheck",interceptorRefs={@InterceptorRef(value="json")})
+	public void raceNameCheck() {
+		try {
+			if (StringUtils.isNotBlank(race.getRaceName())) {
+				JSONObject resultData = new JSONObject();
+				if (raceProcess.raceNameCheck(race.getRaceName())) {
+					resultData.put("resultData", true);
+				} else {
+					resultData.put("resultData", false);
+				}
+				String jsonResult = resultData.toJSONString();
+				HttpUtils.responseJson(jsonResult, response);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+
+	/**
+	 * 检查赛事信息是否填写完整
+	 * @return
+	 */
 	private boolean accept() {
 		boolean accept = true;
 		if (race == null) {
@@ -159,48 +251,10 @@ public class RaceManageAction extends BaseAction {
 		}
 		return accept;
 	}
-
-	@Action(value = "update", results = { @Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp"), @Result(name = "success", type = "redirect", location = "list") })
-	public String update() {
-		return INPUT;
-	}
-
-	@Action(value = "edit", results = { @Result(name = "input", location = "/WEB-INF/admin/race/edit.jsp") })
-	public String edit() {
-		if (id == null) {
-			return ERROR;
-		}
-		try {
-			race = raceProcess.retrieve(id);
-			return INPUT;
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			return ERROR;
-		}
-	}
-
-	@Action("raceNameCheck")
-	public void raceNameCheck() {
-		try {
-			if (StringUtils.isNotBlank(race.getRaceName())) {
-				JSONObject resultData = new JSONObject();
-				if (raceProcess.raceNameCheck(race.getRaceName())) {
-					resultData.put("resultData", true);
-				} else {
-					resultData.put("resultData", false);
-				}
-				String jsonResult = resultData.toJSONString();
-				HttpUtils.responseJson(jsonResult, response);
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
-	}
-
+	
 	public Race getRace() {
 		return race;
 	}
-
 	public List<Race> getRaceList() {
 		return raceList;
 	}
@@ -271,6 +325,14 @@ public class RaceManageAction extends BaseAction {
 
 	public List<RaceJudge> getRaceJudgeList() {
 		return raceJudgeList;
+	}
+
+	public List<Promotion> getRacePromotionList() {
+		return racePromotionList;
+	}
+
+	public void setRacePromotionList(List<Promotion> racePromotionList) {
+		this.racePromotionList = racePromotionList;
 	}
 
 	public void setRaceJudgeList(List<RaceJudge> raceJudgeList) {

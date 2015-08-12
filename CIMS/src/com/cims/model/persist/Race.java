@@ -43,6 +43,12 @@ public class Race {
 	private Boolean eraseGroup;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;
+	
+	public Race(){
+		
+	}
+	
+	
 	public Integer getRaceId() {
 		return raceId;
 	}

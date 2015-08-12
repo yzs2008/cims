@@ -108,47 +108,21 @@ label.control-label {
 								<div class="tab-pane" id="tab2">
 									<form class="form-horizontal">
 										<fieldset>
-											<div class="control-group text-align">
-												<label class="control-label" for="focusedInput">第</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">至</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">晋级到</label>
-												<select>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-												</select>
+											<div class="control-group text-align promotion">
+												<label class="control-label" >第</label>
+												<input class="width-20 focused start" type="text" value="">
+												<label class="control-label" >至</label>
+												<input class="width-20 focused end"  type="text" value="">
+												<label class="control-label" >晋级到</label>
+												<s:select list="raceList" listValue="raceName" listKey="raceId"></s:select>
 											</div>
-											<div class="control-group text-align">
-												<label class="control-label" for="focusedInput">第</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">至</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">晋级到</label>
-												<select>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-												</select>
-											</div>
-											<div class="control-group text-align">
-												<label class="control-label" for="focusedInput">第</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">至</label>
-												<input class="width-20 focused" id="focusedInput" type="text" value="">
-												<label class="control-label" for="focusedInput">晋级到</label>
-												<select>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-													<option>总决赛</option>
-												</select>
+											<div class="control-group text-align promotion">
+												<label class="control-label" >第</label>
+												<input class="width-20 focused start" type="text" value="">
+												<label class="control-label" >至</label>
+												<input class="width-20 focused end"  type="text" value="">
+												<label class="control-label" >晋级到</label>
+												<s:select list="raceList" listValue="raceName" listKey="raceId"></s:select>
 											</div>
 										</fieldset>
 									</form>
@@ -242,8 +216,7 @@ label.control-label {
 							if ($current >= $total) {
 								$('#rootwizard').find('.pager .next').hide();
 								$('#rootwizard').find('.pager .finish').show();
-								$('#rootwizard').find('.pager .finish')
-										.removeClass('disabled');
+								$('#rootwizard').find('.pager .finish').removeClass('disabled');
 							} else {
 								$('#rootwizard').find('.pager .next').show();
 								$('#rootwizard').find('.pager .finish').hide();
@@ -260,12 +233,12 @@ label.control-label {
 		});
 		
 		function initJudgeInfo(){
-			var raceId=1;
+			var raceId=1;//TODO
 			var postData={"id":raceId};
 			var jsonData=JSON.stringify(postData);
 			$.ajax({
 				url:'${ pageContext.request.contextPath }/admin/race/raceJudgeInfo',
-				method:'POST',
+				type:'POST',
 				data:jsonData,
 				dataType:'json',
 				contentType: 'application/json',
@@ -308,7 +281,7 @@ label.control-label {
 		function saveJudgeInfo() {
 			var items=new Array();
 			var index=0;
-			var raceId=1;
+			var raceId=1;//TODO
 			$('ul.judge-info >li> input[type="checkbox"]').each(function(){
 				if($(this).is(":checked")){
 					var _judgeId=$(this).data("judgeid");
@@ -335,10 +308,35 @@ label.control-label {
 			});
 		}
 		function savePromotionInfo() {
-
+			var raceId=1;
+			var items=new Array();
+			var index=0;
+			$('div.promotion').each(function(){
+				var start=$(this).find('input.start').val();	
+				var end=$(this).find('input.end').val();
+				var target=$(this).find('select').val();
+				items[index++]={"raceId":raceId,"nextId":target,"start":start,"end":end};
+				
+			});	
+			var promotionList={"racePromotionList":items};
+			var jsonData = JSON.stringify(promotionList);
+			
+			$.ajax({
+				url:'${ pageContext.request.contextPath }/admin/race/configPromotion',
+				method:'POST',
+				data:jsonData,
+				dataType:'json',
+				async:false,
+				contentType: 'application/json',
+				success:function(data){
+					if(!data.resultData=="done"){
+						alert('晋级配置失败，请重试！');	
+					}	
+				}
+			});
 		}
 		function saveAwardInfo(){
-			
+				
 		}
 		function saveStandardInfo(){
 			

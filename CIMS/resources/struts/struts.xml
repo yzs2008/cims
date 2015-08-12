@@ -3,12 +3,7 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<package name="default" namespace="/" extends="struts-default">
-
-		<interceptors>
-			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
-		</interceptors>
-
+	<package name="default" namespace="/" extends="struts-default,json-default">
 		<global-results>
 			<result name="error">/errorPage/error.jsp</result>
 			<result name="sessionout">/sessionout.html</result>
@@ -31,7 +26,6 @@
 	<constant name="struts.serve.static.browserCache" value="false" />
 
 	<constant name="struts.multipart.maxSize" value="4000194304" />
-	<constant name="struts.convention.default.parent.package"
-		value="default" />
+	<constant name="struts.convention.default.parent.package" value="default" />
 	<constant name="struts.convention.result.path" value="/WEB-INF/WebContent/" />
 </struts>
