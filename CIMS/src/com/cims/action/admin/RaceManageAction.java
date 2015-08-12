@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
 import com.cims.model.datastruct.DrawPattern;
+import com.cims.model.datastruct.JudgeModel;
 import com.cims.model.datastruct.JudgePattern;
 import com.cims.model.persist.Award;
 import com.cims.model.persist.Judge;
@@ -54,6 +55,8 @@ public class RaceManageAction extends BaseAction {
 	private List<Promotion> racePromotionList;
 	private List<Award> raceAwardList;
 	private List<Standard> raceStandardList;
+	
+	private List<JudgeModel> judgeModelList;
 
 	public RaceManageAction() {
 		judgePatternMap = new LinkedHashMap<String, String>();
@@ -76,9 +79,29 @@ public class RaceManageAction extends BaseAction {
 		return INPUT;
 	}
 
-	@Action(value = "detail", results = { @Result(name = "input", location = "/WEB-INF/admin/race/detail.jsp") })
+	@Action(value = "detail", results = { @Result(name = "input", location = "/WEB-INF/admin/race/detail.jsp"),
+										  @Result(name = "backToList",type="redirect", location = "list") })
 	public String detail() {
-		return INPUT;
+		if(id==null){
+			return "backToList";
+		}
+		try {
+			//获取赛事评委信息
+			raceJudgeList = raceProcess.retrieveJudgeList(id);
+			judgeModelList=raceProcess.retrieveJudgeList(raceJudgeList);
+			//获取比赛基本信息
+			race=raceProcess.retrieve(id);
+			//获取赛事晋级信息
+			racePromotionList=raceProcess.retrievePromotionList(id);
+			//获取赛事奖项设置信息
+			raceAwardList=raceProcess.retrieveAwardList(id);
+			//获取赛事评分项信息
+			raceStandardList=raceProcess.retrieveStandard(id);
+			return INPUT;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return ERROR;
+		}
 	}
 
 	/**
@@ -176,7 +199,7 @@ public class RaceManageAction extends BaseAction {
 		try{
 			List<RaceJudge> raceJudgeInfoList=new ArrayList<RaceJudge>();
 			if(id!=null){
-				raceJudgeInfoList= raceProcess.getJudgeInfo(id);
+				raceJudgeInfoList= raceProcess.retrieveJudgeList(id);
 			}		
 			resultData.put("resultData", raceJudgeInfoList);
 		}catch(Exception e){
@@ -360,6 +383,14 @@ public class RaceManageAction extends BaseAction {
 
 	public String getStartTime() {
 		return startTime;
+	}
+
+	public List<JudgeModel> getJudgeModelList() {
+		return judgeModelList;
+	}
+
+	public void setJudgeModelList(List<JudgeModel> judgeModelList) {
+		this.judgeModelList = judgeModelList;
 	}
 
 	public void setStartTime(String startTime) {

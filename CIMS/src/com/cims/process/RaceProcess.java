@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.cims.base.type.StateEnum;
 import com.cims.dao.AwardDao;
+import com.cims.dao.JudgeDao;
 import com.cims.dao.PromotionDao;
 import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.RoundDao;
 import com.cims.dao.StandardDao;
+import com.cims.model.datastruct.JudgeModel;
 import com.cims.model.persist.Award;
+import com.cims.model.persist.Judge;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
@@ -37,6 +40,8 @@ public class RaceProcess {
 	private AwardDao awardDao;
 	@Autowired
 	private StandardDao standardDao;
+	@Autowired
+	private JudgeDao judgeDao;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -144,7 +149,7 @@ public class RaceProcess {
 		return done;
 	}
 
-	public List<RaceJudge> getJudgeInfo(Integer id) {
+	public List<RaceJudge> retrieveJudgeList(Integer id) {
 		List<RaceJudge> judgeInfoList;
 		try{
 			String hql="select o from RaceJudge as o where  o.raceId=?";
@@ -247,5 +252,21 @@ public class RaceProcess {
 			done = false;
 		}
 		return done;
+	}
+
+	public List<JudgeModel> retrieveJudgeList(List<RaceJudge> raceJudgeList) {
+		try{
+			List<JudgeModel> judgeModelList=new ArrayList<JudgeModel>();
+			for(RaceJudge  item : raceJudgeList){
+				JudgeModel judgeModel=new JudgeModel();
+				judgeModel.setJudge(judgeDao.retrieveById(item.getJudgeId()));
+				judgeModel.setRaceJudge(item);
+				judgeModelList.add(judgeModel);
+			}
+			return judgeModelList;
+		}catch(Exception e){
+			log.error(e.getMessage());
+			return new ArrayList<JudgeModel>();
+		}
 	}
 }
