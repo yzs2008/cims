@@ -24,6 +24,8 @@ public class User {
 	private String avatar;
 	private Integer targetMatch;
 	private String descrition;
+	//单位或者学校
+	private String unit;
 	
 
 	public Integer getUserId() {
@@ -91,5 +93,11 @@ public class User {
 	}
 	public void setDescrition(String descrition) {
 		this.descrition = descrition;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 }

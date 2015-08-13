@@ -92,8 +92,8 @@ ul.player-info li {
 										<li>抽签模式<span class="my-span">${race.drawPattern }</span></li>
 										<li>评分模式<span class="my-span">${race.judgePattern.name() }</span></li>
 										<li>现场投票时长<span class="my-span">${race.voteTime }</span></li>
-										<li>排名模式<span class="my-span">${race.eraseGroup }</span></li>
 										<li>当前状态<span class="my-span">${race.state }</span></li>
+										<li>备注<span class="my-span">${race.mark }</span></li>
 									</ul>
 								</div>
 							</fieldset>

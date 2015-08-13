@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,14 @@ public class UserProcess {
 	}
 
 	public User login(String userName, String password) {
-		return userDao.login(userName, password);
+		try {
+			String hql="select o from User as o where (o.userName=? and o.password=?) or (o.email=? and o.password=?)";
+			User user = userDao.retrieveObject(hql, new Object[]{userName,password,userName,password});
+			return user;
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			return null;
+		}
 	}
 
 	public User getUserById(Integer userId) {

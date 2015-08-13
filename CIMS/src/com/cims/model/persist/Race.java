@@ -39,10 +39,9 @@ public class Race {
 	private Integer voteTime;
 	@Enumerated(EnumType.STRING)
 	private DrawPattern drawPattern;
-	@Type(type="true_false")
-	private Boolean eraseGroup;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;
+	private String mark;
 	
 	public Race(){
 		
@@ -122,12 +121,6 @@ public class Race {
 		this.voteTime = voteTime;
 	}
 	
-	public Boolean getEraseGroup() {
-		return eraseGroup;
-	}
-	public void setEraseGroup(Boolean eraseGroup) {
-		this.eraseGroup = eraseGroup;
-	}
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -137,6 +130,16 @@ public class Race {
 	public String getRoundName() {
 		return roundName;
 	}
+	public String getMark() {
+		return mark;
+	}
+
+
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
+
+
 	public void setRoundName(String roundName) {
 		this.roundName = roundName;
 	}

@@ -112,9 +112,9 @@
 										</div>
 									</div>
 									<div class="left-right">
-										<label class="control-label" for="eraseGroup">是否抹去分组</label>
+										<label class="control-label" for="eraseGroup">备注</label>
 										<div class="controls">
-											<input type="text" name="race.eraseGroup" class="default" id="eraseGroup">
+											<input type="text" name="race.mark" class="default" id="eraseGroup">
 										</div>
 									</div>
 								</div>

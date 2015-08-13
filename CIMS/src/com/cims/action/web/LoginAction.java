@@ -1,13 +1,19 @@
-package com.cims.action.register;
+package com.cims.action.web;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.json.annotations.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cims.base.frame.BaseAction;
 import com.cims.base.type.ActionContant;
+import com.cims.model.datastruct.Message;
 import com.cims.model.persist.User;
 import com.cims.process.UserProcess;
 
@@ -21,14 +27,20 @@ public class LoginAction extends BaseAction{
 	
 	private String userName;
 	private String password;
+	private Message ajaxResult=new Message();
 	
 	@Action(value="login", results={@Result(name="input",location="/WEB-INF/content/register_login/login.jsp"),
-									@Result(name="success",location="/index.jsp")})
+									@Result(name="success",location="/index.jsp"),
+									@Result(name="deny",type="json",params={"root","ajaxResult","includeProperties","msg,state"})},
+							interceptorRefs={@InterceptorRef(value="json"),
+											 @InterceptorRef(value="paramsPrepareParamsStack")})
 	public String login(){
 		if(customValidate()){
 			User user = process.login(userName, password);
 			if(user==null || user.getUserId()==null){
-				return INPUT;
+				ajaxResult.setMsg("用户名或密码错误");
+				ajaxResult.setState(false);
+				return "deny";
 			}
 			sessionMap.put(ActionContant.session_user, user);
 			return SUCCESS;
@@ -63,6 +75,11 @@ public class LoginAction extends BaseAction{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public Message getAjaxResult() {
+		return ajaxResult;
+	}
+	public void setAjaxResult(Message ajaxResult) {
+		this.ajaxResult = ajaxResult;
+	}
 
 }

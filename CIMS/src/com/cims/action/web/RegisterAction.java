@@ -1,4 +1,4 @@
-package com.cims.action.register;
+package com.cims.action.web;
 
 
 import org.apache.commons.lang3.StringUtils;

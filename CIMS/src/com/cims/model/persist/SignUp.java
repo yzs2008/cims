@@ -12,11 +12,10 @@ public class SignUp {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer signId;
-	private Integer registerId;
+	private Integer userId;
 	private String productName;
 	private Integer raceId;
 	private String productDescription;
-	private Integer groupNumber;
 	public Integer getSignId() {
 		return signId;
 	}
@@ -24,10 +23,10 @@ public class SignUp {
 		this.signId = signId;
 	}
 	public Integer getRegisterId() {
-		return registerId;
+		return userId;
 	}
 	public void setRegisterId(Integer registerId) {
-		this.registerId = registerId;
+		this.userId = registerId;
 	}
 	public String getProductName() {
 		return productName;
@@ -47,12 +46,5 @@ public class SignUp {
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
-	public Integer getGroupNumber() {
-		return groupNumber;
-	}
-	public void setGroupNumber(Integer groupNumber) {
-		this.groupNumber = groupNumber;
-	}
-	
 	
 }
