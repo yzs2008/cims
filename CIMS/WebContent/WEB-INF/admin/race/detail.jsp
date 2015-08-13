@@ -170,7 +170,32 @@ ul.player-info li {
 								<legend>奖项设置</legend>
 								<div class="control-group">
 									<ul class="player-info">
-										<li></li>
+										<s:iterator value="raceAwardList" var="awardItem">
+											<li style="margin-right: 50px;">
+                                                <span>第</span>
+                                                <span style="color:red">${awardItem.start }</span>
+                                                <span>至</span>
+                                                <span style="color:red;">${awardItem.start+awardItem.count-1 }</span> 名
+                                                <span style="color:green;">称为</span>
+                                                <span style="color:red;font-weight:bolder;">${awardItem.awardName }</span>
+											</li>
+										</s:iterator>	
+									</ul>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>评分项设置</legend>
+								<div class="control-group">
+									<ul class="player-info">
+										<s:iterator value="raceStandardList" var="standardItem" status="itemStatus">
+											<li style="margin-right: 50px;">
+                                                <span>(<s:property value="%{#itemStatus.index + 1}" />)</span>
+                                                <span>${standardItem.standardName }</span> 
+                                               	分值<span style="color:green;">${standardItem.max-standardItem.min }</span>
+                                               	 最高<span style="color:red;font-weight:bolder;">${standardItem.max }</span>
+                                               	 最低<span style="color:red;font-weight:bolder;">${standardItem.min }</span>
+											</li>
+										</s:iterator>	
 									</ul>
 								</div>
 							</fieldset>
