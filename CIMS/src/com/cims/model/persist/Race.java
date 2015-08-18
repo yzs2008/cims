@@ -12,10 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Type;
-
 import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgePattern;
+import com.cims.model.datastruct.RaceState;
 
 @Entity
 @Table(name="cims_race")
@@ -31,7 +30,11 @@ public class Race {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
 	private String qualification;
-	private String state;
+	/**
+	 * 赛事状态
+	 */
+	@Enumerated(EnumType.STRING)
+	private RaceState state;
 	private String description;
 	@Enumerated(EnumType.STRING)
 	private JudgePattern judgePattern;
@@ -41,6 +44,9 @@ public class Race {
 	private DrawPattern drawPattern;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;
+	/**
+	 * 备注字段，存放临时数据
+	 */
 	private String mark;
 	
 	public Race(){
@@ -69,9 +75,7 @@ public class Race {
 	public String getQualification() {
 		return qualification;
 	}
-	public String getState() {
-		return state;
-	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -105,9 +109,7 @@ public class Race {
 	public void setQualification(String qualification) {
 		this.qualification = qualification;
 	}
-	public void setState(String state) {
-		this.state = state;
-	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -148,6 +150,16 @@ public class Race {
 	}
 	public void setDrawPattern(DrawPattern drawPattern) {
 		this.drawPattern = drawPattern;
+	}
+
+
+	public RaceState getState() {
+		return state;
+	}
+
+
+	public void setState(RaceState state) {
+		this.state = state;
 	}
 	
 }

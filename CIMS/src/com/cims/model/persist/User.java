@@ -23,7 +23,7 @@ public class User {
 	private String phone;
 	private String avatar;
 	private Integer targetMatch;
-	private String descrition;
+	private String description;
 	//单位或者学校
 	private String unit;
 	
@@ -70,9 +70,7 @@ public class User {
 	public Integer getTargetMatch() {
 		return targetMatch;
 	}
-	public String getDescrition() {
-		return descrition;
-	}
+
 	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
 	}
@@ -91,13 +89,17 @@ public class User {
 	public void setTargetMatch(Integer targetMatch) {
 		this.targetMatch = targetMatch;
 	}
-	public void setDescrition(String descrition) {
-		this.descrition = descrition;
-	}
+
 	public String getUnit() {
 		return unit;
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

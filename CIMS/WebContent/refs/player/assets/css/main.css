@@ -1151,12 +1151,12 @@
 				min-height: 100%;
 				overflow-y: scroll;
 				background-attachment: fixed;
-				font-size: 14pt;
+				font-size: 11pt;
 				line-height: 1.75em;
 			}
 
 			input, textarea, select {
-				font-size: 14pt;
+				font-size: 11pt;
 				line-height: 1.75em;
 			}
 

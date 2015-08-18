@@ -18,9 +18,16 @@ public class RaceDao extends BaseDao<Race> {
 		return retrieveList(new Race());
 	}
 	
-	public List<Race> retrieveList(Race race)throws Exception{
-		StringBuilder sbHql=new StringBuilder("select o from Race o where 1=1 order by o.createTime desc");
+	public List<Race> retrieveList(Race filter)throws Exception{
+		StringBuilder sbHql=new StringBuilder("select o from Race o where 1=1 ");
 		
+		if(filter.getState()!=null){
+			sbHql.append(" and o.state='").append(filter.getState()).append("' ");
+		}
+		if(filter.getRoundId()!=null){
+			sbHql.append(" and o.roundId='").append(filter.getRoundId()).append("' ");
+		}
+		sbHql.append(" order by o.createTime desc");
 		String hql=sbHql.toString();
 		return retrieveList(hql);
 	}

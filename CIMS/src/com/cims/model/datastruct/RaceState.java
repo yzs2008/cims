@@ -1,11 +1,13 @@
 package com.cims.model.datastruct;
 
 public enum RaceState {
-	close("关闭"),
-	over("结束"),
-	wait("未进行"),
 	needConfig("未配置"),
-	sign("报名");
+	wait("未进行"),
+	sign("报名"),
+	signOver("报名结束"),
+	underWay("正在进行"),
+	over("结束");
+
 	
 	private final String name;
 	

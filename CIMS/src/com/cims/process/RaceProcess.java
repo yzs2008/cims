@@ -92,11 +92,10 @@ public class RaceProcess {
 	}
 
 	// 查
-	public List<Race> retrieveList(Race race) {
+	public List<Race> retrieveList(Race filter) {
 		List<Race> raceList = new ArrayList<Race>();
 		try {
-			raceList = raceDao.retrieveList(race);
-
+			raceList = raceDao.retrieveList(filter);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
