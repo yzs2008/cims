@@ -41,6 +41,10 @@ public class LoginAction extends BaseAction{
 			sessionMap.put(ActionContant.session_user, user);
 			ajaxResult.setMsg("登录成功");
 			ajaxResult.setState(true);
+			String preUrl=(String) sessionMap.get(ActionContant.header_previousUrl);
+			if(StringUtils.isNotEmpty(preUrl)){
+				response.setHeader(ActionContant.header_previousUrl, preUrl);
+			}
 			return SUCCESS;
 		}
 		return INPUT;

@@ -23,6 +23,7 @@ import com.cims.process.RaceProcess;
 import com.cims.process.SignProcess;
 
 @Namespace("/player")
+@InterceptorRef("playerInterceptorStack")
 public class PlayerSignAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
@@ -43,10 +44,6 @@ public class PlayerSignAction extends BaseAction {
 	@Action(value = "sign", results = { @Result(name = "input", location = "/WEB-INF/content/player/sign.jsp") })
 	public String sign() {
 		try {
-			//TODO this is for test!
-			User u=signProcess.getUserById(1);
-			//TODO above code is for test only!
-			sessionMap.put(ActionContant.session_user, u);
 			user = (User) sessionMap.get(ActionContant.session_user);
 			//列出所有正在接受报名状态的赛事
 			Race race=new Race();

@@ -4,12 +4,19 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="default" namespace="/" extends="struts-default,json-default">
+		<interceptors>
+			<interceptor name="playerAuthenticateInterceptor" class="com.cims.interceptors.PlayerAuthenticateInterceptor"></interceptor>	
+			<interceptor-stack name="playerInterceptorStack">
+				<interceptor-ref name="playerAuthenticateInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+	
 		<global-results>
 			<result name="error">/errorPage/error.jsp</result>
-			<result name="sessionout">/sessionout.html</result>
 			<result name="nopermi">/nopermi.html</result>
 		</global-results>
-
+		
 	</package>
 
 	<constant name="struts.custom.i18n.resources" value="i18n/cims" />

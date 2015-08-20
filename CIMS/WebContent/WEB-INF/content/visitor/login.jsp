@@ -109,9 +109,14 @@
 						dataType : 'json',
 						contentType : 'application/json',
 						async : false,
-						success : function(data) {
+						success : function(data,status,req) {
 							if (data.state) {
-								location.href="${ pageContext.request.contextPath }/sign";
+								var preUrl=req.getResponseHeader('previousUrl');
+								if(preUrl!=null){
+									location.href=preUrl;
+								}else{
+									location.href="${ pageContext.request.contextPath }/player/sign";
+								}
 							} else {
 								alert(data.msg);
 							}
