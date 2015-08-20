@@ -108,10 +108,10 @@
 					<div>
 						<div class="row">
 							<div class="12u$">
-								<input type="text" name="productName" placeholder="作品名称" value="${productName }"/>
+								<input type="text" id="product-name" name="productName" placeholder="作品名称" value="${productName }"/>
 							</div>
 							<div class="12u$">
-								<textarea name="productDescription" placeholder="作品简介" rows="8">${productDescription }</textarea>
+								<textarea name="productDescription" id="product-description" placeholder="作品简介" rows="8">${productDescription }</textarea>
 							</div>
 							<div class="12u$">
 								<input type="submit" value="提    交" />
@@ -186,13 +186,31 @@
 		function raceSelect(evt){
 			var raceId=$(evt).data("id");	
 			$("#raceId-select").val(raceId);
+			//获取用户的作品信息
+			var postData={"raceId":raceId};
+			var jsonData=JSON.stringify(postData);
+			$.ajax({
+				   type: "POST",
+				   url: '${ pageContext.request.contextPath }/player/getProductInfo',
+				   data:jsonData,
+				   dataType:'json',
+				   contentType: 'application/json',
+				   async:true,
+				   success: function(data){
+					   if(data.msg.state){
+						   $("#product-name").val(data.sign.productName);
+						   $("#product-description").val(data.sign.productDescription);
+					   }else{
+					   }
+				   }
+				});	
 			$('a[href="#work"]').trigger("click");	
 		}
 		
-		function saveProduction(){
+		function saveProduct(){
 			var raceId=$("#raceId-select").val();
-			var productName=$("").val();
-			var productDescription=$("").val();
+			var productName=$("#product-name").val();
+			var productDescription=$("#product-description").val();
 			
 			if(raceId==null|| raceId==""){
 				alert("请先选择报名赛事");
@@ -204,7 +222,7 @@
 				return false;
 			}
 			
-			var postData={"raceId":raceId,"productDescription":productDescription,"productName":productName}};
+			var postData={"raceId":raceId,"description":productDescription,"productName":productName};
 			var jsonData=JSON.stringify(postData);
 			var accept=false;
 			$.ajax({

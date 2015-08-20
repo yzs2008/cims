@@ -17,6 +17,7 @@ import com.cims.base.type.ActionContant;
 import com.cims.model.datastruct.Message;
 import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Race;
+import com.cims.model.persist.SignUp;
 import com.cims.model.persist.User;
 import com.cims.process.RaceProcess;
 import com.cims.process.SignProcess;
@@ -36,14 +37,14 @@ public class PlayerSignAction extends BaseAction {
 	
 	private Integer raceId;
 	private String productName;
+	private String description;
+	
 
 	@Action(value = "sign", results = { @Result(name = "input", location = "/WEB-INF/content/player/sign.jsp") })
 	public String sign() {
 		try {
 			//TODO this is for test!
-			User u=new User();
-			u.setUserId(1);
-			u.setPassword("22");
+			User u=signProcess.getUserById(1);
 			//TODO above code is for test only!
 			sessionMap.put(ActionContant.session_user, u);
 			user = (User) sessionMap.get(ActionContant.session_user);
@@ -56,7 +57,79 @@ public class PlayerSignAction extends BaseAction {
 		}
 		return INPUT;
 	}
+	/**
+	 * 获取用户报名数据（作品信息）
+	 * 
+	 * @throws IOException
+	 */
+	@Action(value = "getProductInfo",interceptorRefs={@InterceptorRef("defaultStack"),@InterceptorRef(value="json")})
+	public void getProductInfo() throws IOException {
+		JSONObject resultData = new JSONObject();
+		Message msg = new Message();
+		try {
+			if (raceId!=null) {
+				User usr=(User)sessionMap.get(ActionContant.session_user);
+				SignUp sign=signProcess.getProductInfo(usr.getUserId(),raceId);
+				if (sign!=null) {
+					msg.setMsg("作品信息获取成功");
+					msg.setState(true);
+					resultData.put("sign", sign);
+				} else {
+					msg.setMsg("作品信息为空");
+					msg.setState(false);
+				}
 
+			} else {
+				msg.setMsg("参数错误");
+				msg.setState(false);
+			}
+		} catch (Exception e) {
+			msg.setMsg("获取作品信息失败");
+			msg.setState(false);
+			log.error(e);
+		}
+		resultData.put("msg", msg);
+		String resultJson = resultData.toJSONString();
+		HttpUtils.responseJson(resultJson, response);
+	}
+	/**
+	 * 保存用户报名数据（作品信息）
+	 * 
+	 * @throws IOException
+	 */
+	@Action(value = "saveProductInfo",interceptorRefs={@InterceptorRef("defaultStack"),@InterceptorRef(value="json")})
+	public void saveProductInfo() throws IOException {
+		JSONObject resultData = new JSONObject();
+		Message msg = new Message();
+		try {
+			if (acceptProduct()) {
+				SignUp sign=new SignUp();
+				sign.setProductDescription(description);
+				sign.setProductName(productName);
+				sign.setRaceId(raceId);
+				User usr=(User)sessionMap.get(ActionContant.session_user);
+				sign.setUserId(usr.getUserId());
+				if (signProcess.saveProductInfo(sign)) {
+					msg.setMsg("作品信息保存成功");
+					msg.setState(true);
+				} else {
+					msg.setMsg("作品信息保存失败");
+					msg.setState(false);
+				}
+
+			} else {
+				msg.setMsg("请填写完整信息");
+				msg.setState(false);
+			}
+		} catch (Exception e) {
+			msg.setMsg("作品信息保存失败");
+			msg.setState(false);
+		}
+		resultData.put("msg", msg);
+		String resultJson = resultData.toJSONString();
+		HttpUtils.responseJson(resultJson, response);
+	}
+	
 	/**
 	 * 保存用户报名数据（用户个人信息）
 	 * 
@@ -88,7 +161,19 @@ public class PlayerSignAction extends BaseAction {
 		String resultJson = resultData.toJSONString();
 		HttpUtils.responseJson(resultJson, response);
 	}
-
+	
+	private boolean acceptProduct() {
+		boolean accept = true;
+		if (raceId == null) {
+			accept = false;
+			return accept;
+		}
+		if (!StringUtils.isNotEmpty(productName)) {
+			accept = false;
+		}
+		return accept;
+	}
+	
 	private boolean accept() {
 		boolean accept = true;
 		if (user == null) {
@@ -121,6 +206,28 @@ public class PlayerSignAction extends BaseAction {
 
 	public void setRaceList(List<Race> raceList) {
 		this.raceList = raceList;
+	}
+
+	public Integer getRaceId() {
+		return raceId;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setRaceId(Integer raceId) {
+		this.raceId = raceId;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

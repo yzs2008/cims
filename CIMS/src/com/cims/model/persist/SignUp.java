@@ -16,18 +16,14 @@ public class SignUp {
 	private String productName;
 	private Integer raceId;
 	private String productDescription;
+	
 	public Integer getSignId() {
 		return signId;
 	}
 	public void setSignId(Integer signId) {
 		this.signId = signId;
 	}
-	public Integer getRegisterId() {
-		return userId;
-	}
-	public void setRegisterId(Integer registerId) {
-		this.userId = registerId;
-	}
+
 	public String getProductName() {
 		return productName;
 	}
@@ -45,6 +41,12 @@ public class SignUp {
 	}
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 }
