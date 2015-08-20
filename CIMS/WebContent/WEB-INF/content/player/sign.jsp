@@ -224,7 +224,6 @@
 			
 			var postData={"raceId":raceId,"description":productDescription,"productName":productName};
 			var jsonData=JSON.stringify(postData);
-			var accept=false;
 			$.ajax({
 				   type: "POST",
 				   url: '${ pageContext.request.contextPath }/player/saveProductInfo',
@@ -234,14 +233,14 @@
 				   async:false,
 				   success: function(data){
 					   if(data.msg.state){
-						   accept=true; 
+						   alert("报名完成");
+						   $('a[href="#notice"]').trigger("click");	
 					   }else{
 						   alert(data.msg.msg);
-						   accept=false; 
 					   }
 				   }
 				});		
-			return accept;
+			return false;
 		}
 	</script>
 

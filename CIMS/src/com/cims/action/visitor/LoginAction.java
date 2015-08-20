@@ -1,4 +1,4 @@
-package com.cims.action.web;
+package com.cims.action.visitor;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ public class LoginAction extends BaseAction{
 	private String password;
 	private Message ajaxResult=new Message();
 	
-	@Action(value="login", results={@Result(name="input",location="/WEB-INF/content/register_login/login.jsp"),
+	@Action(value="login", results={@Result(name="input",location="/WEB-INF/content/visitor/login.jsp"),
 									@Result(name="success",type="json",params={"root","ajaxResult","includeProperties","msg,state"}),
 									@Result(name="deny",type="json",params={"root","ajaxResult","includeProperties","msg,state"})},
 							interceptorRefs={@InterceptorRef("defaultStack"), @InterceptorRef(value="json")})
@@ -46,7 +46,7 @@ public class LoginAction extends BaseAction{
 		return INPUT;
 	}
 //
-//	@Action(value = "login", results = { @Result(name = "input", location = "/WEB-INF/content/register_login/login.jsp"), @Result(name = "success", location = "/index.jsp"),
+//	@Action(value = "login", results = { @Result(name = "input", location = "/WEB-INF/content/visitor/login.jsp"), @Result(name = "success", location = "/index.jsp"),
 //			@Result(name = "deny", type = "json", params = { "root", "ajaxResult", "includeProperties", "msg,state" }) }, interceptorRefs = { @InterceptorRef(value = "json"),
 //			@InterceptorRef(value = "paramsPrepareParamsStack") })
 //	public String login() {

@@ -1,4 +1,4 @@
-package com.cims.action.web;
+package com.cims.action.visitor;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,8 +21,8 @@ public class RegisterAction extends BaseAction {
 	@Autowired
 	private UserProcess process;
 
-	@Action(value = "register", results = { @Result(name = "success", location = "/WEB-INF/content/register_login/login.jsp") 
-											,@Result(name="input",location="/WEB-INF/content/register_login/login.jsp")
+	@Action(value = "register", results = { @Result(name = "success", location = "/WEB-INF/content/visitor/login.jsp") 
+											,@Result(name="input",location="/WEB-INF/content/visitor/login.jsp")
 											,@Result(name="slip",type="redirect",location="slip")
 										  })
 	public String register(){
