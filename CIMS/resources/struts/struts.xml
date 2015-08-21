@@ -19,6 +19,7 @@
 		
 	</package>
 
+	<constant name="struts.action.excludePattern" value="/message/.*"/>
 	<constant name="struts.custom.i18n.resources" value="i18n/cims" />
 	<!-- 指定Web应用的默认编码集 -->
 	<constant name="struts.i18n.encoding" value="UTF-8" />

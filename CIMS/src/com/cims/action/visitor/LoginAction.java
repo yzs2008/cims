@@ -45,6 +45,7 @@ public class LoginAction extends BaseAction{
 			if(StringUtils.isNotEmpty(preUrl)){
 				response.setHeader(ActionContant.header_previousUrl, preUrl);
 			}
+			sessionMap.remove(ActionContant.header_previousUrl);
 			return SUCCESS;
 		}
 		return INPUT;
