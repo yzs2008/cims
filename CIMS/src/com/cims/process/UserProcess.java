@@ -1,8 +1,5 @@
 package com.cims.process;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,17 +56,6 @@ public class UserProcess {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
-		}
-	}
-
-	public void getByPage() {
-		List<User> userList = new ArrayList<User>();
-		String hql = "select o from User o";
-		try {
-			userList = userDao.retrieveByPage(hql, 5, 10);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 }

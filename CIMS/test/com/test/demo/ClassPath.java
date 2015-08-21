@@ -2,7 +2,7 @@ package com.test.demo;
 
 import java.net.URL;
 
-
+@SuppressWarnings("unused")
 public class ClassPath {
 
 	public static void main(String[] args) {

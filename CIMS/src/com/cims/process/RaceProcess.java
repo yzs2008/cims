@@ -17,7 +17,6 @@ import com.cims.dao.RoundDao;
 import com.cims.dao.StandardDao;
 import com.cims.model.datastruct.JudgeModel;
 import com.cims.model.persist.Award;
-import com.cims.model.persist.Judge;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
