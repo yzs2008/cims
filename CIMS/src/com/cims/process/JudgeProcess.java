@@ -73,4 +73,8 @@ public class JudgeProcess {
 		}
 		return judgeList;
 	}
+	public Judge login(String userName, String password) {
+		
+		return null;
+	}
 }
