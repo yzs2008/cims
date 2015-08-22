@@ -12,7 +12,7 @@
 			'global':	{ range: '*', href: '../refs/judge/css/style.css' },
 			'desktop':	{ range: '737-', href: '../refs/judge/css/style-desktop.css', containers: 1200, grid: { gutters: 25 } },
 			'1000px':	{ range: '737-1200', href: '../refs/judge/css/style-1000px.css', containers: 1000, grid: { gutters: 20 }, viewport: { width: 1080 } },
-			'mobile':	{ range: '-737', href: '../refs/judge/css/style-mobile.css', containers: '100%!', grid: { collapse: true, gutters: 20 }, viewport: { scalable: false } }
+			'mobile':	{ range: '-737', href: '../refs/judge/css/style-mobile-racelist.css', containers: '100%!', grid: { collapse: true, gutters: 20 }, viewport: { scalable: false } }
 		},
 		plugins: {
 			layers: {

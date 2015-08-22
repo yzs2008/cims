@@ -32,7 +32,7 @@ public class LoginAction extends BaseAction{
 							interceptorRefs={@InterceptorRef("defaultStack"), @InterceptorRef(value="json")})
 	public String login(){
 		if(customValidate()){
-			Judge judge = judgeProcess.login(userName, password);
+			Judge judge = judgeProcess.login(userName.trim(), password.trim());
 			if(judge==null || judge.getJudgeId()==null){
 				ajaxResult.setMsg("用户名或密码错误");
 				ajaxResult.setState(false);

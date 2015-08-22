@@ -1,254 +1,149 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>评委登录页面</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<script src="${pageContext.request.contextPath }/refs/judge/js/jquery.min.js"></script>
-		<script src="${pageContext.request.contextPath }/refs/judge/js/skel.min.js"></script>
-		<script src="${pageContext.request.contextPath }/refs/judge/js/skel-layers.min.js"></script>
-		<script src="${pageContext.request.contextPath }/refs/judge/js/init.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/skel.css" />
-			<link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/style.css" />
-			<link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/style-desktop.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><script src="${pageContext.request.contextPath }/refs/judge/js/html5shiv.js"></script><![endif]-->
-	</head>
-	<body>
-		<div id="header-wrapper">
-			<div class="container">
-				<div class="row">
-					<div class="12u">
-						
-						<header id="header">
-							<h1><a href="#" id="logo">Minimaxing</a></h1>
-							<nav id="nav">
-								<a href="index.html" class="current-page-item">Homepage</a>
-								<a href="twocolumn1.html">Two Column #1</a>
-								<a href="twocolumn2.html">Two Column #2</a>
-								<a href="onecolumn.html">One Column</a>
-								<a href="threecolumn.html">Three Column</a>
-							</nav>
-						</header>
-					
-					</div>
+<head>
+<title>评委登录页面</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script src="${pageContext.request.contextPath }/refs/judge/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/refs/judge/js/skel.min.js"></script>
+<script src="${pageContext.request.contextPath }/refs/judge/js/skel-layers.min.js"></script>
+<script src="${pageContext.request.contextPath }/refs/judge/js/init.js"></script>
+<noscript>
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/skel.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/style.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/style-desktop.css" />
+</noscript>
+<!--[if lte IE 9]><link rel="stylesheet" href="${pageContext.request.contextPath }/refs/judge/css/ie9.css" /><![endif]-->
+<!--[if lte IE 8]><script src="${pageContext.request.contextPath }/refs/judge/js/html5shiv.js"></script><![endif]-->
+
+<style type="text/css">
+.input-style {
+	display: block;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.6);
+	border-radius: 2px;
+	color: #fff;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	width: 250px;
+	margin: 20px 0px;
+}
+
+a.myButton:hover {
+	background: #0986A2;
+}
+
+.myButton {
+	display: block;
+	width: 250px;
+	height: 35px;
+	background: #96A588;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: white;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 6px;
+	margin-top: 20px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	color: #fff;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color: #fff;
+	opacity: 1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color: #fff;
+	opacity: 1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: #909;
+}
+</style>
+</head>
+<body>
+	<div id="header-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="12u">
+
+					<header id="header">
+						<h1 style="text-align: center; width: 90%;">
+							<a href="javascript:void(0);" id="logo">欢迎使用CIMS评分系统</a>
+						</h1>
+					</header>
+
 				</div>
 			</div>
 		</div>
-		<div id="banner-wrapper">
-			<div class="container">
+	</div>
+	<div id="banner-wrapper">
+		<div class="container">
 
-				<div id="banner">
-					<h2>Put something cool here!</h2>
-					<span>And put something almost as cool here, but a bit longer ...</span>
+			<div id="banner">
+				<div style="text-align: left; width: 260px; margin: 0 auto; min-width: 260px; padding-top: 30px;">
+					<input id="name" type="text" placeholder="用户名" class="input-style" />
+					<input id="password" type="text" placeholder="密码" class="input-style" />
+					<a class="myButton" href="javascript:void(0);" onclick="judgeLogin()">评 委 登 录</a>
 				</div>
-
 			</div>
+
 		</div>
-		<div id="main">
-			<div class="container">
-				<div class="row main-row">
-					<div class="4u">
-						
-						<section>
-							<h2>Welcome to Minimaxing!</h2>
-							<p>This is <strong>Minimaxing</strong>, a fully responsive HTML5 site template designed by <a href="http://n33.co">n33</a> and released for free by <a href="http://html5up.net">HTML5 UP</a>. It features
-							a simple, lightweight design, solid HTML5 and CSS3 code, and full responsive support for desktop, tablet, and mobile displays.</p>
-							<footer class="controls">
-								<a href="http://html5up.net" class="button">More cool designs ...</a>
-							</footer>
-						</section>
-					
-					</div>
-					<div class="4u">
-						
-						<section>
-							<h2>Who are you guys?</h2>
-							<ul class="small-image-list">
-								<li>
-									<a href="#"><img src="images/pic2.jpg" alt="" class="left" /></a>
-									<h4>Jane Anderson</h4>
-									<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo facilisis amet quis.</p>
-								</li>
-								<li>
-									<a href="#"><img src="images/pic1.jpg" alt="" class="left" /></a>
-									<h4>James Doe</h4>
-									<p>Vitae magna eget odio amet mollis justo facilisis amet quis. Sed sagittis consequat.</p>
-								</li>
-							</ul>
-						</section>
-					
-					</div>
-					<div class="4u">
-					
-						<section>
-							<h2>How about some links?</h2>
-							<div>
-								<div class="row">
-									<div class="6u">
-										<ul class="link-list">
-											<li><a href="#">Sed neque nisi consequat</a></li>
-											<li><a href="#">Dapibus sed mattis blandit</a></li>
-											<li><a href="#">Quis accumsan lorem</a></li>
-											<li><a href="#">Suspendisse varius ipsum</a></li>
-											<li><a href="#">Eget et amet consequat</a></li>
-										</ul>
-									</div>
-									<div class="6u">
-										<ul class="link-list">
-											<li><a href="#">Quis accumsan lorem</a></li>
-											<li><a href="#">Sed neque nisi consequat</a></li>
-											<li><a href="#">Eget et amet consequat</a></li>
-											<li><a href="#">Dapibus sed mattis blandit</a></li>
-											<li><a href="#">Vitae magna sed dolore</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</section>
+	</div>
+	<div id="footer-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="12u">
 
-					</div>
-				</div>
-				<div class="row main-row">
-					<div class="6u">
-					
-						<section>
-							<h2>An assortment of pictures and text</h2>
-							<p>Duis neque nisi, dapibus sed mattis quis, rutrum et accumsan. 
-							Suspendisse nibh. Suspendisse vitae magna eget odio amet mollis 
-							justo facilisis quis. Sed sagittis mauris amet tellus gravida 
-							lorem ipsum dolor sit amet consequat blandit lorem ipsum dolor 
-							sit amet consequat sed dolore.</p>
-							<ul class="big-image-list">
-								<li>
-									<a href="#"><img src="images/pic3.jpg" alt="" class="left" /></a>
-									<h3>Magna Gravida Dolore</h3>
-									<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo 
-									facilisis amet quis consectetur in, sollicitudin vitae justo. Cras 
-									Maecenas eu arcu purus, phasellus fermentum elit.</p>
-								</li>
-								<li>
-									<a href="#"><img src="images/pic4.jpg" alt="" class="left" /></a>
-									<h3>Magna Gravida Dolore</h3>
-									<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo 
-									facilisis amet quis consectetur in, sollicitudin vitae justo. Cras 
-									Maecenas eu arcu purus, phasellus fermentum elit.</p>
-								</li>
-								<li>
-									<a href="#"><img src="images/pic5.jpg" alt="" class="left" /></a>
-									<h3>Magna Gravida Dolore</h3>
-									<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo 
-									facilisis amet quis consectetur in, sollicitudin vitae justo. Cras 
-									Maecenas eu arcu purus, phasellus fermentum elit.</p>
-								</li>
-							</ul>
-						</section>
+					<div id="copyright">&copy; 郑州大学. | 设计: CIMS团队</div>
 
-					</div>
-					<div class="6u">
-					
-						<article class="blog-post">
-							<h2>Just another blog post</h2>
-							<a class="comments" href="#">33 comments</a>
-							<a href="#"><img src="images/pic6.jpg" alt="" class="top blog-post-image" /></a>
-							<h3>Magna Gravida Dolore</h3>
-							<p>Aenean non massa sapien. In hac habitasse platea dictumst. 
-							Maecenas sodales purus et nulla sodales aliquam. Aenean ac 
-							porttitor metus. In hac habitasse platea dictumst. Phasellus 
-							blandit turpis in leo scelerisque mollis. Nulla venenatis 
-							ipsum nec est porta rhoncus. Mauris sodales sed pharetra 
-							nisi nec consectetur. Cras elit magna, hendrerit nec 
-							consectetur in, sollicitudin vitae justo. Cras amet aliquet 
-							Aliquam ligula turpis, feugiat id fermentum malesuada, 
-							rutrum eget turpis. Mauris sodales sed pharetra nisi nec 
-							consectetur. Cras elit magna, hendrerit nec consectetur 
-							in sollicitudin vitae.</p>
-							<footer class="controls">
-								<a href="#" class="button">Continue Reading</a>
-							</footer>
-						</article>
-
-					</div>
 				</div>
 			</div>
 		</div>
-		<div id="footer-wrapper">
-			<div class="container">
-				<div class="row">
-					<div class="8u">
-						
-						<section>
-							<h2>How about a truckload of links?</h2>
-							<div>
-								<div class="row">
-									<div class="3u">
-										<ul class="link-list">
-											<li><a href="#">Sed neque nisi consequat</a></li>
-											<li><a href="#">Dapibus sed mattis blandit</a></li>
-											<li><a href="#">Quis accumsan lorem</a></li>
-											<li><a href="#">Suspendisse varius ipsum</a></li>
-											<li><a href="#">Eget et amet consequat</a></li>
-										</ul>
-									</div>
-									<div class="3u">
-										<ul class="link-list">
-											<li><a href="#">Quis accumsan lorem</a></li>
-											<li><a href="#">Sed neque nisi consequat</a></li>
-											<li><a href="#">Eget et amet consequat</a></li>
-											<li><a href="#">Dapibus sed mattis blandit</a></li>
-											<li><a href="#">Vitae magna sed dolore</a></li>
-										</ul>
-									</div>
-									<div class="3u">
-										<ul class="link-list">
-											<li><a href="#">Sed neque nisi consequat</a></li>
-											<li><a href="#">Dapibus sed mattis blandit</a></li>
-											<li><a href="#">Quis accumsan lorem</a></li>
-											<li><a href="#">Suspendisse varius ipsum</a></li>
-											<li><a href="#">Eget et amet consequat</a></li>
-										</ul>
-									</div>
-									<div class="3u">
-										<ul class="link-list">
-											<li><a href="#">Quis accumsan lorem</a></li>
-											<li><a href="#">Sed neque nisi consequat</a></li>
-											<li><a href="#">Eget et amet consequat</a></li>
-											<li><a href="#">Dapibus sed mattis blandit</a></li>
-											<li><a href="#">Vitae magna sed dolore</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</section>
-					
-					</div>
-					<div class="4u">
+	</div>
+	<script type="text/javascript">
+		function judgeLogin() {
+			var name = $("#name").val();
+			var password = $("#password").val();
 
-						<section>
-							<h2>Something of interest</h2>
-							<p>Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed. 
-							Suspendisse eu varius nibh. Suspendisse vitae magna eget odio amet 
-							mollis justo facilisis quis. Sed sagittis mauris amet tellus gravida
-							lorem ipsum dolor sit amet consequat blandit.</p>
-							<footer class="controls">
-								<a href="#" class="button">Oh, please continue ....</a>
-							</footer>
-						</section>
+			if (name == null || name.trim() == "" || password == null || password.trim() == "") {
+				alert("请输入用户名和密码");
+				return;
+			}
 
-					</div>
-				</div>
-				<div class="row">
-					<div class="12u">
-
-						<div id="copyright">
-							&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
+			var postData = {
+				"userName" : name,
+				"password" : password
+			};
+			var jsonData = JSON.stringify(postData);
+			$.ajax({
+				type : "POST",
+				url : '${ pageContext.request.contextPath }/judge/login',
+				data : jsonData,
+				dataType : 'json',
+				contentType : 'application/json',
+				async : false,
+				success : function(data) {
+					if (data.state) {
+						location.href="${ pageContext.request.contextPath }/judge/racelist";
+					} else {
+						alert(data.msg);
+					}
+				}
+			});
+		}
+	</script>
+</body>
 </html>

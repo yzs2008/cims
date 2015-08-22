@@ -45,7 +45,6 @@
 	}
 
 	#main section, #main article {
-		background: #fff;
 	}
 
 	article.blog-post .comments {
@@ -158,9 +157,10 @@
 /* Mobile UI */
 	
 	#titleBar {
+		padding-left:40px;
 		text-align: center;
 		color: #fff;
-		font-size: 1.25em;
+		font-size: 0.9em;
 		background-color: #007294;
 		background-image: -moz-linear-gradient(top, #008dab, #007294);
 		background-image: -webkit-linear-gradient(top, #008dab, #007294);

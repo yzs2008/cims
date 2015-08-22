@@ -74,7 +74,13 @@ public class JudgeProcess {
 		return judgeList;
 	}
 	public Judge login(String userName, String password) {
-		
-		return null;
+		try{
+			String hql="select o from Judge as o where o.judgeName=? and o.password=?";
+			Judge judge=judgeDao.retrieveObject(hql, new Object[]{userName,password});
+			return judge;
+		}catch(Exception e){
+			log.error(e);
+			return null;
+		}
 	}
 }
