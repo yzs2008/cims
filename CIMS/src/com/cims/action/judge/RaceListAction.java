@@ -16,4 +16,9 @@ public class RaceListAction extends BaseAction{
 	public String list(){
 		return INPUT;
 	}
+	
+	@Action(value="wait",results={@Result(name="input",location="/WEB-INF/content/judge/wait.jsp")})
+	public String waitPage(){
+		return INPUT;
+	}
 }

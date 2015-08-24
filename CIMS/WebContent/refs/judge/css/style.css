@@ -12,9 +12,8 @@
 
 	body {
 		font-size: 13.5pt;
-		font-family: sans-serif;
+		font-family: SimSun;
 		background-color: #e3e9dc;
-		font-family: 'Ubuntu Condensed', sans-serif;
 		color: #878e83;
 		letter-spacing: -1px;
 	}
@@ -25,7 +24,6 @@
 	}
 
 	h1,h2 {
-		text-transform: lowercase;
 	}
 
 	h2 {
