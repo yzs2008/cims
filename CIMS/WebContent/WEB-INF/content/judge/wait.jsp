@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>评委视窗</title>
+<title>评审视窗</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <script src="${pageContext.request.contextPath }/refs/judge/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/refs/judge/js/skel.min.js"></script>
@@ -47,7 +47,7 @@
 				<div class="12u">
 					<header id="header">
 						<h1>
-							<a href="#" id="logo">CIMS评委视窗</a> <span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">马亚伟</span></span>
+							<a href="#" id="logo">CIMS评审视窗</a> <span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">马亚伟</span></span>
 						</h1>
 						<nav id="nav">
 							<a href="javascript:void(0);" onclick="showJudgeOrProgress(this)" data-state="0">评审进程</a> <a href="index.html">退出比赛</a>
