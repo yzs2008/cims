@@ -48,13 +48,13 @@ section, article {
 	<div id="main">
 		<div class="container">
 			<div class="row main-row">
-				<div class="12u" style="text-align: center;">
+				<div class="12u container-3d" style="text-align: center;">
 					<div class="slide-section">
 						<h3>作者</h3>
 						<p>单位与个人</p>
 					</div>
 					<div class="total-score">
-						<section id="score-show" style="display: none;">
+						<section id="score-show">
 							<article class="big-score">19.00</article>
 							<a href="javascript:void(0);" onclick="submitScore()">长按2秒提交成绩</a>
 						</section>
@@ -78,7 +78,7 @@ section, article {
 									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">&#8592;</a></li>
 									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">清空</a></li>
 									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">取消</a></li>
-									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">确定</a></li>
+									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0" onclick="accept(this)">确定</a></li>
 								</ul>
 							</div>
 						</section>
@@ -107,7 +107,7 @@ section, article {
 							<article class="item-score">20</article>
 						</header>
 						<article style="margin: 0px;">
-							<img class="item-icon" alt="对应" src="${pageContext.request.contextPath }/images/judge/Triangle.jpg">
+							<img class="item-icon" alt="对应" onclick="turnKeyboard(this)" data-max="20" src="${pageContext.request.contextPath }/images/judge/Triangle.jpg">
 						</article>
 						<footer>
 							<article class="item-name">色彩搭配，总体印象</article>
@@ -157,7 +157,46 @@ section, article {
 	</div>
 
 	<script type="text/javascript">
-		
+	function turnKeyboard(evt){
+		$('div.total-score').addClass('total-hover');
+	}
+	function accept(evt){
+		$('div.total-score').removeClass('total-hover');
+// 		var opt={
+// 		    '-webkit-transform': 'rotateX(90deg)', /* Chrome, Safari, Opera  */
+// 	    	'transform': 'rotateX(90deg)'
+// 		};
+// 		var height=$('#keyboard-show').height();
+// 		var animateOpt={'height':height,'top':0};
+// 		$('#keyboard-show').stop().animate({'height':0,'top':'240px'},1000,function(){
+// 			$(this).hide();
+// 			$('#score-show').show();
+// 			$('#score-show').animate(animateOpt,1000);
+// 		});
+	}
+// 	function turnKeyboard(evt){
+// 		var height=$('#score-show').height();
+// 		var animateOpt={'height':height,'top':0};
+// 		$('#score-show').stop().animate({'height':0,'top':'240px'},1000,function(){
+// 			$(this).hide();
+// 			$('#keyboard-show').show();
+// 			$('#keyboard-show').animate(animateOpt,1000);
+// 		});
+// 	}
+// 	function accept(evt){
+// 		var opt={
+// 		    '-webkit-transform': 'rotateX(90deg)', /* Chrome, Safari, Opera  */
+// 	    	'transform': 'rotateX(90deg)'
+// 		};
+// 		var height=$('#keyboard-show').height();
+// 		var animateOpt={'height':height,'top':0};
+// 		$('#keyboard-show').stop().animate({'height':0,'top':'240px'},1000,function(){
+// 			$(this).hide();
+// 			$('#score-show').show();
+// 			$('#score-show').animate(animateOpt,1000);
+// 		});
+// 	}
+
 	</script>
 </body>
 </html>
