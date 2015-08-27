@@ -225,7 +225,7 @@ ul.big-image-list img {
 	border: solid 1px;
 	padding: 0px 50px;
 	position: relative;
-	height: 260px;
+	height: 280px;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
@@ -261,7 +261,7 @@ section#score-show a {
 	border-radius: 5px;
 	width: 60%;
 	margin: 10px auto;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 section#score-show, section#keyboard-show {
@@ -276,7 +276,7 @@ section#score-show, section#keyboard-show {
 }
 
 section#score-show {
-	box-shadow: inset 300px 0px 40px rgba(255, 255, 255, 0.8);
+	
 }
 
 section#keyboard-show {
@@ -289,7 +289,7 @@ section#keyboard-show {
 	background-color: #BBE6D6;
 	display: block;
 	font-size: 1.5em;
-	margin-bottom: 0px;
+	margin-bottom: 15px;
 	color: red;
 	font-weight: 800;
 	border-radius: 6px;
@@ -300,7 +300,27 @@ section#keyboard-show {
 	line-height: 1.5em;
 	    height: 1.5em;
 }
-
+.progressBar-hidden{
+        visibility: hidden;
+        width:0px;
+}
+#progressBarContainer{
+    height: 15px;
+    border: solid 1px #50B6E6;
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+        border-radius: 7px;
+        padding: 1px;
+}
+#progressBar{
+	margin: 0px 1px;
+    height: 10px;
+    width: 0px;
+    background-color: #50B6E6;
+    border-radius: 10px;
+}
 .keyborad-container {
 	
 }
