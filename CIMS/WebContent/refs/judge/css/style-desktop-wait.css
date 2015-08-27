@@ -298,6 +298,7 @@ section#keyboard-show {
 	position: relative;
 	letter-spacing: 2px;
 	line-height: 1.5em;
+	    height: 1.5em;
 }
 
 .keyborad-container {
