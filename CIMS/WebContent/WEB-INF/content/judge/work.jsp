@@ -60,23 +60,24 @@ section, article {
 						</section>
 						<section id="keyboard-show">
 							<p class="user-score">
-								<span style="position: absolute; left: 0px; top: 0; color: black; font-size: 0.6em; display: inline-block;    font-weight: normal;">上限：20</span>19.00
+								<span style="position: absolute; left: 0px; top: 0; color: black; font-size: 0.6em; display: inline-block;    font-weight: normal;">上限：20</span>
+								<span id="user-input">&nbsp;</span>
 							</p>
 							<div class="keyborad-container">
 								<ul class="keys">
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">0</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">1</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">2</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">3</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">4</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">5</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">6</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">7</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">8</a></li>
-									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">9</a></li>
+									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="0">0</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="1">1</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="2">2</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="3">3</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="4">4</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="5">5</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="6">6</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="7">7</a></li>
+									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)"  class="key-for-tap" data-item="8">8</a></li>
+									<li class="key-item"><a href="javascript:void(0);"  onclick="numberInput(this)" class="key-for-tap" data-item="9">9</a></li>
 									<li class="key-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">.</a></li>
-									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">&#8592;</a></li>
-									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">清空</a></li>
+									<li class="fun-item"><a href="javascript:void(0);"  onclick="backspace(this)" class="key-for-tap" >&#8592;</a></li>
+									<li class="fun-item"><a href="javascript:void(0);" onclick="clearInput(this)" class="key-for-tap" >清空</a></li>
 									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0">取消</a></li>
 									<li class="fun-item"><a href="javascript:void(0);" class="key-for-tap" data-item="0" onclick="accept(this)">确定</a></li>
 								</ul>
@@ -90,7 +91,7 @@ section, article {
 				</div>
 			</div>
 			<div class="row main-row">
-				<div class="12u" style="text-align: center;">
+				<div class="12u" style="text-align: center;    margin-bottom: 20px;">
 					<section class="item-inline">
 						<header>
 							<article class="item-score">20</article>
@@ -152,7 +153,7 @@ section, article {
 	</div>
 	<div id="footer-wrapper">
 		<div>
-			&copy; Untitled. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a>
+			&copy; 郑州大学. | 设计研发: <a href="javascript:void(0);">挂坠儿</a>
 		</div>
 	</div>
 
@@ -160,42 +161,41 @@ section, article {
 	function turnKeyboard(evt){
 		$('div.total-score').addClass('total-hover');
 	}
+	//输入结束
 	function accept(evt){
 		$('div.total-score').removeClass('total-hover');
-// 		var opt={
-// 		    '-webkit-transform': 'rotateX(90deg)', /* Chrome, Safari, Opera  */
-// 	    	'transform': 'rotateX(90deg)'
-// 		};
-// 		var height=$('#keyboard-show').height();
-// 		var animateOpt={'height':height,'top':0};
-// 		$('#keyboard-show').stop().animate({'height':0,'top':'240px'},1000,function(){
-// 			$(this).hide();
-// 			$('#score-show').show();
-// 			$('#score-show').animate(animateOpt,1000);
-// 		});
 	}
-// 	function turnKeyboard(evt){
-// 		var height=$('#score-show').height();
-// 		var animateOpt={'height':height,'top':0};
-// 		$('#score-show').stop().animate({'height':0,'top':'240px'},1000,function(){
-// 			$(this).hide();
-// 			$('#keyboard-show').show();
-// 			$('#keyboard-show').animate(animateOpt,1000);
-// 		});
-// 	}
-// 	function accept(evt){
-// 		var opt={
-// 		    '-webkit-transform': 'rotateX(90deg)', /* Chrome, Safari, Opera  */
-// 	    	'transform': 'rotateX(90deg)'
-// 		};
-// 		var height=$('#keyboard-show').height();
-// 		var animateOpt={'height':height,'top':0};
-// 		$('#keyboard-show').stop().animate({'height':0,'top':'240px'},1000,function(){
-// 			$(this).hide();
-// 			$('#score-show').show();
-// 			$('#score-show').animate(animateOpt,1000);
-// 		});
-// 	}
+	//取消输入
+	function cancel(evt){
+		
+	}
+	//清空输入
+	function clearInput(evt){
+		$('#user-input').text(' ');
+	}
+	//退格键
+	function backspace(evt){
+		var screenValue=$('#user-input').text();	
+		if(screenValue.length==1){
+			return;
+		}
+		var newInput=screenValue.substr(0,screenValue.length-1);
+		$('#user-input').text(newInput);
+	}
+	//点号输入
+	function dotInput(evt){
+		
+	}
+	//数字输入
+	function numberInput(evt){
+		var screenValue=$('#user-input').text();	
+		if(screenValue.length>=10){
+			return;
+		}
+		var newInput=$(evt).data('item');
+		screenValue+=newInput;
+		$('#user-input').text(screenValue);
+	}
 
 	</script>
 </body>
