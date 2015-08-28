@@ -16,7 +16,9 @@ import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.RoundDao;
 import com.cims.dao.StandardDao;
 import com.cims.model.datastruct.JudgeModel;
+import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Award;
+import com.cims.model.persist.Judge;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
@@ -265,6 +267,26 @@ public class RaceProcess {
 		}catch(Exception e){
 			log.error(e.getMessage());
 			return new ArrayList<JudgeModel>();
+		}
+	}
+
+	public List<Race> getRaceListByJudge(Judge judge) {
+		try{
+			List<Race> raceList=new ArrayList<Race>();
+
+			RaceJudge raceJudge=new RaceJudge();
+			raceJudge.setJudgeId(judge.getJudgeId());
+			List<RaceJudge> raceJudgeList=raceJudgeDao.retrieveList(raceJudge);
+			for(RaceJudge rj:raceJudgeList){
+				Race item=raceDao.retrieveById(rj.getRaceId());
+				if(item.getState()==RaceState.underWay || item.getState()==RaceState.signOver){
+					raceList.add(item);
+				}
+			}
+			return raceList;
+		}catch(Exception e){
+			log.error(e);
+			return new ArrayList<Race>();
 		}
 	}
 }
