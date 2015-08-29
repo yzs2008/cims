@@ -78,8 +78,8 @@
                     </div>
                   </div>
 		    </div>
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
         <%@ include file="../../common/adminFoot.jsp" %>
-        <script src="${pageContext.request.contextPath}/js/jquery-1.9.1.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.dataTables.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/scripts.js"></script>

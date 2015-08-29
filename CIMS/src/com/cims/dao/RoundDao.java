@@ -1,5 +1,6 @@
 package com.cims.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +17,13 @@ public class RoundDao extends BaseDao<Round> {
 	}
 	
 	public List<Round> retrieveList() throws Exception{
-		return retrieveList(new Round());
+		try{
+			String hql="select o from Round as o order by o.id asc";
+			return retrieveList(hql);
+		}catch(Exception e){
+			log.error(e);
+			return new ArrayList<Round>();
+		}
 	}
 	
 	public List<Round> retrieveList(Round round)throws Exception{

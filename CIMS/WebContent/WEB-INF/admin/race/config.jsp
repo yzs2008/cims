@@ -220,7 +220,7 @@ label.control-label {
 						}
 					});
 			$('#rootwizard .finish').click(function() {
-				var raceId=1;//TODO
+				var raceId=${id};
 				saveStandardInfo();
 				location.href="${pageContext.request.contextPath}/admin/race/detail?id="+raceId;
 			});
@@ -230,7 +230,7 @@ label.control-label {
 		});
 
 		function initJudgeInfo() {
-			var raceId = 1;//TODO
+			var raceId = ${id};
 			var postData = {
 				"id" : raceId
 			};
@@ -282,7 +282,7 @@ label.control-label {
 		function saveJudgeInfo() {
 			var items = new Array();
 			var index = 0;
-			var raceId = 1;//TODO
+			var raceId = ${id};
 			$('ul.judge-info >li> input[type="checkbox"]').each(
 					function() {
 						if ($(this).is(":checked")) {
@@ -345,7 +345,7 @@ label.control-label {
 			}
 		}
 		function savePromotionInfo() {
-			var raceId = 1;
+			var raceId = ${id};
 			var items = new Array();
 			var index = 0;
 			$('div.promotion').each(function() {
@@ -395,7 +395,7 @@ label.control-label {
 		}
 
 		function saveAwardInfo() {
-			var raceId = 1;
+			var raceId = ${id};
 			var items = new Array();
 			var index = 0;
 			$('div.award').each(function() {
@@ -467,7 +467,7 @@ label.control-label {
 			}
 		}
 		function saveStandardInfo() {
-			var raceId = 1;
+			var raceId = ${id};
 			var items = new Array();
 			var index = 0;
 			$('div.standard').each(function() {
