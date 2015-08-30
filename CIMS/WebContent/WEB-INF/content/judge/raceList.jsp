@@ -52,7 +52,7 @@
 			<div class="row main-row">
 				<s:iterator value="raceList" var="item">
 					<div class="4u">
-						<section class="race-list ">
+						<section class="race-list " onclick="selectAndGo(this)" data-id="${item.raceId }">
 							<p class="race-name">${item.raceName }</p>
 						</section>
 					</div>
@@ -75,7 +75,10 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		
+		function selectAndGo(evt){
+			var raceId=$(evt).data('id');	
+			location.href='wait?raceId='+raceId;
+		}	
 	</script>
 </body>
 </html>

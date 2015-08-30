@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -74,27 +75,15 @@
 				<section>
 					<div class="row">
 						<input type="hidden" id="raceId-select" />
+						<s:iterator var="item" value="raceList">
 						<div class="4u 12u$(mobile)">
-							<a href="javascript:void(0);" onclick="raceSelect(this)" data-id="1">
+							<a href="javascript:void(0);" onclick="raceSelect(this)" data-id="${item.raceId }">
 								<div class="raceDiv">
-									<p>第三届科技创新比赛</p>
+									<p>${item.raceName }</p>
 								</div>
 							</a>
 						</div>
-						<div class="4u 12u$(mobile)">
-							<a href="javascript:void(0);" onclick="raceSelect(this)" data-id="1">
-								<div class="raceDiv">
-									<p>第三届科技创新比赛</p>
-								</div>
-							</a>
-						</div>
-						<div class="4u 12u$(mobile)">
-							<a href="javascript:void(0);" onclick="raceSelect(this)" data-id="1">
-								<div class="raceDiv">
-									<p>第三届科技创新比赛</p>
-								</div>
-							</a>
-						</div>
+						</s:iterator>
 					</div>
 				</section>
 			</article>

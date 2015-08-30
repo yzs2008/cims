@@ -22,7 +22,7 @@ public class RaceDao extends BaseDao<Race> {
 		StringBuilder sbHql=new StringBuilder("select o from Race o where 1=1 ");
 		
 		if(filter.getState()!=null){
-			sbHql.append(" and o.state='").append(filter.getState()).append("' ");
+			sbHql.append(" and o.state='").append(filter.getState().name()).append("' ");
 		}
 		if(filter.getRoundId()!=null){
 			sbHql.append(" and o.roundId='").append(filter.getRoundId()).append("' ");
