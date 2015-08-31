@@ -27,6 +27,7 @@ import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
 import com.cims.model.persist.Standard;
+import com.cims.model.persist.User;
 import com.cims.process.JudgeProcess;
 import com.cims.process.RaceProcess;
 
@@ -55,6 +56,7 @@ public class RaceManageAction extends BaseAction {
 	private List<Promotion> racePromotionList;
 	private List<Award> raceAwardList;
 	private List<Standard> raceStandardList;
+	private List<User> playerList;
 	
 	private List<JudgeModel> judgeModelList;
 
@@ -97,6 +99,9 @@ public class RaceManageAction extends BaseAction {
 			raceAwardList=raceProcess.retrieveAwardList(id);
 			//获取赛事评分项信息
 			raceStandardList=raceProcess.retrieveStandard(id);
+			//获取选手列表信息
+			playerList=raceProcess.retrievePlayer(id);
+			
 			return INPUT;
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -379,6 +384,14 @@ public class RaceManageAction extends BaseAction {
 
 	public void setDrawPatternMap(Map<String, String> drawPatternMap) {
 		this.drawPatternMap = drawPatternMap;
+	}
+
+	public List<User> getPlayerList() {
+		return playerList;
+	}
+
+	public void setPlayerList(List<User> playerList) {
+		this.playerList = playerList;
 	}
 
 	public String getStartTime() {

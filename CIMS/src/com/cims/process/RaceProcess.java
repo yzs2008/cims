@@ -15,6 +15,7 @@ import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.RoundDao;
 import com.cims.dao.StandardDao;
+import com.cims.dao.UserDao;
 import com.cims.model.datastruct.JudgeModel;
 import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Award;
@@ -24,6 +25,7 @@ import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
 import com.cims.model.persist.Standard;
+import com.cims.model.persist.User;
 
 @Service("RaceProcess")
 public class RaceProcess {
@@ -43,6 +45,8 @@ public class RaceProcess {
 	private StandardDao standardDao;
 	@Autowired
 	private JudgeDao judgeDao;
+	@Autowired
+	private UserDao userDao ;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -288,5 +292,17 @@ public class RaceProcess {
 			log.error(e);
 			return new ArrayList<Race>();
 		}
+	}
+
+	public List<User> retrievePlayer(Integer id) {
+		try{
+			String hql="select o from User as o where o.userId ";
+			List<User> userList ;
+			return null;
+		}catch(Exception e){
+			log.error(e);
+			return null;
+		}
+	
 	}
 }

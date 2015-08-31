@@ -190,6 +190,8 @@
 						   $("#product-name").val(data.sign.productName);
 						   $("#product-description").val(data.sign.productDescription);
 					   }else{
+						   $("#product-name").val("");
+						   $("#product-description").val("");
 					   }
 				   }
 				});	

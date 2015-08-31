@@ -138,7 +138,12 @@ public class PlayerSignAction extends BaseAction {
 		Message msg = new Message();
 		try {
 			if (accept()) {
-				if (signProcess.saveUserInfo(user)) {
+				User loginUser=(User)sessionMap.get(ActionContant.session_user);
+				loginUser.setRealName(user.getRealName());
+				loginUser.setPhone(user.getPhone());
+				loginUser.setDescription(user.getDescription());
+				loginUser.setUnit(user.getUnit());
+				if (signProcess.saveUserInfo(loginUser)) {
 					msg.setMsg("报名用户信息保存成功");
 					msg.setState(true);
 				} else {
