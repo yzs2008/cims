@@ -84,16 +84,46 @@ ul.player-info li {
 								<legend>赛事基本信息</legend>
 								<div class="control-group">
 									<ul class="info">
-										<li>赛事名称<span class="my-span">${race.raceName}</span></li>
-										<li>开赛时间<span class="my-span">${race.startTime }</span></li>
-										<li>主&nbsp;办&nbsp;方&nbsp;<span class="my-span">${race.host }</span></li>
-										<li>比赛地点<span class="my-span">${race.place }</span></li>
-										<li>所属轮次<span class="my-span">${race.roundName }</span></li>
-										<li>抽签模式<span class="my-span">${race.drawPattern }</span></li>
-										<li>评分模式<span class="my-span">${race.judgePattern.name() }</span></li>
-										<li>现场投票时长<span class="my-span">${race.voteTime }</span></li>
-										<li>当前状态<span class="my-span">${race.state }</span></li>
-										<li>备注<span class="my-span">${race.mark }</span></li>
+										<li>
+											赛事名称
+											<span class="my-span">${race.raceName}</span>
+										</li>
+										<li>
+											开赛时间
+											<span class="my-span">${race.startTime }</span>
+										</li>
+										<li>
+											主&nbsp;办&nbsp;方&nbsp;
+											<span class="my-span">${race.host }</span>
+										</li>
+										<li>
+											比赛地点
+											<span class="my-span">${race.place }</span>
+										</li>
+										<li>
+											所属轮次
+											<span class="my-span">${race.roundName }</span>
+										</li>
+										<li>
+											抽签模式
+											<span class="my-span">${race.drawPattern.toString() }</span>
+										</li>
+										<li>
+											评分模式
+											<span class="my-span">${race.judgePattern.toString() }</span>
+										</li>
+										<li>
+											现场投票时长
+											<span class="my-span">${race.voteTime }</span>
+										</li>
+										<li>
+											当前状态
+											<span class="my-span">${race.state.toString() }</span>
+										</li>
+										<li>
+											备注
+											<span class="my-span">${race.mark }</span>
+										</li>
 									</ul>
 								</div>
 							</fieldset>
@@ -103,8 +133,9 @@ ul.player-info li {
 									<ul class="judge-info">
 										<s:iterator value="judgeModelList" var="items">
 											<li>
-												<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }<s:property value='items.judge.avatar' />"> 
-												<br> <span>${items.judge.judgeName }</span>
+												<img alt="评委头像" class="width-50" src="${pageContext.request.contextPath }/${ items.judge.avatar}"/>
+												<br>
+												<span>${items.judge.judgeName }</span>
 												<span> [${items.raceJudge.displayName }] </span>
 												<span> * ${items.raceJudge.weight }</span>
 											</li>
@@ -116,36 +147,13 @@ ul.player-info li {
 								<legend>选手信息</legend>
 								<div class="control-group">
 									<ul class="player-info">
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手姓名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
-										<li><img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }/images/judge/default.jpg"> <br> <span>选手名(男)</span></li>
+										<s:iterator value="playerList" var="item">
+											<li>
+												<img alt="选手头像" class="width-50" src="${pageContext.request.contextPath }${item.avatar }">
+												<br>
+												<span>${item.realName }</span>
+											</li>
+										</s:iterator>
 									</ul>
 								</div>
 							</fieldset>
@@ -155,14 +163,15 @@ ul.player-info li {
 									<ul class="player-info" style="margin-top: 20px;">
 										<s:iterator value="racePromotionList" var="promotionItem">
 											<li style="margin-right: 50px;">
-                                                <span>第</span>
-                                                <span style="color:red">${promotionItem.start }</span>
-                                                <span>至</span>
-                                                <span style="color:red;">${promotionItem.end }</span> 名
-                                                <span style="color:green;">晋级到</span>
-                                                <span>${promotionItem.nextId }</span>
+												<span>第</span>
+												<span style="color: red">${promotionItem.start }</span>
+												<span>至</span>
+												<span style="color: red;">${promotionItem.end }</span>
+												名
+												<span style="color: green;">晋级到</span>
+												<span>${promotionItem.nextRaceName }</span>
 											</li>
-										</s:iterator>	
+										</s:iterator>
 									</ul>
 								</div>
 							</fieldset>
@@ -172,14 +181,15 @@ ul.player-info li {
 									<ul class="player-info">
 										<s:iterator value="raceAwardList" var="awardItem">
 											<li style="margin-right: 50px;">
-                                                <span>第</span>
-                                                <span style="color:red">${awardItem.start }</span>
-                                                <span>至</span>
-                                                <span style="color:red;">${awardItem.start+awardItem.count-1 }</span> 名
-                                                <span style="color:green;">称为</span>
-                                                <span style="color:red;font-weight:bolder;">${awardItem.awardName }</span>
+												<span>第</span>
+												<span style="color: red">${awardItem.start }</span>
+												<span>至</span>
+												<span style="color: red;">${awardItem.start+awardItem.count-1 }</span>
+												名
+												<span style="color: green;">称为</span>
+												<span style="color: red; font-weight: bolder;">${awardItem.awardName }</span>
 											</li>
-										</s:iterator>	
+										</s:iterator>
 									</ul>
 								</div>
 							</fieldset>
@@ -189,13 +199,20 @@ ul.player-info li {
 									<ul class="player-info">
 										<s:iterator value="raceStandardList" var="standardItem" status="itemStatus">
 											<li style="margin-right: 50px;">
-                                                <span>(<s:property value="%{#itemStatus.index + 1}" />)</span>
-                                                <span>${standardItem.standardName }</span> 
-                                               	分值<span style="color:green;">${standardItem.max-standardItem.min }</span>
-                                               	 最高<span style="color:red;font-weight:bolder;">${standardItem.max }</span>
-                                               	 最低<span style="color:red;font-weight:bolder;">${standardItem.min }</span>
+												<span>
+													(
+													<s:property value="%{#itemStatus.index + 1}" />
+													)
+												</span>
+												<span>${standardItem.standardName }</span>
+												分值
+												<span style="color: green;">${standardItem.max-standardItem.min }</span>
+												最高
+												<span style="color: red; font-weight: bolder;">${standardItem.max }</span>
+												最低
+												<span style="color: red; font-weight: bolder;">${standardItem.min }</span>
 											</li>
-										</s:iterator>	
+										</s:iterator>
 									</ul>
 								</div>
 							</fieldset>

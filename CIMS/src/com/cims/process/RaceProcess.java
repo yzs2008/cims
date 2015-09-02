@@ -14,6 +14,7 @@ import com.cims.dao.PromotionDao;
 import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.RoundDao;
+import com.cims.dao.SignUpDao;
 import com.cims.dao.StandardDao;
 import com.cims.dao.UserDao;
 import com.cims.model.datastruct.JudgeModel;
@@ -24,6 +25,7 @@ import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.Round;
+import com.cims.model.persist.SignUp;
 import com.cims.model.persist.Standard;
 import com.cims.model.persist.User;
 
@@ -47,6 +49,8 @@ public class RaceProcess {
 	private JudgeDao judgeDao;
 	@Autowired
 	private UserDao userDao ;
+	@Autowired
+	private SignUpDao signUpDao;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -296,12 +300,17 @@ public class RaceProcess {
 
 	public List<User> retrievePlayer(Integer id) {
 		try{
-			String hql="select o from User as o where o.userId ";
-			List<User> userList ;
-			return null;
+			String getSignUp="select o from SignUp as o where o.raceId=?";
+			List<SignUp> signUpList=signUpDao.retrieveList(getSignUp, new Object[]{id});
+			List<User> userList=new ArrayList<User>();
+			for(SignUp sign:signUpList){
+				User tem=userDao.retrieveById(sign.getUserId());
+				userList.add(tem);
+			}
+			return userList;
 		}catch(Exception e){
 			log.error(e);
-			return null;
+			return new ArrayList<User>();
 		}
 	
 	}

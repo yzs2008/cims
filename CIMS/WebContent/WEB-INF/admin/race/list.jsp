@@ -63,9 +63,9 @@
                                                 <td>${item.raceName }</td>
                                                 <td>${item.roundId }</td>
                                                 <td>${item.voteTime }</td>
-                                                <td>${item.drawPattern }</td>
+                                                <td>${item.drawPattern.toString() }</td>
                                                 <td>${item.judgePattern.toString() }</td>
-                                                <td>${item.state}</td>
+                                                <td>${item.state.toString()}</td>
                                                 <td style="min-width:95px;width:95px;">
 													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="detail(this)">查看</a>
 													<a href="javascript:void(0);" data-id="${item.raceId }" onclick="config(this)">配置</a>

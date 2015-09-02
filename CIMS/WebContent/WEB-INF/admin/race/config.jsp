@@ -352,6 +352,7 @@ label.control-label {
 				var start = $(this).find('input.start').val();
 				var end = $(this).find('input.end').val();
 				var target = $(this).find('select').val();
+				var targetName=$(this).find('select').find('option:selected').text();
 				//填入空值视为无效输入
 				if (start == null || start == "") {
 					return true;
@@ -368,6 +369,7 @@ label.control-label {
 				items[index++] = {
 					"raceId" : raceId,
 					"nextId" : target,
+					"nextRaceName":targetName,
 					"start" : start,
 					"end" : end
 				};

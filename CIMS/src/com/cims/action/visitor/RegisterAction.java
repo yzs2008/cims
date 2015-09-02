@@ -1,6 +1,8 @@
 package com.cims.action.visitor;
 
 
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -20,6 +22,8 @@ public class RegisterAction extends BaseAction {
 	private User user;
 	@Autowired
 	private UserProcess process;
+	
+	private final String default_avatar="/images/sys/player_default.png";
 
 	@Action(value = "register", results = { @Result(name = "success", location = "/WEB-INF/content/visitor/login.jsp") 
 											,@Result(name="input",location="/WEB-INF/content/visitor/login.jsp")
@@ -34,6 +38,8 @@ public class RegisterAction extends BaseAction {
 			return ActionContant.result_slip;
 		}
 		if(customerValidate()){
+			user.setAvatar(default_avatar);
+			user.setRegisterTime(new Date());
 			if(process.saveRegister(user)){
 				return SUCCESS;
 			}

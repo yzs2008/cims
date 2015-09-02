@@ -51,7 +51,7 @@
 		<div class="container">
 			<div class="row main-row">
 				<s:iterator value="raceList" var="item">
-					<div class="4u">
+					<div class="4u" style="margin:0 auto;float:none;cursor:pointer;">
 						<section class="race-list " onclick="selectAndGo(this)" data-id="${item.raceId }">
 							<p class="race-name">${item.raceName }</p>
 						</section>

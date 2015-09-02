@@ -14,6 +14,7 @@ public class Promotion {
 	private Integer promotionId;
 	private Integer raceId;
 	private Integer nextId;
+	private String nextRaceName;
 	private Integer start;
 	private Integer end;
 	public Integer getPromotionId() {
@@ -45,6 +46,12 @@ public class Promotion {
 	}
 	public void setEnd(Integer end) {
 		this.end = end;
+	}
+	public String getNextRaceName() {
+		return nextRaceName;
+	}
+	public void setNextRaceName(String nextRaceName) {
+		this.nextRaceName = nextRaceName;
 	}
 	
 }
