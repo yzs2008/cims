@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +16,9 @@ public class Score {
 	private Integer scoreId;
 	private Integer raceId;
 	private Integer playerId;
-	private Integer judgeId;
+	@OneToOne
+	@JoinColumn(name="judgeId")
+	private Judge judge;
 	private Double score;
 	public Integer getScoreId() {
 		return scoreId;
@@ -34,11 +38,12 @@ public class Score {
 	public void setPlayerId(Integer playerId) {
 		this.playerId = playerId;
 	}
-	public Integer getJudgeId() {
-		return judgeId;
+
+	public Judge getJudge() {
+		return judge;
 	}
-	public void setJudgeId(Integer judgeId) {
-		this.judgeId = judgeId;
+	public void setJudge(Judge judge) {
+		this.judge = judge;
 	}
 	public Double getScore() {
 		return score;
