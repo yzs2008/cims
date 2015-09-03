@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cims_score")
-public class Score {
+public class JudgeScore {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer scoreId;

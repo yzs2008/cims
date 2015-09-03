@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cims_scoreDetail")
-public class ScoreDetail {
+public class JudgeScoreDetail {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer scoreDetialId;
