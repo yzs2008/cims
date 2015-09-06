@@ -35,7 +35,7 @@ section, article {
 				<div class="12u">
 					<header id="header">
 						<h1>
-							<a href="#" id="logo">CIMS评审在线 </a><span>郑州市小主持人大赛</span> <span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">马亚伟</span></span>
+							<a href="#" id="logo">CIMS评审在线 </a><span>${race.raceName }</span> <span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">马亚伟</span></span>
 						</h1>
 						<nav id="nav">
 							<a href="index.html">退出比赛</a>
@@ -50,8 +50,9 @@ section, article {
 			<div class="row main-row">
 				<div class="12u container-3d" style="text-align: center;">
 					<div class="slide-section">
-						<h3>作者</h3>
-						<p>单位与个人</p>
+						<h3>${user.realName }</h3>
+						<p>${user.unit }</p>
+						<p>${user.description }</p>
 					</div>
 					<div class="total-score" data-state="0">
 						<section id="score-show">
@@ -88,8 +89,8 @@ section, article {
 						</section>
 					</div>
 					<div class="slide-section">
-						<h3>作品名称</h3>
-						<p>作品简介，必须</p>
+						<h3>${signUp.productName }</h3>
+						<p>${signUp.productDescription }</p>
 					</div>
 				</div>
 			</div>

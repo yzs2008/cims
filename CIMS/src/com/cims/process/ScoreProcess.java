@@ -22,6 +22,7 @@ import com.cims.model.datastruct.PlayerScoreModel;
 import com.cims.model.datastruct.JudgeScoreModel;
 import com.cims.model.persist.FinalScore;
 import com.cims.model.persist.Judge;
+import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
 import com.cims.model.persist.JudgeScore;
 import com.cims.model.persist.SignUp;
@@ -211,6 +212,16 @@ public class ScoreProcess {
 		}catch(Exception e){
 			log.error(e);
 			return new ArrayList<JudgeScoreModel>();
+		}
+	}
+	public SignUp getSignUpByUser(User user, Race race) {
+		try{
+			String hql="select o from SignUp where o.userId=? and raceId=?";
+			SignUp sign = signUpDao.retrieveObject(hql, new Object[]{user.getUserId(),race.getRaceId()});
+			return sign;
+		}catch(Exception e){
+			log.error(e);
+			return null;
 		}
 	}
 	

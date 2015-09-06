@@ -4,7 +4,7 @@
 		<div class="span3" id="sidebar">
 			<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
 				<li>
-					<a href="index.html" class="active">
+					<a href="${pageContext.request.contextPath }/admin/race/index" class="active">
 						<i class="icon-chevron-right"></i> 控制面板
 					</a>
 				</li>

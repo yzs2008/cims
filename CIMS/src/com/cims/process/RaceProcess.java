@@ -110,6 +110,16 @@ public class RaceProcess {
 		}
 		return raceList;
 	}
+	// 查
+	public List<Race> retrieveList() {
+		List<Race> raceList = new ArrayList<Race>();
+		try {
+			raceList = raceDao.retrieveList();
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		return raceList;
+	}
 
 	public List<Round> retrieveRoundList() {
 		List<Round> roundList = new ArrayList<Round>();
