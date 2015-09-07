@@ -324,4 +324,22 @@ public class RaceProcess {
 		}
 	
 	}
+
+	public Boolean updateRaceState(String raceId, String state) {
+		Boolean done=false;
+		try{
+			Race race=retrieve(Integer.valueOf(raceId));
+			if(race==null){
+				return false;
+			}
+			RaceState raceState=RaceState.valueOf(state);
+			race.setState(raceState);
+			update(race);
+			done=true;
+		}catch(Exception e){
+			log.error(e);
+			done=false;
+		}
+		return done;
+	}
 }
