@@ -20,6 +20,7 @@ import com.cims.base.frame.HttpUtils;
 import com.cims.model.datastruct.DrawPattern;
 import com.cims.model.datastruct.JudgeModel;
 import com.cims.model.datastruct.JudgePattern;
+import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Award;
 import com.cims.model.persist.Judge;
 import com.cims.model.persist.Promotion;
@@ -117,6 +118,7 @@ public class RaceManageAction extends BaseAction {
 	public String add() {
 		try {
 			if (accept()) {
+				race.setState(RaceState.needConfig);
 				raceProcess.saveRace(race);
 				return SUCCESS;
 			} else {

@@ -2,13 +2,16 @@ package com.cims.process;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cims.base.type.ActionContant;
 import com.cims.base.type.StateEnum;
 import com.cims.dao.AwardDao;
+import com.cims.dao.DrawDao;
 import com.cims.dao.JudgeDao;
 import com.cims.dao.PromotionDao;
 import com.cims.dao.RaceDao;
@@ -17,9 +20,12 @@ import com.cims.dao.RoundDao;
 import com.cims.dao.SignUpDao;
 import com.cims.dao.StandardDao;
 import com.cims.dao.UserDao;
+import com.cims.model.datastruct.ApplicationMode;
+import com.cims.model.datastruct.ApplicationState;
 import com.cims.model.datastruct.JudgeModel;
 import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Award;
+import com.cims.model.persist.Draw;
 import com.cims.model.persist.Judge;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
@@ -48,9 +54,11 @@ public class RaceProcess {
 	@Autowired
 	private JudgeDao judgeDao;
 	@Autowired
-	private UserDao userDao ;
+	private UserDao userDao;
 	@Autowired
 	private SignUpDao signUpDao;
+	@Autowired
+	private DrawDao drawDao;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -110,6 +118,7 @@ public class RaceProcess {
 		}
 		return raceList;
 	}
+
 	// 查
 	public List<Race> retrieveList() {
 		List<Race> raceList = new ArrayList<Race>();
@@ -156,7 +165,7 @@ public class RaceProcess {
 			raceJudgeDao.execute(deleteFist, new Object[] { raceId });
 
 			// 重新写入评委信息
-			for(RaceJudge rj:raceJudgeList){
+			for (RaceJudge rj : raceJudgeList) {
 				rj.setStatus(StateEnum.enable);
 				raceJudgeDao.create(rj);
 			}
@@ -169,12 +178,12 @@ public class RaceProcess {
 
 	public List<RaceJudge> retrieveJudgeList(Integer id) {
 		List<RaceJudge> judgeInfoList;
-		try{
-			String hql="select o from RaceJudge as o where  o.raceId=?";
-			judgeInfoList=raceJudgeDao.retrieveList(hql, new Object[]{id});
-		}catch(Exception e){
+		try {
+			String hql = "select o from RaceJudge as o where  o.raceId=?";
+			judgeInfoList = raceJudgeDao.retrieveList(hql, new Object[] { id });
+		} catch (Exception e) {
 			log.error(e.getMessage());
-			judgeInfoList=new ArrayList<RaceJudge>();
+			judgeInfoList = new ArrayList<RaceJudge>();
 		}
 		return judgeInfoList;
 	}
@@ -188,7 +197,7 @@ public class RaceProcess {
 			promotionDao.execute(deleteFist, new Object[] { raceId });
 
 			// 重新写入晋级信息
-			for(Promotion item:racePromotionList){
+			for (Promotion item : racePromotionList) {
 				promotionDao.create(item);
 			}
 		} catch (Exception e) {
@@ -196,28 +205,28 @@ public class RaceProcess {
 			done = false;
 		}
 		return done;
-		
+
 	}
 
 	public List<Promotion> retrievePromotionList(Integer id) {
-		try{
+		try {
 			List<Promotion> promotionList;
-			String query="select o from Promotion as o where o.raceId=?";
-			promotionList= promotionDao.retrieveList(query, new Object[]{id});
+			String query = "select o from Promotion as o where o.raceId=?";
+			promotionList = promotionDao.retrieveList(query, new Object[] { id });
 			return promotionList;
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new ArrayList<Promotion>();
 		}
 	}
-	
+
 	public List<Award> retrieveAwardList(Integer id) {
-		try{
+		try {
 			List<Award> awardList;
-			String query="select o from Award as o where o.raceId=?";
-			awardList= awardDao.retrieveList(query, new Object[]{id});
+			String query = "select o from Award as o where o.raceId=?";
+			awardList = awardDao.retrieveList(query, new Object[] { id });
 			return awardList;
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new ArrayList<Award>();
 		}
@@ -232,7 +241,7 @@ public class RaceProcess {
 			awardDao.execute(deleteFist, new Object[] { raceId });
 
 			// 重新写入奖项信息
-			for(Award item:raceAwardList){
+			for (Award item : raceAwardList) {
 				awardDao.create(item);
 			}
 		} catch (Exception e) {
@@ -243,16 +252,17 @@ public class RaceProcess {
 	}
 
 	public List<Standard> retrieveStandard(Integer id) {
-		try{
+		try {
 			List<Standard> standardList;
-			String query="select o from Standard as o where o.raceId=?";
-			standardList= standardDao.retrieveList(query, new Object[]{id});
+			String query = "select o from Standard as o where o.raceId=?";
+			standardList = standardDao.retrieveList(query, new Object[] { id });
 			return standardList;
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new ArrayList<Standard>();
 		}
 	}
+
 	public boolean configStandard(List<Standard> raceStandardList) {
 		boolean done = true;
 		try {
@@ -262,7 +272,7 @@ public class RaceProcess {
 			standardDao.execute(deleteFist, new Object[] { raceId });
 
 			// 重新写入评分项信息
-			for(Standard item:raceStandardList){
+			for (Standard item : raceStandardList) {
 				standardDao.create(item);
 			}
 		} catch (Exception e) {
@@ -273,73 +283,152 @@ public class RaceProcess {
 	}
 
 	public List<JudgeModel> retrieveJudgeList(List<RaceJudge> raceJudgeList) {
-		try{
-			List<JudgeModel> judgeModelList=new ArrayList<JudgeModel>();
-			for(RaceJudge  item : raceJudgeList){
-				JudgeModel judgeModel=new JudgeModel();
+		try {
+			List<JudgeModel> judgeModelList = new ArrayList<JudgeModel>();
+			for (RaceJudge item : raceJudgeList) {
+				JudgeModel judgeModel = new JudgeModel();
 				judgeModel.setJudge(judgeDao.retrieveById(item.getJudgeId()));
 				judgeModel.setRaceJudge(item);
 				judgeModelList.add(judgeModel);
 			}
 			return judgeModelList;
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			return new ArrayList<JudgeModel>();
 		}
 	}
 
 	public List<Race> getRaceListByJudge(Judge judge) {
-		try{
-			List<Race> raceList=new ArrayList<Race>();
+		try {
+			List<Race> raceList = new ArrayList<Race>();
 
-			RaceJudge raceJudge=new RaceJudge();
+			RaceJudge raceJudge = new RaceJudge();
 			raceJudge.setJudgeId(judge.getJudgeId());
-			List<RaceJudge> raceJudgeList=raceJudgeDao.retrieveList(raceJudge);
-			for(RaceJudge rj:raceJudgeList){
-				Race item=raceDao.retrieveById(rj.getRaceId());
-				if(item.getState()==RaceState.underWay || item.getState()==RaceState.signOver){
+			List<RaceJudge> raceJudgeList = raceJudgeDao.retrieveList(raceJudge);
+			for (RaceJudge rj : raceJudgeList) {
+				Race item = raceDao.retrieveById(rj.getRaceId());
+				if (item.getState() == RaceState.underWay || item.getState() == RaceState.signOver) {
 					raceList.add(item);
 				}
 			}
 			return raceList;
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e);
 			return new ArrayList<Race>();
 		}
 	}
 
 	public List<User> retrievePlayer(Integer id) {
-		try{
-			String getSignUp="select o from SignUp as o where o.raceId=?";
-			List<SignUp> signUpList=signUpDao.retrieveList(getSignUp, new Object[]{id});
-			List<User> userList=new ArrayList<User>();
-			for(SignUp sign:signUpList){
-				User tem=userDao.retrieveById(sign.getUserId());
+		try {
+			String getSignUp = "select o from SignUp as o where o.raceId=?";
+			List<SignUp> signUpList = signUpDao.retrieveList(getSignUp, new Object[] { id });
+			List<User> userList = new ArrayList<User>();
+			for (SignUp sign : signUpList) {
+				User tem = userDao.retrieveById(sign.getUserId());
 				userList.add(tem);
 			}
 			return userList;
-		}catch(Exception e){
+		} catch (Exception e) {
 			log.error(e);
 			return new ArrayList<User>();
 		}
-	
+
 	}
 
 	public Boolean updateRaceState(String raceId, String state) {
-		Boolean done=false;
-		try{
-			Race race=retrieve(Integer.valueOf(raceId));
-			if(race==null){
+		Boolean done = false;
+		try {
+			Race race = retrieve(Integer.valueOf(raceId));
+			if (race == null) {
 				return false;
 			}
-			RaceState raceState=RaceState.valueOf(state);
+			RaceState raceState = RaceState.valueOf(state);
 			race.setState(raceState);
 			update(race);
-			done=true;
-		}catch(Exception e){
+			done = true;
+		} catch (Exception e) {
 			log.error(e);
-			done=false;
+			done = false;
 		}
 		return done;
+	}
+
+	public void monitorState(String raceId, String state, Map<String, Object> application) throws Exception {
+		RaceState rs = RaceState.valueOf(state);
+		switch (rs) {
+		case underWay: {// 将比赛状态加入全局变量中
+			ApplicationState appState = (ApplicationState) application.get(ActionContant.application_state);
+			if (appState == null) {
+				appState = new ApplicationState();
+				Race curRace = raceDao.retrieveById(raceId);
+				appState.setCurRace(curRace);
+				User curPlayer = locationCurPlayer(curRace);
+				appState.setCurPlayer(curPlayer);
+				appState.setAppModel(ApplicationMode.auto);
+
+				application.put(ActionContant.application_state, appState);
+			} else {
+				Race curRace = raceDao.retrieveById(raceId);
+				appState.setCurRace(curRace);
+				User curPlayer = locationCurPlayer(curRace);
+				appState.setCurPlayer(curPlayer);
+				appState.setAppModel(ApplicationMode.auto);
+
+				application.remove(ActionContant.application_state);
+				application.put(ActionContant.application_state, appState);
+			}
+			break;
+		}
+		case over:
+			// 将比赛状态移除全局变量外
+			application.remove(ActionContant.application_state);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private User locationCurPlayer(Race curRace) {
+		try {
+			User user=null;
+			String hql = "select o from Draw as o where o.raceId=? order by o.orderSerial asc";
+			List<Draw> drawList = drawDao.retrieveList(hql, curRace.getRaceId());
+			if (drawList == null || drawList.size() == 0) {
+				startupRaceInsertPlayer(curRace.getRaceId());
+			}
+			for(Draw d:drawList){
+				if(d.getScored()){
+					user=userDao.retrieveById(d.getUserId());
+					break;
+				}
+			}
+			return user;
+		} catch (Exception e) {
+			log.error(e);
+			return null;
+		}
+	}
+
+	private void startupRaceInsertPlayer(Integer raceId) throws Exception {
+		try {
+			String hql="select o from SignUp as o  where o.raceId=?";
+			List<SignUp> allUser=signUpDao.retrieveList(hql, raceId);
+			List<Draw> drawList=new ArrayList<Draw>();
+			int i=0;
+			for(SignUp su:allUser){
+				Draw draw=new Draw();
+				draw.setOrderSerial(i++);
+				draw.setRaceId(raceId);
+				draw.setUserId(su.getUserId());
+				draw.setScored(false);
+				drawList.add(draw);
+			}
+			for(Draw dr:drawList){
+				drawDao.create(dr);
+			}
+		} catch (Exception e) {
+			log.error(e);
+			throw e;
+		}
 	}
 }

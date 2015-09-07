@@ -17,6 +17,7 @@ import com.cims.model.datastruct.Message;
 import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Race;
 import com.cims.process.RaceProcess;
+import com.opensymphony.xwork2.ActionContext;
 
 @Namespace("/admin/race")
 public class RaceControl extends BaseAction {
@@ -57,6 +58,7 @@ public class RaceControl extends BaseAction {
 				msg.setMsg("参数错误！");
 			}
 			if (raceProcess.updateRaceState(raceId, state)) {
+				raceProcess.monitorState(raceId, state, ActionContext.getContext().getApplication());
 				msg.setMsg("状态更新成功");
 				msg.setState(true);
 

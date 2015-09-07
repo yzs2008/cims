@@ -2,9 +2,9 @@ package com.cims.model.datastruct;
 
 public enum RaceState {
 	needConfig("未配置"),
-	wait("未进行"),
 	sign("报名"),
 	signOver("报名结束"),
+	wait("未进行"),
 	underWay("正在进行"),
 	over("结束");
 //	needConfig("needConfig","未配置"),

@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name="cims_draw")
 public class Draw {
@@ -15,13 +17,13 @@ public class Draw {
 	private Integer userId;
 	private Integer raceId;
 	private Integer orderSerial;
+	@Type(type="true_false")
+	private Boolean scored;
 	
 	public Integer getDrawId() {
 		return drawId;
 	}
-	public Integer getPlayerId() {
-		return userId;
-	}
+
 	public Integer getRaceId() {
 		return raceId;
 	}
@@ -31,14 +33,26 @@ public class Draw {
 	public void setDrawId(Integer drawId) {
 		this.drawId = drawId;
 	}
-	public void setPlayerId(Integer playerId) {
-		this.userId = playerId;
-	}
+
 	public void setRaceId(Integer raceId) {
 		this.raceId = raceId;
 	}
 	public void setOrderSerial(Integer orderSerial) {
 		this.orderSerial = orderSerial;
+	}
+	public Boolean getScored() {
+		return scored;
+	}
+	public void setScored(Boolean scored) {
+		this.scored = scored;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 }
