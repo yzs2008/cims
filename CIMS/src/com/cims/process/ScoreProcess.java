@@ -216,7 +216,7 @@ public class ScoreProcess {
 	}
 	public SignUp getSignUpByUser(User user, Race race) {
 		try{
-			String hql="select o from SignUp where o.userId=? and raceId=?";
+			String hql="select o from SignUp as o where o.userId=? and raceId=?";
 			SignUp sign = signUpDao.retrieveObject(hql, new Object[]{user.getUserId(),race.getRaceId()});
 			return sign;
 		}catch(Exception e){

@@ -58,7 +58,7 @@ public class RaceControl extends BaseAction {
 				msg.setMsg("参数错误！");
 			}
 			if (raceProcess.updateRaceState(raceId, state)) {
-				raceProcess.monitorState(raceId, state, ActionContext.getContext().getApplication());
+				raceProcess.monitorState(Integer.valueOf(raceId), state, ActionContext.getContext().getApplication());
 				msg.setMsg("状态更新成功");
 				msg.setState(true);
 

@@ -353,7 +353,7 @@ public class RaceProcess {
 		return done;
 	}
 
-	public void monitorState(String raceId, String state, Map<String, Object> application) throws Exception {
+	public void monitorState(Integer raceId, String state, Map<String, Object> application) throws Exception {
 		RaceState rs = RaceState.valueOf(state);
 		switch (rs) {
 		case underWay: {// 将比赛状态加入全局变量中
@@ -397,7 +397,7 @@ public class RaceProcess {
 				startupRaceInsertPlayer(curRace.getRaceId());
 			}
 			for(Draw d:drawList){
-				if(d.getScored()){
+				if(!d.getScored()){
 					user=userDao.retrieveById(d.getUserId());
 					break;
 				}

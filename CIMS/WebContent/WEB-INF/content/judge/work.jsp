@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -35,7 +37,8 @@ section, article {
 				<div class="12u">
 					<header id="header">
 						<h1>
-							<a href="#" id="logo">CIMS评审在线 </a><span>${race.raceName }</span> <span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">马亚伟</span></span>
+							<a href="#" id="logo">CIMS评审在线 </a>
+							<span>${race.raceName }</span> <span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">马亚伟</span></span>
 						</h1>
 						<nav id="nav">
 							<a href="index.html">退出比赛</a>
@@ -69,21 +72,51 @@ section, article {
 							</p>
 							<div class="keyborad-container">
 								<ul class="keys">
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="0">0</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="1">1</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="2">2</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="3">3</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="4">4</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="5">5</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="6">6</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="7">7</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="8">8</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="9">9</a></li>
-									<li class="key-item"><a href="javascript:void(0);" onclick="dotInput(this)" class="key-for-tap" data-item="0">.</a></li>
-									<li class="fun-item"><a href="javascript:void(0);" onclick="backspace(this)" class="key-for-tap">&#8592;</a></li>
-									<li class="fun-item"><a href="javascript:void(0);" onclick="clearInput(this)" class="key-for-tap">清空</a></li>
-									<li class="fun-item"><a href="javascript:void(0);" onclick="cancel(this)" class="key-for-tap" data-item="0">取消</a></li>
-									<li class="fun-item"><a href="javascript:void(0);" onclick="accept(this)" class="key-for-tap" data-item="0">确定</a></li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="0">0</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="1">1</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="2">2</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="3">3</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="4">4</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="5">5</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="6">6</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="7">7</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="8">8</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="numberInput(this)" class="key-for-tap" data-item="9">9</a>
+									</li>
+									<li class="key-item">
+										<a href="javascript:void(0);" onclick="dotInput(this)" class="key-for-tap" data-item="0">.</a>
+									</li>
+									<li class="fun-item">
+										<a href="javascript:void(0);" onclick="backspace(this)" class="key-for-tap">&#8592;</a>
+									</li>
+									<li class="fun-item">
+										<a href="javascript:void(0);" onclick="clearInput(this)" class="key-for-tap">清空</a>
+									</li>
+									<li class="fun-item">
+										<a href="javascript:void(0);" onclick="cancel(this)" class="key-for-tap" data-item="0">取消</a>
+									</li>
+									<li class="fun-item">
+										<a href="javascript:void(0);" onclick="accept(this)" class="key-for-tap" data-item="0">确定</a>
+									</li>
 								</ul>
 							</div>
 						</section>
@@ -96,49 +129,58 @@ section, article {
 			</div>
 			<div class="row main-row">
 				<div class="12u" style="text-align: center; margin-bottom: 20px;">
-					<section class="item-inline">
-						<header>
-							<article class="item-score" id="standard-item0"></article>
-						</header>
-						<article style="margin: 0px;">
-							<img class="item-icon" alt="对应" onclick="turnKeyboard(this)" data-max="100" data-standard="standard-item0" src="${pageContext.request.contextPath }/images/judge/Triangle.jpg">
-						</article>
-						<footer>
-							<article class="item-name">色彩搭配，总体印象</article>
-						</footer>
-					</section>
+					<s:iterator value="raceStandardList" var="standardItem">
+						<section class="item-inline">
+							<header>
+								<article class="item-score" id="standard-item${standardItem.standardId }"></article>
+							</header>
+							<article style="margin: 0px;">
+								<img class="item-icon" alt="对应" onclick="turnKeyboard(this)" data-max="${standardItem.max }" data-standard="standard-item${standardItem.standardId }"
+									src="${pageContext.request.contextPath }/images/judge/Triangle.jpg"
+								>
+							</article>
+							<footer>
+								<article class="item-name">${standardItem.standardName }</article>
+							</footer>
+						</section>
+					</s:iterator>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div id="footer-wrapper">
 		<div>
-			&copy; 郑州大学. | 设计研发: <a href="javascript:void(0);">挂坠儿</a>
+			&copy; 郑州大学. | 设计研发:
+			<a href="javascript:void(0);">挂坠儿</a>
 		</div>
 	</div>
 
 	<script type="text/javascript">
 		//var beginTime;
-		var duringMilliseconds=1800;
+		var duringMilliseconds = 1800;
 		function submitPress() {
-			beginTime=new Date().getTime();
+			beginTime = new Date().getTime();
 			console.info(beginTime);
 			$('#progressBarContainer').removeClass('progressBar-hidden');
-			$('#progressBar').animate({'width':'193px'},duringMilliseconds,function(){
-				submitScore();	
+			$('#progressBar').animate({
+				'width' : '193px'
+			}, duringMilliseconds, function() {
+				submitScore();
 			})
 		}
 		function submitRelease() {
 			//var endTime=new Date().getTime();
 			//var interval=endTime-beginTime;
 			//console.info(interval);
-// 			if(interval>=duringMilliseconds){
-// 				submitScore();	
-// 			}
-			$('#progressBar').stop().css({'width':'0px'});
+			// 			if(interval>=duringMilliseconds){
+			// 				submitScore();	
+			// 			}
+			$('#progressBar').stop().css({
+				'width' : '0px'
+			});
 			$('#progressBarContainer').addClass('progressBar-hidden');
 		}
-		function submitScore(){
+		function submitScore() {
 			noty({
 				text : '提交成功',
 				type : 'notification',
@@ -146,8 +188,8 @@ section, article {
 				layout : 'topCenter',
 				maxVisible : 1,
 				theme : 'defaultTheme'
-			});	
-			location.href="/cims";
+			});
+			location.href = "/cims";
 		}
 
 		var inputError = null;
@@ -160,8 +202,7 @@ section, article {
 			}
 			$('div.total-score').addClass('total-hover');
 
-			var orignalScore = $(evt).parents('section.item-inline').find(
-					'article.item-score').text();//原始值
+			var orignalScore = $(evt).parents('section.item-inline').find('article.item-score').text();//原始值
 			if (orignalScore == null || orignalScore == 0) {
 				$('#user-input').text('');
 			} else {
