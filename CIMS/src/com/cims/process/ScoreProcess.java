@@ -55,8 +55,6 @@ public class ScoreProcess {
 	private RaceJudgeDao raceJudgeDao;
 	@Autowired
 	private JudgeDao judgeDao;
-	@Autowired
-	private JudgeScoreDao scoreDao;
 	
 	
 	
@@ -143,7 +141,7 @@ public class ScoreProcess {
 	public List<JudgeScore> getJudgeScoreByJudge(Integer raceId,Integer judgeId) {
 		try{
 			String hql="select o from JudgeScore as o where o.raceId=? and o.judge.judgeId=?";
-			List<JudgeScore> scoreList=scoreDao.retrieveList(hql, new Object[]{raceId,judgeId});
+			List<JudgeScore> scoreList=judgeScoreDao.retrieveList(hql, new Object[]{raceId,judgeId});
 			return scoreList;
 		}catch(Exception e){
 			log.error(e);
@@ -154,7 +152,7 @@ public class ScoreProcess {
 	public List<JudgeScore> getJudgeScoreByPlayer(Integer raceId,Integer playerId) {
 		try{
 			String hql="select o from JudgeScore as o where o.raceId=? and o.playerId=?";
-			List<JudgeScore> scoreList=scoreDao.retrieveList(hql, new Object[]{raceId,playerId});
+			List<JudgeScore> scoreList=judgeScoreDao.retrieveList(hql, new Object[]{raceId,playerId});
 			return scoreList;
 		}catch(Exception e){
 			log.error(e);
@@ -230,12 +228,12 @@ public class ScoreProcess {
 		try{
 			//先删除系统内的原本值
 			String hql="select o from JudgeScore as o where o.judge=? and o.raceId=? and o.playerId=?";
-			JudgeScore old=scoreDao.retrieveObject(hql, new Object[]{score.getJudge(),score.getRaceId(),score.getPlayerId()});
+			JudgeScore old=judgeScoreDao.retrieveObject(hql, new Object[]{score.getJudge(),score.getRaceId(),score.getPlayerId()});
 			if(old!=null){
-				scoreDao.delete(old);
+				judgeScoreDao.delete(old);
 			}
 			
-			scoreDao.create(score);
+			judgeScoreDao.create(score);
 			for(JudgeScoreDetail js:detailList){
 				js.setScoreId(score.getScoreId());
 				judgeScoreDetailDao.create(js);
