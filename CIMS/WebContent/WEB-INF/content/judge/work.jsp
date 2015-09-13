@@ -132,7 +132,7 @@ section, article {
 					<s:iterator value="raceStandardList" var="standardItem">
 						<section class="item-inline">
 							<header>
-								<article class="item-score" id="standard-item${standardItem.standardId }"></article>
+								<article class="item-score" data-standardid="${standardItem.standardId }" id="standard-item${standardItem.standardId }"></article>
 							</header>
 							<article style="margin: 0px;">
 								<img class="item-icon" alt="对应" onclick="turnKeyboard(this)" data-max="${standardItem.max }" data-standard="standard-item${standardItem.standardId }"
@@ -189,8 +189,50 @@ section, article {
 				maxVisible : 1,
 				theme : 'defaultTheme'
 			});
-			location.href = "/cims";
-		}
+			//location.href = "/cims";
+			var items=new Array();
+			var total = 0;
+			var index=0;
+			total=$('#total-show').text();
+			$('article.item-score').each(function() {
+				var itemVar = $(this).text();
+				if (itemVar == null || itemVar == "") {
+					itemVar = 0;
+				}
+				var itemInput = parseFloat(itemVar);
+				var standardId=$(this).data('standardid');
+				var item={
+					'score':itemInput,
+					'standardId':standardId
+				};
+				items[index++]=item;
+			});
+
+			var postData = {
+				"detailList" : items,
+				"score":total
+			};
+			var jsonData = JSON.stringify(postData);
+
+			$.ajax({
+						url : '${ pageContext.request.contextPath }/judge/saveScore',
+						method : 'POST',
+						data : jsonData,
+						dataType : 'json',
+						async : false,
+						contentType : 'application/json',
+						success : function(data) {
+							if (!data.resultData == "done") {
+								alert('晋级配置失败，请重试！');
+							}
+						},
+						error:function(data){
+							if(data==null){
+								;
+							}	
+						}
+					});
+ 		}
 
 		var inputError = null;
 
