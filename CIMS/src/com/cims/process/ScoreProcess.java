@@ -18,19 +18,20 @@ import com.cims.dao.SignUpDao;
 import com.cims.dao.UserDao;
 import com.cims.dao.VoteDao;
 import com.cims.dao.VoteDetailDao;
-import com.cims.model.datastruct.PlayerScoreModel;
 import com.cims.model.datastruct.JudgeScoreModel;
+import com.cims.model.datastruct.PlayerScoreModel;
 import com.cims.model.persist.FinalScore;
 import com.cims.model.persist.Judge;
+import com.cims.model.persist.JudgeScore;
+import com.cims.model.persist.JudgeScoreDetail;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
-import com.cims.model.persist.JudgeScore;
 import com.cims.model.persist.SignUp;
 import com.cims.model.persist.User;
 
 @Service("ScoreProcess")
 public class ScoreProcess {
-	private final transient Logger log = Logger.getLogger(RoundProcess.class);
+	private final transient Logger log = Logger.getLogger(ScoreProcess.class);
 	
 	@Autowired
 	private FinalScoreDao finalScoreDao;
@@ -223,6 +224,30 @@ public class ScoreProcess {
 			log.error(e);
 			return null;
 		}
+	}
+	public boolean saveScore(JudgeScore score , List<JudgeScoreDetail> detailList) {
+		boolean done=false;
+		try{
+			//先删除系统内的原本值
+			String hql="select o from JudgeScore as o where o.judge=? and o.raceId=? and o.playerId=?";
+			JudgeScore old=scoreDao.retrieveObject(hql, new Object[]{score.getJudge(),score.getRaceId(),score.getPlayerId()});
+			if(old!=null){
+				scoreDao.delete(old);
+			}
+			
+			scoreDao.create(score);
+			for(JudgeScoreDetail js:detailList){
+				js.setScoreId(score.getScoreId());
+				judgeScoreDetailDao.create(js);
+			}
+			
+			done=true;
+			return done;
+		}catch(Exception e){
+			log.error(e);
+			done=false;
+		}
+		return done;
 	}
 	
 }
