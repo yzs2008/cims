@@ -41,12 +41,6 @@ public class JudgeAction extends BaseAction{
 	private Double score;
 	
 	public JudgeAction() {
-		Map<String,Object> application=ActionContext.getContext().getApplication();
-		ApplicationState appState=(ApplicationState) application.get(ActionContant.application_state);
-		user=appState.getCurPlayer();
-		race=appState.getCurRace();
-		signUp=scoreProcess.getSignUpByUser(user,race);
-		raceStandardList=raceProcess.retrieveStandard(race.getRaceId());
 	}
 	
 	/**
@@ -55,6 +49,12 @@ public class JudgeAction extends BaseAction{
 	 */
 	@Action(value="work",results={@Result(name="input",location="/WEB-INF/content/judge/work.jsp")})
 	public String waitPage(){
+		Map<String,Object> application=ActionContext.getContext().getApplication();
+		ApplicationState appState=(ApplicationState) application.get(ActionContant.application_state);
+		user=appState.getCurPlayer();
+		race=appState.getCurRace();
+		signUp=scoreProcess.getSignUpByUser(user,race);
+		raceStandardList=raceProcess.retrieveStandard(race.getRaceId());
 		return INPUT;
 	}
 	/**
