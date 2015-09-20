@@ -88,49 +88,5 @@ public class JudgeAction extends BaseAction{
 		}
 		return SUCCESS;
 	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public SignUp getSignUp() {
-		return signUp;
-	}
-
-	public void setSignUp(SignUp signUp) {
-		this.signUp = signUp;
-	}
-
-	public Race getRace() {
-		return race;
-	}
-
-	public void setRace(Race race) {
-		this.race = race;
-	}
-
-	public List<Standard> getRaceStandardList() {
-		return raceStandardList;
-	}
-
-	public void setRaceStandardList(List<Standard> raceStandardList) {
-		this.raceStandardList = raceStandardList;
-	}
-	public List<JudgeScoreDetail> getDetailList() {
-		return detailList;
-	}
-	public void setDetailList(List<JudgeScoreDetail> detailList) {
-		this.detailList = detailList;
-	}
-	public Double getScore() {
-		return score;
-	}
-	public void setScore(Double score) {
-		this.score = score;
-	}
 	
 }

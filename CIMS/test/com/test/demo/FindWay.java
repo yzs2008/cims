@@ -33,14 +33,14 @@ public class FindWay {
 	public static void find(int[][] path, int x,int y){
 		int m=path.length;
 		int n=path[0].length-1;
-		if(x<0||y>=n){
+		if(x<0||y>n){
 			return;
 		}
 		if(x==0 && y==n){
+			count++;
 			return ;
 		}
 		if(path[x][y]==0){
-			count++;
 			return;
 		}else{
 			find(path,x-1,y);
