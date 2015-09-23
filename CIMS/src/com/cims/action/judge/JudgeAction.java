@@ -62,7 +62,7 @@ public class JudgeAction extends BaseAction{
 	 * @return
 	 */
 	@Action(value="saveScore",results={@Result(name="success",type="redirect",location="/judge/wait")}
-							,interceptorRefs={@InterceptorRef("json")}
+							,interceptorRefs={@InterceptorRef(value="json")}
 							)
 	public String saveScore(){
 		try{
@@ -87,6 +87,38 @@ public class JudgeAction extends BaseAction{
 			return ERROR;
 		}
 		return SUCCESS;
+	}
+
+	public SignUp getSignUp() {
+		return signUp;
+	}
+
+	public void setSignUp(SignUp signUp) {
+		this.signUp = signUp;
+	}
+
+	public List<Standard> getRaceStandardList() {
+		return raceStandardList;
+	}
+
+	public void setRaceStandardList(List<Standard> raceStandardList) {
+		this.raceStandardList = raceStandardList;
+	}
+
+	public List<JudgeScoreDetail> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<JudgeScoreDetail> detailList) {
+		this.detailList = detailList;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
 	}
 	
 }

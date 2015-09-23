@@ -82,7 +82,7 @@ public class RaceManageAction extends BaseAction {
 		return INPUT;
 	}
 
-	@Action(value = "detail", results = { @Result(name = "input", location = "/WEB-INF/admin/race/detail.jsp"),
+	@Action(value = "raceDetail", results = { @Result(name = "input", location = "/WEB-INF/admin/race/detail.jsp"),
 										  @Result(name = "backToList",type="redirect", location = "list") })
 	public String detail() {
 		if(id==null){
