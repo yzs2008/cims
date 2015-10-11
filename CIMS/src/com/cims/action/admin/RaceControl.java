@@ -2,6 +2,7 @@ package com.cims.action.admin;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
+import com.cims.base.type.ActionContant;
+import com.cims.model.datastruct.ApplicationChairman;
 import com.cims.model.datastruct.Message;
 import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Race;
@@ -26,6 +29,9 @@ public class RaceControl extends BaseAction {
 
 	@Autowired
 	private RaceProcess raceProcess;
+	
+	//是否显示启动系统的功能按钮，系统一旦启动后不再显示
+	private Boolean showStartup;
 
 	private List<Race> raceList;
 	private RaceState[] raceStateList = RaceState.values();
@@ -36,7 +42,38 @@ public class RaceControl extends BaseAction {
 	public String index() {
 		try {
 			raceList = raceProcess.retrieveList();
+			Map<String, Object> app = context.getApplication();
+			if(app.get(ActionContant.application_chairman) == null){
+				showStartup=true;
+			}else{
+				showStartup=false;
+			}
 			return INPUT;
+		} catch (Exception e) {
+			log.error(e);
+			return ERROR;
+		}
+	}
+
+	/**
+	 * 启动系统
+	 * 
+	 * @return
+	 */
+	@Action(value = "startup", results = { @Result(name = "success",type="redirect" ,location = "index") })
+	public String startup() {
+		try {
+			Map<String, Object> app = context.getApplication();
+			if (app.get(ActionContant.application_chairman) == null) {
+				ApplicationChairman chairman = ApplicationChairman.getInstance();
+				synchronized (chairman) {
+					if (app.get(ActionContant.application_chairman) == null) {
+						chairman.raceList = raceProcess.getUnderwayRaceList();
+						app.put(ActionContant.application_chairman, chairman);
+					}
+				}
+			}
+			return SUCCESS;
 		} catch (Exception e) {
 			log.error(e);
 			return ERROR;
@@ -106,6 +143,14 @@ public class RaceControl extends BaseAction {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public Boolean getShowStartup() {
+		return showStartup;
+	}
+
+	public void setShowStartup(Boolean showStartup) {
+		this.showStartup = showStartup;
 	}
 
 }

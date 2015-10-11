@@ -222,14 +222,12 @@ section, article {
 						async : false,
 						contentType : 'application/json',
 						success : function(data) {
-							if (!data.resultData == "done") {
-								alert('晋级配置失败，请重试！');
+							if (data.resultData == "done") {
+								alert('打分成功');
 							}
 						},
 						error:function(data){
-							if(data==null){
-								;
-							}	
+							alert("系统出现错误，请联系技术支持人员");
 						}
 					});
  		}

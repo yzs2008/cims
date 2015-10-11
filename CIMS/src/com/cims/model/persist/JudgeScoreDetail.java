@@ -11,15 +11,16 @@ import javax.persistence.Table;
 public class JudgeScoreDetail {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer scoreDetialId;
+	private Integer scoreDetailId;
 	private Integer scoreId;
 	private Integer standardId;
 	private Double score;
-	public Integer getScoreDetialId() {
-		return scoreDetialId;
+    
+	public Integer getScoreDetailId() {
+		return scoreDetailId;
 	}
-	public void setScoreDetialId(Integer scoreDetialId) {
-		this.scoreDetialId = scoreDetialId;
+	public void setScoreDetailId(Integer scoreDetailId) {
+		this.scoreDetailId = scoreDetailId;
 	}
 	public Integer getScoreId() {
 		return scoreId;

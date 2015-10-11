@@ -67,6 +67,13 @@ div.progressBar {
 a:focus{
 	color:black;
 }
+.startup-style{
+    border: solid 1px red;
+    margin: auto 150px;
+    padding: 7px 20px;
+    text-align: center;
+    background-color: #FFF5F5;	
+}
 </style>
 </head>
 
@@ -80,6 +87,17 @@ a:focus{
 			<div class="block">
 				<div class="navbar navbar-inner block-header">
 					<div class="muted pull-left">赛事控制面板</div>
+				</div>
+				<div class="block-content collapse in">
+					<div class="startup-style">
+					<s:if test="%{showStartup==true }">
+						系统状态：<span style="color:red;font-weight:bold;">未开启</span>
+						【若要使用系统评分，必须先<a style="    font-weight: bolder; color: red; margin: auto 20px;" href="${pageContext.request.contextPath }/admin/race/startup">开启系统</a>】
+					</s:if>
+					<s:else>
+						系统状态：<span>已开启</span>
+					</s:else>
+					</div>
 				</div>
 				<div class="block-content collapse in">
 					<div class="span12">

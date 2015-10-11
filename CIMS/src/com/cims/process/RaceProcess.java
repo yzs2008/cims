@@ -21,7 +21,7 @@ import com.cims.dao.SignUpDao;
 import com.cims.dao.StandardDao;
 import com.cims.dao.UserDao;
 import com.cims.model.datastruct.ApplicationMode;
-import com.cims.model.datastruct.ApplicationState;
+import com.cims.model.datastruct.ApplicationChairman;
 import com.cims.model.datastruct.JudgeModel;
 import com.cims.model.datastruct.RaceState;
 import com.cims.model.persist.Award;
@@ -357,31 +357,27 @@ public class RaceProcess {
 		RaceState rs = RaceState.valueOf(state);
 		switch (rs) {
 		case underWay: {// 将比赛状态加入全局变量中
-			ApplicationState appState = (ApplicationState) application.get(ActionContant.application_state);
-			if (appState == null) {
-				appState = new ApplicationState();
-				Race curRace = raceDao.retrieveById(raceId);
-				appState.setCurRace(curRace);
-				User curPlayer = locationCurPlayer(curRace);
-				appState.setCurPlayer(curPlayer);
-				appState.setAppModel(ApplicationMode.auto);
-
-				application.put(ActionContant.application_state, appState);
+			ApplicationChairman chairman = (ApplicationChairman) application.get(ActionContant.application_chairman);
+			//系统尚未启动，先启动系统
+			if (chairman == null) {
+				chairman = ApplicationChairman.getInstance();
+				synchronized(chairman){
+					if(application.get(ActionContant.application_chairman)==null){
+						chairman.raceList=getUnderwayRaceList();
+						application.put(ActionContant.application_chairman, chairman);
+					}
+				}
 			} else {
-				Race curRace = raceDao.retrieveById(raceId);
-				appState.setCurRace(curRace);
-				User curPlayer = locationCurPlayer(curRace);
-				appState.setCurPlayer(curPlayer);
-				appState.setAppModel(ApplicationMode.auto);
-
-				application.remove(ActionContant.application_state);
-				application.put(ActionContant.application_state, appState);
+				//系统已经启动，更新系统内比赛信息
+				chairman.raceList=getUnderwayRaceList();
 			}
 			break;
 		}
 		case over:
 			// 将比赛状态移除全局变量外
-			application.remove(ActionContant.application_state);
+			ApplicationChairman chairman = (ApplicationChairman) application.get(ActionContant.application_chairman);
+			Race r=retrieve(raceId);
+			chairman.raceList.remove(r);
 			break;
 		default:
 			break;
@@ -430,5 +426,17 @@ public class RaceProcess {
 			log.error(e);
 			throw e;
 		}
+	}
+
+	public List<Race> getUnderwayRaceList() {
+		List<Race> raceIdList;
+		try{
+			String hql="select o from Race as o where o.state="+"'"+RaceState.underWay.name()+"'";
+			raceIdList=raceDao.retrieveList(hql);
+		}catch(Exception e){
+			log.error(e);
+			raceIdList=new ArrayList<Race>();
+		}
+		return raceIdList;
 	}
 }
