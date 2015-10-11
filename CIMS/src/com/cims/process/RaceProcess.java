@@ -307,7 +307,7 @@ public class RaceProcess {
 			List<RaceJudge> raceJudgeList = raceJudgeDao.retrieveList(raceJudge);
 			for (RaceJudge rj : raceJudgeList) {
 				Race item = raceDao.retrieveById(rj.getRaceId());
-				if (item.getState() == RaceState.underWay || item.getState() == RaceState.signOver) {
+				if (item.getState() == RaceState.underWay) {
 					raceList.add(item);
 				}
 			}
@@ -438,5 +438,18 @@ public class RaceProcess {
 			raceIdList=new ArrayList<Race>();
 		}
 		return raceIdList;
+	}
+
+	public String getDisplayName(Judge judge, Race race) {
+		try{
+			String hql="select o from RaceJudge  as o where o.raceId=? and o.judgeId=?";
+			RaceJudge rj=raceJudgeDao.retrieveObject(hql, new Object[]{race.getRaceId(),judge.getJudgeId()});
+			if(rj!=null){
+				return rj.getDisplayName();
+			}
+		}catch(Exception e){
+			log.error(e);
+		}
+		return "";
 	}
 }

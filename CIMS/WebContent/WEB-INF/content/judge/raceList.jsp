@@ -35,7 +35,7 @@
 
 					<header id="header">
 						<h1 style="text-align: center; width: 90%;">
-							<a href="javascript:void(0);" id="logo">马亚伟评审您好，您的评审场次如下</a>
+							<a href="javascript:void(0);" id="logo">${judge.judgeName }评审您好，您的评审场次如下</a>
 						</h1>
 						<nav id="nav">
 							<a href="${pageContext.request.contextPath }/judge/logout" class="current-page-item" onclick="logout()">注销</a>

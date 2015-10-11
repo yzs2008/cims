@@ -59,7 +59,7 @@
 					<header id="header">
 						<h1>
 							<a href="#" id="logo">CIMS评审视窗</a>
-							<span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">马亚伟</span></span>
+							<span style="color: white; position: absolute; right: 0px; top: 0px;">评审：<span style="color: yellow;">${displayName }</span></span>
 						</h1>
 						<nav id="nav">
 							<a href="javascript:void(0);" onclick="showJudgeOrProgress(this)" data-state="0">评审进程</a>
