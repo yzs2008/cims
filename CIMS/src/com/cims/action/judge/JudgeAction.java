@@ -27,6 +27,7 @@ import com.cims.process.ScoreProcess;
 import com.opensymphony.xwork2.ActionContext;
 
 @Namespace("/judge")
+@InterceptorRef("judgeInterceptorStack")
 public class JudgeAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 

@@ -3,6 +3,7 @@ package com.cims.action.judge;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.cims.model.persist.Race;
 import com.cims.process.RaceProcess;
 
 @Namespace("/judge")
+@InterceptorRef("judgeInterceptorStack")
 public class RaceListAction extends BaseAction{
 	private static final long serialVersionUID = 1L;
 

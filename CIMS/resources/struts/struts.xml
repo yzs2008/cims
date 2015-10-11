@@ -10,6 +10,12 @@
 				<interceptor-ref name="playerAuthenticateInterceptor"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
+
+			<interceptor name="judgeAuthenticateInterceptor" class="com.cims.interceptors.JudgeAuthenticateInterceptor"></interceptor>	
+			<interceptor-stack name="judgeInterceptorStack">
+				<interceptor-ref name="judgeAuthenticateInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
 		</interceptors>
 	
 		<global-results>

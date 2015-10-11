@@ -30,7 +30,7 @@ public class RaceControl extends BaseAction {
 	@Autowired
 	private RaceProcess raceProcess;
 	
-	//是否显示启动系统的功能按钮，系统一旦启动后不再显示
+	//是否显示启动系统的功能按钮
 	private Boolean showStartup;
 
 	private List<Race> raceList;

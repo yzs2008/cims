@@ -19,6 +19,7 @@ import com.cims.process.RaceProcess;
 import com.cims.process.ScoreProcess;
 
 @Namespace("/judge")
+@InterceptorRef("judgeInterceptorStack")
 public class JudgeWaitAction extends BaseAction{
 	private static final long serialVersionUID = 1L;
 
