@@ -2,7 +2,6 @@ package com.cims.action.judge;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -14,7 +13,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.cims.base.frame.BaseAction;
 import com.cims.base.frame.HttpUtils;
 import com.cims.base.type.ActionContant;
-import com.cims.model.datastruct.ApplicationChairman;
 import com.cims.model.persist.Judge;
 import com.cims.model.persist.JudgeScore;
 import com.cims.model.persist.JudgeScoreDetail;
@@ -43,6 +41,7 @@ public class JudgeAction extends BaseAction {
 
 	private List<JudgeScoreDetail> detailList;
 	private Double score;
+	//private Integer userId;
 
 	private Judge judge;
 
@@ -54,18 +53,19 @@ public class JudgeAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	@Action(value = "work", results = { @Result(name = "input", location = "/WEB-INF/content/judge/work.jsp") })
+	@Action(value = "work", results = { @Result(name = "input", location = "/WEB-INF/content/judge/work.jsp"),
+			@Result(name = "back", type = "redirect", location = "wait") })
 	public String waitPage() {
 		try {
-			//Map<String, Object> application = ActionContext.getContext().getApplication();
-			//ApplicationChairman chairman = (ApplicationChairman) application.get(ActionContant.application_chairman);
 			judge = (Judge) sessionMap.get(ActionContant.session_judge);
 			race = (Race) sessionMap.get(ActionContant.session_race);
 			user = scoreProcess.getCurPlayer(race);
-			//查看该评委是否已经给该选手打过分，打过分了，直接返回等待页面。没打分方可进入。
-			if(scoreProcess.isScored(judge,race,user)){
+			// 查看该评委是否已经给该选手打过分，打过分了，直接返回等待页面。没打分方可进入。
+			if (scoreProcess.isScored(judge, race, user)) {
 				return "back";
 			}
+			sessionMap.remove(ActionContant.session_user);
+			sessionMap.put(ActionContant.session_user, user);
 			signUp = scoreProcess.getSignUpByUser(user, race);
 			raceStandardList = raceProcess.retrieveStandard(race.getRaceId());
 			return INPUT;
@@ -85,34 +85,38 @@ public class JudgeAction extends BaseAction {
 	public void saveScore() throws IOException {
 		JSONObject resultData = new JSONObject();
 		try {
-			if (score == null || detailList == null || detailList.size() == 0) {
+			if (score == null || detailList == null || detailList.size() == 0 ) {
 				resultData.put("resultData", "error");
 				return;
 			}
-			//Map<String, Object> application = ActionContext.getContext().getApplication();
-			//ApplicationChairman appState = (ApplicationChairman) application.get(ActionContant.application_chairman);
-			// user = appState.getCurPlayer();
-			// race = appState.getCurRace();
-
+			
 			JudgeScore judgeScore = new JudgeScore();
 			Judge judge = (Judge) ActionContext.getContext().getSession().get(ActionContant.session_judge);
+			race = (Race) sessionMap.get(ActionContant.session_race);
+			user =(User)sessionMap.get(ActionContant.session_user);
 			judgeScore.setJudge(judge);
 			judgeScore.setScore(score);
 			judgeScore.setRaceId(race.getRaceId());
 			judgeScore.setPlayerId(user.getUserId());
 
-			if (scoreProcess.saveScore(judgeScore, detailList)) {
-				// 设置该评委的标志为已打分
+			if (!scoreProcess.isJudgeScored(judgeScore)) {
+				if (scoreProcess.saveScore(judgeScore, detailList)) {
+					// 检测打分状态
+					scoreProcess.checkScoreState(judgeScore);
+					resultData.put("resultData", "done");
+				} else {
+					log.error("无法保存成绩：[" + judgeScore + "]");
+					resultData.put("resultData", "error");
+				}
 			} else {
-
+				//已经存在成绩，不允许重复打分
+				resultData.put("resultData", "error2");
 			}
 
 		} catch (Exception e) {
 			log.error(e);
 			resultData.put("resultData", "error");
-			return;
 		}
-		resultData.put("resultData", "done");
 
 		String resultJson = resultData.toJSONString();
 		HttpUtils.responseJson(resultJson, response);

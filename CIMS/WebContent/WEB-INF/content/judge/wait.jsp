@@ -63,7 +63,7 @@
 						</h1>
 						<nav id="nav">
 							<a href="javascript:void(0);" onclick="showJudgeOrProgress(this)" data-state="0">评审进程</a>
-							<a href="index.html">退出比赛</a>
+							<a href="javascript:void(0);" onclick="quitRace()">退出比赛</a>
 						</nav>
 					</header>
 				</div>
@@ -319,10 +319,9 @@
 		function getData(dataUrl) {
 			var resultData;
 
-			var raceId = $('#raceId').val();
 
 			var postData = {
-				"raceId" : raceId
+				"nullValue" : ""
 			};
 			var jsonData = JSON.stringify(postData);
 			$.ajax({
@@ -359,6 +358,9 @@
 		}
 	</script>
 	<script type="text/javascript">
+	function quitRace(){
+		location.href="racelist";
+	}
 	</script>
 </body>
 </html>

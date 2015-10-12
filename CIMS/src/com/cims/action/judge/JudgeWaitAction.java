@@ -18,6 +18,7 @@ import com.cims.model.datastruct.JudgeScoreModel;
 import com.cims.model.datastruct.PlayerScoreModel;
 import com.cims.model.persist.Judge;
 import com.cims.model.persist.Race;
+import com.cims.model.persist.User;
 import com.cims.process.RaceProcess;
 import com.cims.process.ScoreProcess;
 
@@ -33,23 +34,40 @@ public class JudgeWaitAction extends BaseAction {
 
 	private Integer raceId;
 	private String displayName;
+	
+	
+	@Action(value="wait4race",results={@Result(name="input",type="redirect",location="wait"),
+			@Result(name = "choose", type = "redirect", location = "racelist") })
+	public String wait4race(){
+		try{
+			if (raceId == null) {
+				return "choose";
+			}
+			Race race=raceProcess.retrieve(raceId);
+			if(sessionMap.get(ActionContant.session_race)==null){
+				sessionMap.put(ActionContant.session_race, race);
+			}else{
+				sessionMap.replace(ActionContant.session_race, race);
+			}
+			if(sessionMap.get(ActionContant.session_user)==null){
+				sessionMap.put(ActionContant.session_user, scoreProcess.getCurPlayer(race));
+			}
+			return INPUT;
+		}catch(Exception e){
+			log.error(e);
+			return ERROR;
+		}
+	}
 
 	@Action(value = "wait", results = { @Result(name = "input", location = "/WEB-INF/content/judge/wait.jsp"),
 			@Result(name = "choose", type = "redirect", location = "racelist") })
 	public String waitPage() {
 		try {
-
-			if (raceId == null) {
-				return "choose";
-			}
-			Race race = raceProcess.retrieve(raceId);
-			if (race == null) {
-				return "choose";
-			}
+			Race race;
 			if (sessionMap.get(ActionContant.session_race) == null) {
-				sessionMap.put(ActionContant.session_race, race);
+				return "choose";
 			} else {
-				sessionMap.replace(ActionContant.session_race, race);
+				race=(Race)sessionMap.get(ActionContant.session_race);
 			}
 
 			Judge judge = (Judge) sessionMap.get(ActionContant.session_judge);
@@ -71,7 +89,8 @@ public class JudgeWaitAction extends BaseAction {
 	public void getFinalScore() throws IOException {
 		JSONObject resultData = new JSONObject();
 		try {
-			List<PlayerScoreModel> finalScoreList = scoreProcess.getFinalScoreModel(raceId);
+			Race race=(Race)sessionMap.get(ActionContant.session_race);
+			List<PlayerScoreModel> finalScoreList = scoreProcess.getFinalScoreModel(race.getRaceId());
 			resultData.put("resultData", finalScoreList);
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -90,9 +109,9 @@ public class JudgeWaitAction extends BaseAction {
 	public void getJudgeScoreTrace() throws IOException {
 		JSONObject resultData = new JSONObject();
 		try {
-			// Judge judge=(Judge)sessionMap.get(ActionContant.session_judge);
-			Integer judgeId = 1;
-			List<PlayerScoreModel> judgeTraceList = scoreProcess.getJudgeTraceScoreModel(raceId, judgeId);
+			Judge judge=(Judge)sessionMap.get(ActionContant.session_judge);
+			Race race=(Race)sessionMap.get(ActionContant.session_race);
+			List<PlayerScoreModel> judgeTraceList = scoreProcess.getJudgeTraceScoreModel(race.getRaceId(), judge.getJudgeId());
 			resultData.put("resultData", judgeTraceList);
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -111,8 +130,9 @@ public class JudgeWaitAction extends BaseAction {
 	public void getProgress() throws IOException {
 		JSONObject resultData = new JSONObject();
 		try {
-			Integer playerId = 1;
-			List<JudgeScoreModel> judgeScoreList = scoreProcess.getJudgeScoreModel(raceId, playerId);
+			User user=(User)sessionMap.get(ActionContant.session_user);
+			Race race=(Race)sessionMap.get(ActionContant.session_race);
+			List<JudgeScoreModel> judgeScoreList = scoreProcess.getJudgeScoreModel(race.getRaceId(), user.getUserId());
 			resultData.put("resultData", judgeScoreList);
 		} catch (Exception e) {
 			log.error(e.getMessage());

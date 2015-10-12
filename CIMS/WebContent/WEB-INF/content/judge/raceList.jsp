@@ -77,7 +77,7 @@
 	<script type="text/javascript">
 		function selectAndGo(evt){
 			var raceId=$(evt).data('id');	
-			location.href='wait?raceId='+raceId;
+			location.href='wait4race?raceId='+raceId;
 		}	
 	</script>
 </body>

@@ -231,12 +231,6 @@ public class ScoreProcess {
 	public boolean saveScore(JudgeScore score , List<JudgeScoreDetail> detailList) {
 		boolean done=false;
 		try{
-			//先删除系统内的原本值
-			String hql="select o from JudgeScore as o where o.judge=? and o.raceId=? and o.playerId=?";
-			JudgeScore old=judgeScoreDao.retrieveObject(hql, new Object[]{score.getJudge(),score.getRaceId(),score.getPlayerId()});
-			if(old!=null){
-				judgeScoreDao.delete(old);
-			}
 			
 			judgeScoreDao.create(score);
 			for(JudgeScoreDetail js:detailList){
@@ -261,8 +255,8 @@ public class ScoreProcess {
 		try{
 			User user=null; 
 			//先查找参加该比赛的所有有效选手
-			String hql="select top 1 o from Draw  as o where o.raceId=? and o.state=? and o.scored=? order by o.orderSerial asc";
-			List<Draw> drawList=drawDao.retrieveList(hql, new Object[]{race.getRaceId(),PlayerState.normal.name(),false});
+			String hql="select o from Draw  as o where o.raceId=? and o.state=? and o.scored=? order by o.orderSerial asc";
+			List<Draw> drawList=drawDao.retrieveList(hql, new Object[]{race.getRaceId(),PlayerState.normal,false});
 			//遍历选手，查看个选手成绩状况
 			for(Draw d:drawList){
 				user=userDao.retrieveById(d.getUserId());
@@ -276,11 +270,59 @@ public class ScoreProcess {
 	}
 	public boolean isScored(Judge judge, Race race, User user) {
 		try{
-			//TODO
-			return false;
+			String hql="select o from JudgeScore as o where o.judge=? and o.playerId=? and o.raceId=?";
+			JudgeScore js=judgeScoreDao.retrieveObject(hql, new Object[]{judge,user.getUserId(),race.getRaceId()});
+			if(js==null){
+				return false;
+			}
+			return true;
 		}catch(Exception e){
 			log.error(e);
 			return true;
+		}
+	}
+	public void checkScoreState(JudgeScore judgeScore) {
+		try{
+			//评委人数
+			String hql="select count(o) from RaceJudge as o where o.raceId=%s";
+			hql=String.format(hql, judgeScore.getRaceId());
+			Integer judgeCount=raceJudgeDao.records(hql);
+			//当前评分记录数
+			hql="select count(o) from JudgeScore as o where o.raceId=%s and o.playerId=%s";
+			hql=String.format(hql,judgeScore.getRaceId(),judgeScore.getPlayerId());
+			Integer scoreCount=judgeScoreDao.records(hql);
+			
+			if(judgeCount==scoreCount){
+				//标记当前选手的评分过程为完成
+				hql="select o from Draw as o where o.raceId=? and o.userId=?";
+				Draw draw=drawDao.retrieveObject(hql, new Object[]{judgeScore.getRaceId(),judgeScore.getPlayerId()});
+				draw.setScored(true);
+				drawDao.update(draw);
+			}
+
+		}catch(Exception e){
+			log.error(e);
+		}
+	}
+	public boolean isJudgeScored(JudgeScore score) {
+		try{
+			String hql="select o from JudgeScore as o where o.judge=? and o.raceId=? and o.playerId=?";
+			JudgeScore old=judgeScoreDao.retrieveObject(hql, new Object[]{score.getJudge(),score.getRaceId(),score.getPlayerId()});
+			if(old!=null){
+				return true;
+			}
+			return false;
+		}catch(Exception e){
+			log.error(e);
+			return false;
+		}
+	}
+	public User getUserById(Integer userId) {
+		try{
+			return userDao.retrieveById(userId);
+		}catch(Exception e){
+			log.error(e);
+			return null;
 		}
 	}
 	

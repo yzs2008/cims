@@ -189,7 +189,6 @@ section, article {
 				maxVisible : 1,
 				theme : 'defaultTheme'
 			});
-			//location.href = "/cims";
 			var items=new Array();
 			var total = 0;
 			var index=0;
@@ -207,10 +206,9 @@ section, article {
 				};
 				items[index++]=item;
 			});
-
 			var postData = {
 				"detailList" : items,
-				"score":total
+				"score":total,
 			};
 			var jsonData = JSON.stringify(postData);
 
@@ -222,8 +220,19 @@ section, article {
 						async : false,
 						contentType : 'application/json',
 						success : function(data) {
-							if (data.resultData == "done") {
-								alert('打分成功');
+							var rst=data.resultData;
+							switch(rst){
+								case "done":
+									alert("打分成功");
+									location.href="wait";
+									break;
+								case "error2":
+									alert("您已经给过成绩，不允许重复打分！");
+									location.href="wait";
+									break;
+								case "error":
+									alert("系统出现故障，成绩未保存，请重试或者联系技术人员");
+									break;
 							}
 						},
 						error:function(data){
