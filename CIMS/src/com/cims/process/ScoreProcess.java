@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cims.dao.AdjustScoreDao;
+import com.cims.dao.DrawDao;
 import com.cims.dao.FinalScoreDao;
 import com.cims.dao.JudgeDao;
 import com.cims.dao.JudgeScoreDao;
@@ -20,6 +21,8 @@ import com.cims.dao.VoteDao;
 import com.cims.dao.VoteDetailDao;
 import com.cims.model.datastruct.JudgeScoreModel;
 import com.cims.model.datastruct.PlayerScoreModel;
+import com.cims.model.datastruct.PlayerState;
+import com.cims.model.persist.Draw;
 import com.cims.model.persist.FinalScore;
 import com.cims.model.persist.Judge;
 import com.cims.model.persist.JudgeScore;
@@ -55,6 +58,8 @@ public class ScoreProcess {
 	private RaceJudgeDao raceJudgeDao;
 	@Autowired
 	private JudgeDao judgeDao;
+	@Autowired
+	private DrawDao drawDao;
 	
 	
 	
@@ -246,6 +251,37 @@ public class ScoreProcess {
 			done=false;
 		}
 		return done;
+	}
+	/**
+	 * 根据当前登录评委，评委打分的比赛，选择当前应该被评判的选手
+	 * @param race
+	 * @return
+	 */
+	public User getCurPlayer(Race race) {
+		try{
+			User user=null; 
+			//先查找参加该比赛的所有有效选手
+			String hql="select top 1 o from Draw  as o where o.raceId=? and o.state=? and o.scored=? order by o.orderSerial asc";
+			List<Draw> drawList=drawDao.retrieveList(hql, new Object[]{race.getRaceId(),PlayerState.normal.name(),false});
+			//遍历选手，查看个选手成绩状况
+			for(Draw d:drawList){
+				user=userDao.retrieveById(d.getUserId());
+				break;
+			}
+			return user;
+		}catch(Exception e){
+			log.error(e);
+			return null;
+		}
+	}
+	public boolean isScored(Judge judge, Race race, User user) {
+		try{
+			//TODO
+			return false;
+		}catch(Exception e){
+			log.error(e);
+			return true;
+		}
 	}
 	
 }

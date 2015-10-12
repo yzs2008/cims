@@ -44,6 +44,8 @@ public class JudgeAction extends BaseAction {
 	private List<JudgeScoreDetail> detailList;
 	private Double score;
 
+	private Judge judge;
+
 	public JudgeAction() {
 	}
 
@@ -54,18 +56,30 @@ public class JudgeAction extends BaseAction {
 	 */
 	@Action(value = "work", results = { @Result(name = "input", location = "/WEB-INF/content/judge/work.jsp") })
 	public String waitPage() {
-		Map<String, Object> application = ActionContext.getContext().getApplication();
-		ApplicationChairman chairman = (ApplicationChairman) application.get(ActionContant.application_chairman);
-		signUp = scoreProcess.getSignUpByUser(user, race);
-		raceStandardList = raceProcess.retrieveStandard(race.getRaceId());
-		return INPUT;
+		try {
+			//Map<String, Object> application = ActionContext.getContext().getApplication();
+			//ApplicationChairman chairman = (ApplicationChairman) application.get(ActionContant.application_chairman);
+			judge = (Judge) sessionMap.get(ActionContant.session_judge);
+			race = (Race) sessionMap.get(ActionContant.session_race);
+			user = scoreProcess.getCurPlayer(race);
+			//查看该评委是否已经给该选手打过分，打过分了，直接返回等待页面。没打分方可进入。
+			if(scoreProcess.isScored(judge,race,user)){
+				return "back";
+			}
+			signUp = scoreProcess.getSignUpByUser(user, race);
+			raceStandardList = raceProcess.retrieveStandard(race.getRaceId());
+			return INPUT;
+		} catch (Exception e) {
+			log.error(e);
+			return ERROR;
+		}
 	}
 
 	/**
 	 * 保存评审评分
 	 * 
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@Action(value = "saveScore", interceptorRefs = { @InterceptorRef(value = "json") })
 	public void saveScore() throws IOException {
@@ -75,10 +89,10 @@ public class JudgeAction extends BaseAction {
 				resultData.put("resultData", "error");
 				return;
 			}
-			Map<String, Object> application = ActionContext.getContext().getApplication();
-			ApplicationChairman appState = (ApplicationChairman) application.get(ActionContant.application_chairman);
-//			user = appState.getCurPlayer();
-//			race = appState.getCurRace();
+			//Map<String, Object> application = ActionContext.getContext().getApplication();
+			//ApplicationChairman appState = (ApplicationChairman) application.get(ActionContant.application_chairman);
+			// user = appState.getCurPlayer();
+			// race = appState.getCurRace();
 
 			JudgeScore judgeScore = new JudgeScore();
 			Judge judge = (Judge) ActionContext.getContext().getSession().get(ActionContant.session_judge);
@@ -95,12 +109,12 @@ public class JudgeAction extends BaseAction {
 
 		} catch (Exception e) {
 			log.error(e);
-			resultData.put("resultData", "error"); 
+			resultData.put("resultData", "error");
 			return;
 		}
-		resultData.put("resultData", "done"); 
-		
-		String resultJson=resultData.toJSONString();
+		resultData.put("resultData", "done");
+
+		String resultJson = resultData.toJSONString();
 		HttpUtils.responseJson(resultJson, response);
 	}
 
@@ -134,6 +148,14 @@ public class JudgeAction extends BaseAction {
 
 	public void setScore(Double score) {
 		this.score = score;
+	}
+
+	public Judge getJudge() {
+		return judge;
+	}
+
+	public void setJudge(Judge judge) {
+		this.judge = judge;
 	}
 
 }
