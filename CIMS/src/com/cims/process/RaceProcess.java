@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.cims.base.type.ActionContant;
 import com.cims.base.type.StateEnum;
+import com.cims.dao.AdjustScoreDao;
 import com.cims.dao.AwardDao;
 import com.cims.dao.DrawDao;
+import com.cims.dao.FinalScoreDao;
 import com.cims.dao.JudgeDao;
+import com.cims.dao.LiveScoreDao;
 import com.cims.dao.PromotionDao;
 import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
@@ -20,13 +23,16 @@ import com.cims.dao.RoundDao;
 import com.cims.dao.SignUpDao;
 import com.cims.dao.StandardDao;
 import com.cims.dao.UserDao;
-import com.cims.model.datastruct.ApplicationMode;
 import com.cims.model.datastruct.ApplicationChairman;
 import com.cims.model.datastruct.JudgeModel;
+import com.cims.model.datastruct.PlayerState;
 import com.cims.model.datastruct.RaceState;
+import com.cims.model.persist.AdjustScore;
 import com.cims.model.persist.Award;
 import com.cims.model.persist.Draw;
+import com.cims.model.persist.FinalScore;
 import com.cims.model.persist.Judge;
+import com.cims.model.persist.LiveScore;
 import com.cims.model.persist.Promotion;
 import com.cims.model.persist.Race;
 import com.cims.model.persist.RaceJudge;
@@ -59,6 +65,12 @@ public class RaceProcess {
 	private SignUpDao signUpDao;
 	@Autowired
 	private DrawDao drawDao;
+	@Autowired
+	private AdjustScoreDao adjustScoreDao;
+	@Autowired
+	private LiveScoreDao liveScoreDao;
+	@Autowired
+	private FinalScoreDao finalScoreDao;
 
 	// 增
 	public boolean saveRace(Race race) {
@@ -354,9 +366,46 @@ public class RaceProcess {
 	}
 
 	public void monitorState(Integer raceId, String state, Map<String, Object> application) throws Exception {
+		try{
 		RaceState rs = RaceState.valueOf(state);
 		switch (rs) {
-		case underWay: {// 将比赛状态加入全局变量中
+		case underWay: {
+			//启动比赛，需要初始化比赛 的所有信息
+			//初始化draw表（默认的出场顺序）
+			String hql4Draw = "select o from Draw as o where o.raceId=? order by o.orderSerial asc";
+			List<Draw> drawList = drawDao.retrieveList(hql4Draw, raceId);
+			if (drawList == null || drawList.size() == 0) {
+				startupRaceInsertPlayer(raceId);
+			}
+			//初始化adjustScore表（加减分项）
+			String hql4Adjust="select count(o) from AdjustScore as o where o.raceId=%s";
+			hql4Adjust=String.format(hql4Adjust,raceId); 
+			Integer records=adjustScoreDao.records(hql4Adjust);
+			if(records==null || records==0){
+				startupRaceInsertAdjustScore(raceId);
+			}
+			//初始化liveScore表（现场得分，主要用来计算评委分数等）
+			String hql4LiveScore="select count(o) from LiveScore as o where o.raceId=%s";
+			hql4LiveScore=String.format(hql4LiveScore, raceId);
+			records=liveScoreDao.records(hql4LiveScore); 
+			if(records==null || records==0){
+				startupRaceInsertLiveScore(raceId);
+			}
+			//初始化finalScore表
+			String hql4FinalScore="select count(o) from FinalScore as o where o.raceId=%s";
+			hql4FinalScore=String.format(hql4FinalScore, raceId);
+			records=finalScoreDao.records(hql4FinalScore); 
+			if(records==null || records==0){
+				startupRaceInsertFinalScore(raceId);
+			}
+
+			/**
+			 * FinalScore=liveScore+adjustScore
+			 * liveScore=computer(judgeScoreA+judgeScoreB+judgeScoreB+judgeScoreB……)
+			 * adjustScore=computer(vote) or blackbox operation;
+			 */	
+
+			// 将比赛状态加入全局变量中
 			ApplicationChairman chairman = (ApplicationChairman) application.get(ActionContant.application_chairman);
 			//系统尚未启动，先启动系统
 			if (chairman == null) {
@@ -382,26 +431,8 @@ public class RaceProcess {
 		default:
 			break;
 		}
-	}
-
-	private User locationCurPlayer(Race curRace) {
-		try {
-			User user=null;
-			String hql = "select o from Draw as o where o.raceId=? order by o.orderSerial asc";
-			List<Draw> drawList = drawDao.retrieveList(hql, curRace.getRaceId());
-			if (drawList == null || drawList.size() == 0) {
-				startupRaceInsertPlayer(curRace.getRaceId());
-			}
-			for(Draw d:drawList){
-				if(!d.getScored()){
-					user=userDao.retrieveById(d.getUserId());
-					break;
-				}
-			}
-			return user;
-		} catch (Exception e) {
+		}catch(Exception e){
 			log.error(e);
-			return null;
 		}
 	}
 
@@ -417,10 +448,71 @@ public class RaceProcess {
 				draw.setRaceId(raceId);
 				draw.setUserId(su.getUserId());
 				draw.setScored(false);
+				draw.setState(PlayerState.normal);
 				drawList.add(draw);
 			}
 			for(Draw dr:drawList){
 				drawDao.create(dr);
+			}
+		} catch (Exception e) {
+			log.error(e);
+			throw e;
+		}
+	}
+	private void startupRaceInsertAdjustScore(Integer raceId) throws Exception {
+		try {
+			String hql="select o from SignUp as o  where o.raceId=?";
+			List<SignUp> allUser=signUpDao.retrieveList(hql, raceId);
+			List<AdjustScore> adjustScoreList=new ArrayList<AdjustScore>();
+			for(SignUp su:allUser){
+				AdjustScore adjustScore=new AdjustScore();
+				adjustScore.setAdjustment(0.0);
+				adjustScore.setPlayerId(su.getUserId());
+				adjustScore.setRaceId(raceId);
+				adjustScoreList.add(adjustScore);
+			}
+			for(AdjustScore ajs:adjustScoreList){
+				adjustScoreDao.create(ajs);
+			}
+		} catch (Exception e) {
+			log.error(e);
+			throw e;
+		}
+	}
+	private void startupRaceInsertLiveScore(Integer raceId) throws Exception {
+		try {
+			String hql="select o from SignUp as o  where o.raceId=?";
+			List<SignUp> allUser=signUpDao.retrieveList(hql, raceId);
+			List<LiveScore> liveScoreList=new ArrayList<LiveScore>();
+			for(SignUp su:allUser){
+				LiveScore liveScore=new LiveScore();
+				liveScore.setLiveScore(0.0);
+				liveScore.setPlayerId(su.getUserId());
+				liveScore.setRaceId(raceId);
+				liveScoreList.add(liveScore);
+			}
+			for(LiveScore ls:liveScoreList){
+				liveScoreDao.create(ls);
+			}
+		} catch (Exception e) {
+			log.error(e);
+			throw e;
+		}
+	}
+	private void startupRaceInsertFinalScore(Integer raceId) throws Exception {
+		try {
+			String hql="select o from SignUp as o  where o.raceId=?";
+			List<SignUp> allUser=signUpDao.retrieveList(hql, raceId);
+			List<FinalScore> finalScoreList=new ArrayList<FinalScore>();
+			for(SignUp su:allUser){
+				FinalScore finalScore=new FinalScore();
+				finalScore.setFinalScore(0.0);
+				finalScore.setPlayer(userDao.retrieveById(su.getUserId()));
+				finalScore.setRaceId(raceId);
+				finalScoreList.add(finalScore);
+			}
+			for(FinalScore ls:finalScoreList){
+				finalScoreDao.create(ls);
 			}
 		} catch (Exception e) {
 			log.error(e);
