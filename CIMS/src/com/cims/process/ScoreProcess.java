@@ -7,6 +7,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cims.computer.AverageComputer;
+import com.cims.computer.ComputeCenter;
+import com.cims.computer.ComputeData;
+import com.cims.computer.DefaultComputer;
+import com.cims.computer.MaxMinExcludeAverageComputer;
+import com.cims.computer.SumComputer;
 import com.cims.dao.AdjustScoreDao;
 import com.cims.dao.DrawDao;
 import com.cims.dao.FinalScoreDao;
@@ -14,6 +20,7 @@ import com.cims.dao.JudgeDao;
 import com.cims.dao.JudgeScoreDao;
 import com.cims.dao.JudgeScoreDetailDao;
 import com.cims.dao.LiveScoreDao;
+import com.cims.dao.RaceDao;
 import com.cims.dao.RaceJudgeDao;
 import com.cims.dao.SignUpDao;
 import com.cims.dao.UserDao;
@@ -60,6 +67,8 @@ public class ScoreProcess {
 	private JudgeDao judgeDao;
 	@Autowired
 	private DrawDao drawDao;
+	@Autowired
+	private RaceDao raceDao;
 	
 	
 	
@@ -143,6 +152,12 @@ public class ScoreProcess {
 		}
 		return score;
 	}
+	/**
+	 * 找到某场比赛某一个评委的所有评分
+	 * @param raceId
+	 * @param judgeId
+	 * @return
+	 */
 	public List<JudgeScore> getJudgeScoreByJudge(Integer raceId,Integer judgeId) {
 		try{
 			String hql="select o from JudgeScore as o where o.raceId=? and o.judge.judgeId=?";
@@ -153,7 +168,12 @@ public class ScoreProcess {
 			return new ArrayList<JudgeScore>();
 		}
 	}
-	
+	/**
+	 * 找到某场比赛某一个选手的所有评分
+	 * @param raceId
+	 * @param playerId
+	 * @return
+	 */
 	public List<JudgeScore> getJudgeScoreByPlayer(Integer raceId,Integer playerId) {
 		try{
 			String hql="select o from JudgeScore as o where o.raceId=? and o.playerId=?";
@@ -298,6 +318,28 @@ public class ScoreProcess {
 				Draw draw=drawDao.retrieveObject(hql, new Object[]{judgeScore.getRaceId(),judgeScore.getPlayerId()});
 				draw.setScored(true);
 				drawDao.update(draw);
+				//计算LiveScore(现场得分)
+				/**
+				 * 要面向接口编程，这里引入一个接口，能够计算评委现场得分。另外这里用到依赖注入，以适应后期的变化
+				 */
+				ComputeCenter cc;
+				Race r=raceDao.retrieveById(judgeScore.getPlayerId());
+				switch (r.getJudgePattern()) {
+				case sum:
+					cc=new SumComputer();
+					break;
+				case average:
+					cc=new AverageComputer();
+					break;
+				case max_min_exclude_average:
+					cc=new MaxMinExcludeAverageComputer();
+					break;
+				default:
+					cc=new DefaultComputer();
+					break;
+				}
+				Double liveScore=0.0;
+				
 			}
 
 		}catch(Exception e){
@@ -324,6 +366,10 @@ public class ScoreProcess {
 			log.error(e);
 			return null;
 		}
+	}
+	
+	public List<ComputeData> getJudgeScore(){
+		return null;
 	}
 	
 }

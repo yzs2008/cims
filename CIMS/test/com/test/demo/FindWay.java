@@ -6,6 +6,7 @@ public class FindWay {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);   
+
 		int m=3;
 		int n=3;
 //		m=sc.nextInt();
