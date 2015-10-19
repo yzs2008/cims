@@ -52,6 +52,14 @@ public class BaseDao<T> {
 	public Integer records(String hql) throws Exception {
 		return (Integer) getSession().createQuery(hql).uniqueResult().hashCode();
 	}
+	public Integer records(String hql,Object param) throws Exception {
+		return records(hql,new Object[]{param});
+	}
+	public Integer records(String hql,Object[] params) throws Exception {
+		Query query=getSession().createQuery(hql);
+		setQueryParams(query, params);
+		return query.uniqueResult().hashCode();
+	}
 
 	public List<T> retrieveList(String hql) throws Exception {
 		return retrieveList(hql, new Object[] {});
