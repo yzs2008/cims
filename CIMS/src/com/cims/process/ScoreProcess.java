@@ -397,15 +397,57 @@ public class ScoreProcess {
 				List<Promotion> promotionList=promotionDao.retrieveList(hql4PromotionRuler, raceId);
 				String hql4FinalScore="select o from FinalScore as o where o.raceId=? order by o.finalScore desc";
 				List<FinalScore> finalScoreList=finalScoreDao.retrieveList(hql4FinalScore, raceId);
+				Integer startPointer=0;
+				Integer count=finalScoreList.size();
 				for(Promotion p:promotionList){
-					int start=p.getStart();
+					int start=p.getStart()-1;
+					start=start>startPointer?start:startPointer;
 					int end=p.getEnd();
-					for(int i=p.getStart();i<p.getEnd();i++){
-						
-					}
-				}
+					end=end>count?count:end;
 
-				//写入晋级报名
+					//写入晋级报名
+					for(int i=start;i<end;i++){
+						FinalScore fs=finalScoreList.get(i);
+						String hql4Production="select o from SignUp as o where o.raceId=? and o.userId=?";
+						SignUp old=signUpDao.retrieveObject(hql4Production, new Object[]{fs.getRaceId(),fs.getPlayer().getUserId()});
+						SignUp sign=new SignUp();
+						sign.setRaceId(p.getNextId());
+						sign.setUserId(fs.getPlayer().getUserId());
+						sign.setProductDescription(old.getProductDescription());
+						sign.setProductName(old.getProductName());
+						signUpDao.create(sign);
+						
+						startPointer++;
+					}
+					//并列选手同时晋级
+					if(startPointer>0  &&  startPointer<count){
+						Boolean tieFlag = false;
+						do {
+							FinalScore lastOne = finalScoreList.get(startPointer - 1);
+							FinalScore tie = finalScoreList.get(startPointer);
+							if (lastOne.getFinalScore().equals(tie.getFinalScore())) {
+								String hql4Production = "select o from SignUp as o where o.raceId=? and o.userId=?";
+								SignUp old = signUpDao.retrieveObject(hql4Production, new Object[] { tie.getRaceId(), tie.getPlayer().getUserId() });
+								SignUp sign = new SignUp();
+								sign.setRaceId(p.getNextId());
+								sign.setUserId(tie.getPlayer().getUserId());
+								sign.setProductDescription(old.getProductDescription());
+								sign.setProductName(old.getProductName());
+								signUpDao.create(sign);
+
+								startPointer++;
+								if(startPointer<count){
+									tieFlag=true;
+								}else{
+									tieFlag=false;
+								}
+							}else{
+								tieFlag=false;
+							}
+						} while (tieFlag);
+					}//并列晋级结束
+				}//一次晋级结束
+				/**************************设置晋级结束**************************/
 			}
 
 		}catch(Exception e){
