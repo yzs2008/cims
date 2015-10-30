@@ -18,42 +18,6 @@ body {
     margin: 0 auto;
 }
 
-.input-style {
-	display: block;
-	height: 30px;
-	background: transparent;
-	border: 1px solid rgba(255, 255, 255, 0.6);
-	border-radius: 2px;
-	color: #fff;
-	font-family: 'Exo', sans-serif;
-	font-size: 16px;
-	font-weight: 400;
-	padding: 4px;
-	width: 250px;
-	margin: 20px 0px;
-}
-
-a.myButton:hover {
-	background: #0986A2;
-}
-
-.myButton {
-	display: block;
-	width: 250px;
-	height: 35px;
-	background: #96A588;
-	border: 1px solid #fff;
-	cursor: pointer;
-	border-radius: 2px;
-	color: white;
-	font-family: 'Exo', sans-serif;
-	font-size: 16px;
-	font-weight: 600;
-	padding: 6px;
-	margin-top: 20px;
-	vertical-align: middle;
-	text-align: center;
-}
 
 #logoImage{
     width: 150px;
@@ -74,11 +38,45 @@ a.myButton:hover {
     color:gold;
 }
 #banner-wrapper{
-    width: 930px;
-    background-color: aliceblue;
+    width: 830px;
     height: 300px;
     margin: 0 auto;
-    padding-right: 20px;
+}
+div.order-info{
+    display: inline-block;
+    background-color: #E50D06;
+    height: 38px;
+
+}
+div.order-info ul{
+    padding: 0px;
+    margin: 0px;	
+}
+div.order-info ul li{
+	display: inline-block;
+    line-height: 38px;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+}
+.banner-img{
+	vertical-align: middle;
+}
+div.order-num-div{
+	display: inline-block;
+    width: 60px;
+    height: 37px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+.order-num-span{
+	position: absolute;
+    top: -2px;
+    left: 20px;
+    font-size: 35px;
+    font-weight: 900;
+    color: red;
 }
 </style>
 </head>
@@ -94,14 +92,129 @@ a.myButton:hover {
 			</div>
 		</div>
 		<div id="banner-wrapper">
-			<div id="banner">
-				<img alt="order" src="${pageContext.request.contextPath }/images/main/num.png">
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">1</span>
+				</div>
 				<div class="order-info">
 					<ul>
-						<li>张三枫</li>	
-						<li>武当山</li>	
-						<li>太极拳</li>	
-						<li>89.09</li>	
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">2</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">3</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">4</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">5</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">6</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">7</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">8</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
+					</ul>
+				</div>
+			</div>
+			<div class="item-banner">
+				<div class="order-num-div">
+					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
+					<span class="order-num-span">9</span>
+				</div>
+				<div class="order-info">
+					<ul>
+						<li style="width:150px;">张三枫</li>	
+						<li style="width:210px;">武当山</li>	
+						<li style="width:278px;">太极拳</li>	
+						<li style="width:100px;">89.09</li>	
 					</ul>
 				</div>
 			</div>
