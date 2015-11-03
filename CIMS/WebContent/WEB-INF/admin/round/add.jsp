@@ -48,7 +48,7 @@
                                         <div class="control-group">
                                           <label class="control-label" for="round">上级轮次</label>
                                           <div class="controls">
-                                          	<select id="round-list" name="race.roundId" onchange="setRoundName()">
+                                          	<select id="round-list" name="round.parent" onchange="setRoundName()">
                                           		<c:forEach var="item" items="${ roundList}">
                                           			<option value="${item.roundId}">${item.roundName}</option>	
                                           		</c:forEach>
