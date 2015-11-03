@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cims.base.frame.BaseAction;
 import com.cims.base.type.ActionContant;
+import com.cims.model.datastruct.OrderScoreItem;
 import com.cims.model.persist.Race;
 import com.cims.process.RaceProcess;
+import com.cims.process.ScreenProcess;
 
 @Namespace("/main")
 @InterceptorRef("screenInterceptorStack")
@@ -21,14 +23,19 @@ public class ScreenShow extends BaseAction {
 	
 	@Autowired
 	private RaceProcess raceProcess;
+	@Autowired
+	private ScreenProcess screenProcess;
 	
 	private String raceId;
 	private List<Race> raceList;
+	
+	private List<OrderScoreItem> itemList;
 
 	@Action(value = "orderscore", results = { @Result(name = "input", location = "/WEB-INF/content/main/orderScore.jsp"),
 			@Result(name = "back", type = "redirect", location = "wait") })
 	public String orderScore(){
 		Race race=(Race)sessionMap.get(ActionContant.session_screen_race);
+		itemList=screenProcess.getOrderScoreList(race);
 		return INPUT;
 	}
 	/**
@@ -59,5 +66,11 @@ public class ScreenShow extends BaseAction {
 	}
 	public void setRaceList(List<Race> raceList) {
 		this.raceList = raceList;
+	}
+	public List<OrderScoreItem> getItemList() {
+		return itemList;
+	}
+	public void setItemList(List<OrderScoreItem> itemList) {
+		this.itemList = itemList;
 	}
 }

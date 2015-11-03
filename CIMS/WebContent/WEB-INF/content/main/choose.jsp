@@ -38,10 +38,10 @@
 	</div>
 	<div id="main" style="background-color: #e3e9dc; padding: 3em 0;">
 
-		<div class="container">
+		<div class="container" style="width:987px;">
 			<div class="row main-row">
 				<s:iterator value="raceList" var="item">
-					<div class="4u" style="margin:0 auto;float:none;cursor:pointer;">
+					<div class="4u" style="margin:0 auto;float:none;cursor:pointer;display: inline-block;width:30%;">
 						<section class="race-list " onclick="selectAndGo(this)" data-id="${item.raceId }">
 							<p class="race-name">${item.raceName }</p>
 						</section>
