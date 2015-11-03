@@ -39,8 +39,9 @@ body {
 }
 #banner-wrapper{
     width: 830px;
-    height: 300px;
+    height: auto;
     margin: 0 auto;
+    min-height: 440px;
 }
 div.order-info{
     display: inline-block;
@@ -78,6 +79,13 @@ div.order-num-div{
     font-weight: 900;
     color: red;
 }
+.copyright{
+    margin: 0 auto;
+    width: 987px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 12px;
+}
 </style>
 </head>
 <body>
@@ -85,7 +93,7 @@ div.order-num-div{
 		<div id="header-wrapper">
 			<img alt="logo" id="logoImage" src="${pageContext.request.contextPath }/images/main/logo.png">
 			<div class="title-main">
-				第五届电子科学与技术-科技创新比赛
+				${race.raceName }
 			</div>
 			<div class="title-subhead">
 					
@@ -222,9 +230,10 @@ div.order-num-div{
 		<div id="footer-wrapper">
 			<div class="container">
 				<div class="row">
-					<div class="12u">
+					<div class="copyright">
 
-						<div id="copyright">&copy; 郑州大学. | 设计: CIMS团队</div>
+						<div id="copyright">&copy; 麦兜故事. | 设计开发:麦兜故事工作室 </div>
+						<div>豫ICP证0371号</div>
 
 					</div>
 				</div>

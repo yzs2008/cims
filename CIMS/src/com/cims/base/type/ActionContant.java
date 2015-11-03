@@ -6,6 +6,7 @@ public interface ActionContant {
 	String session_race="race";
 	String session_slip="slip";
 	String result_slip="slip";
+	String session_screen_race="srace";
 	/**
 	 * 系统当前进行的赛事的对象，存放于application中的key值
 	 */

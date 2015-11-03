@@ -16,6 +16,12 @@
 				<interceptor-ref name="judgeAuthenticateInterceptor"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
+
+			<interceptor name="screenShowInterceptor" class="com.cims.interceptors.ScreenShowInterceptor"></interceptor>	
+			<interceptor-stack name="screenInterceptorStack">
+				<interceptor-ref name="screenShowInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
 		</interceptors>
 	
 		<global-results>
