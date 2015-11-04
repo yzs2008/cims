@@ -77,16 +77,22 @@
 									</div>
 								</div>
 								<div class="control-group padding-top20">
-									<div class="left-right">
-										<label class="control-label" for="qualification">参赛资格</label>
-										<div class="controls">
-											<input type="text" class="default" name="race.qualification" id="qualification" required="required">
-										</div>
-									</div>
+<!-- 									<div class="left-right"> -->
+<!-- 										<label class="control-label" for="qualification">参赛资格</label> -->
+<!-- 										<div class="controls"> -->
+<!-- 											<input type="text" class="default" name="race.qualification" id="qualification" required="required"> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 									<div class="left-right">
 										<label class="control-label" for="place">举办地点</label>
 										<div class="controls">
 											<input type="text" name="race.place" class="default" id="place">
+										</div>
+									</div>
+									<div class="left-right">
+										<label class="control-label" for="drawPattern">排序模式</label>
+										<div class="controls">
+											<s:select name="race.drawPattern" listKey="key" listValue="value" list="drawPatternMap" />
 										</div>
 									</div>
 								</div>
@@ -105,12 +111,6 @@
 									</div>
 								</div>
 								<div class="control-group padding-top20">
-									<div class="left-right">
-										<label class="control-label" for="drawPattern">排序模式</label>
-										<div class="controls">
-											<s:select name="race.drawPattern" listKey="key" listValue="value" list="drawPatternMap" />
-										</div>
-									</div>
 									<div class="left-right">
 										<label class="control-label" for="eraseGroup">备注</label>
 										<div class="controls">

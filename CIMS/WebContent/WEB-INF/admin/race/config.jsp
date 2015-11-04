@@ -222,7 +222,7 @@ label.control-label {
 			$('#rootwizard .finish').click(function() {
 				var raceId=${id};
 				saveStandardInfo();
-				location.href="${pageContext.request.contextPath}/admin/race/detail?id="+raceId;
+				location.href="${pageContext.request.contextPath}/admin/race/raceDetail?id="+raceId;
 			});
 			$('#rootwizard').find("a[href*='tab1']").trigger('click');
 
