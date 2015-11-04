@@ -12,6 +12,7 @@ import com.cims.computer.ComputeCenter;
 import com.cims.computer.ComputeData;
 import com.cims.computer.DefaultComputer;
 import com.cims.computer.MaxMinExcludeAverageComputer;
+import com.cims.computer.MaxMinExcludeSumComputer;
 import com.cims.computer.SumComputer;
 import com.cims.dao.AdjustScoreDao;
 import com.cims.dao.DrawDao;
@@ -345,7 +346,7 @@ public class ScoreProcess {
 				 * 要面向接口编程，这里引入一个接口，能够计算评委现场得分。另外这里用到依赖注入，以适应后期的变化
 				 */
 				ComputeCenter cc;
-				Race r = raceDao.retrieveById(judgeScore.getPlayerId());
+				Race r = raceDao.retrieveById(judgeScore.getRaceId());
 				switch (r.getJudgePattern()) {
 				case sum:
 					cc = new SumComputer();
@@ -355,6 +356,9 @@ public class ScoreProcess {
 					break;
 				case max_min_exclude_average:
 					cc = new MaxMinExcludeAverageComputer();
+					break;
+				case max_min_exclude_sum:
+					cc=new MaxMinExcludeSumComputer();
 					break;
 				default:
 					cc = new DefaultComputer();
