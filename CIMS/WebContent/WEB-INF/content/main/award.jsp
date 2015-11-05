@@ -98,6 +98,14 @@ div.order-num-div{
     font-weight: 900;
     color: red;
 }
+.order-num-span2{
+	position: absolute;
+    top: -2px;
+    left: 12px;
+    font-size: 35px;
+    font-weight: 900;
+    color: red;
+}
 .copyright{
     margin: 0 auto;
     width: 987px;
@@ -128,7 +136,12 @@ div.order-num-div{
 			<div class="item-banner">
 				<div class="order-num-div">
 					<img alt="order" class="banner-img" src="${pageContext.request.contextPath }/images/main/num.png">
-					<span class="order-num-span">${index.index+1 }</span>
+					<s:if test="#index.index>=9 ">
+						<span class="order-num-span2">${index.index+1 }</span>
+					</s:if>
+					<s:if test="#index.index<9 ">
+						<span class="order-num-span">${index.index+1 }</span>
+					</s:if>
 				</div>
 				<div class="order-info">
 					<ul>
