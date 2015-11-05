@@ -30,6 +30,8 @@ public class ScreenShow extends BaseAction {
 	private List<Race> raceList;
 	
 	private List<OrderScoreItem> itemList;
+	
+	private String redirectUrl;
 
 	@Action(value = "orderscore", results = { @Result(name = "input", location = "/WEB-INF/content/main/orderScore.jsp"),
 			@Result(name = "back", type = "redirect", location = "wait") })
@@ -52,7 +54,7 @@ public class ScreenShow extends BaseAction {
 	 * @return
 	 */
 	@Action(value = "choose", results = { @Result(name = "input", location = "/WEB-INF/content/main/choose.jsp"),
-			@Result(name = "success", type = "redirect", location = "orderscore") })
+			@Result(name = "success", type = "redirect", location = "${redirectUrl}") })
 	public String choose(){
 		if(raceId==null){
 			//列出现在进行的所有比赛
@@ -62,6 +64,9 @@ public class ScreenShow extends BaseAction {
 		//加入选择 的比赛
 		Race race=raceProcess.retrieve(Integer.valueOf(raceId));
 		sessionMap.put(ActionContant.session_screen_race, race);
+
+		redirectUrl=(String)sessionMap.get(ActionContant.header_previousUrl);
+		
 		return SUCCESS;
 	}
 	public String getRaceId() {
@@ -79,6 +84,14 @@ public class ScreenShow extends BaseAction {
 	public List<OrderScoreItem> getItemList() {
 		return itemList;
 	}
+	public String getRedirectUrl() {
+		return redirectUrl;
+	}
+
+	public void setRedirectUrl(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
+	}
+
 	public void setItemList(List<OrderScoreItem> itemList) {
 		this.itemList = itemList;
 	}

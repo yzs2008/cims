@@ -27,6 +27,10 @@ public class ScreenShowInterceptor extends AbstractInterceptor {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			String ctx = request.getContextPath();
 			if (request.getRequestURI().indexOf("/choose") == -1) {
+				String url=request.getRequestURI();
+				url=url.substring(request.getContextPath().length());
+				session.put("previousUrl", url);
+
 				String loginUrl = ctx + "/main/choose";
 				response.sendRedirect(loginUrl);
 				return null;
