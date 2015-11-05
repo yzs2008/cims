@@ -8,6 +8,8 @@ public class OrderScoreItem {
 	private User player;
 	private SignUp production;
 	private Double score;
+	private String award;
+	
 	public User getPlayer() {
 		return player;
 	}
@@ -25,6 +27,12 @@ public class OrderScoreItem {
 	}
 	public void setScore(Double score) {
 		this.score = score;
+	}
+	public String getAward() {
+		return award;
+	}
+	public void setAward(String award) {
+		this.award = award;
 	}
 
 	

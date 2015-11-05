@@ -38,6 +38,15 @@ public class ScreenShow extends BaseAction {
 		itemList=screenProcess.getOrderScoreList(race);
 		return INPUT;
 	}
+
+	@Action(value = "award", results = { @Result(name = "input", location = "/WEB-INF/content/main/award.jsp"),
+			@Result(name = "back", type = "redirect", location = "wait") })
+	public String award(){
+		Race race=(Race)sessionMap.get(ActionContant.session_screen_race);
+		itemList=screenProcess.getOrderScoreList(race);
+		itemList=screenProcess.getAwardList(itemList,race);
+		return INPUT;
+	}
 	/**
 	 * 选择要显示排名 的比赛
 	 * @return
