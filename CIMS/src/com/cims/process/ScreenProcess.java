@@ -35,7 +35,7 @@ public class ScreenProcess {
 		try{
 			ArrayList<OrderScoreItem> itemList=new ArrayList<OrderScoreItem>();
 			
-			String hql="select o from FinalScore as o where raceId=?";
+			String hql="select o from FinalScore as o where raceId=? order by o.finalScore desc";
 			List<FinalScore> finalScoreList=finalScoreDao.retrieveList(hql, new Object[]{race.getRaceId()});
 			for(FinalScore fs : finalScoreList){
 				OrderScoreItem item=new OrderScoreItem();

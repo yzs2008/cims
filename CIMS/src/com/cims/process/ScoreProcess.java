@@ -390,10 +390,10 @@ public class ScoreProcess {
 			Integer rst=drawDao.records(hql,new Object[]{raceId,PlayerState.normal,false});
 			//比赛结束
 			if(rst==0){
-				//更新赛事状态为结束
-				Race r=raceDao.retrieveById(raceId);
-				r.setState(RaceState.over);
-				raceDao.update(r);
+//				//更新赛事状态为结束      (此处不能更新，否则无法显示排名了，赛事状态更新使用手动方式)
+//				Race r=raceDao.retrieveById(raceId);
+//				r.setState(RaceState.over);
+//				raceDao.update(r);
 
 				/******************************产生晋级***********************************/
 				//获取晋级规则
